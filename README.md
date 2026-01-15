@@ -24,3 +24,6 @@ Henkilökohtainen osakesalkkuprofiili
 2. Osakesalkun lisääminen ja muokkaus
 3. Osakkeiden seuranta ja havainnot
 4. Julkisten salkkujen selaus ja arviointi
+
+## API
+https://finnhub.io/docs/api
