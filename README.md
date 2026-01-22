@@ -14,7 +14,7 @@ Henkilökohtainen osakesalkkuprofiili
 
 ## Projektissa käytetyt teknologiat
 
-- BackEnd: Java (SpringBoot)
+- BackEnd: Java (SpringBoot) (REST API käyttäjille ja osakesalkku)
 - FrontEnd: React (Vite)
 - Tietokanta: PostgreSQL
 - Pilvipalvelu: TBD
