@@ -26,4 +26,6 @@ Henkilökohtainen osakesalkkuprofiili
 4. Julkisten salkkujen selaus ja arviointi
 
 ## API
+
+### API julkisiin osakkeisiin
 https://finnhub.io/docs/api
