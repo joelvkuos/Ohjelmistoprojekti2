@@ -1,4 +1,4 @@
- ### Ohjelmistoprojekti 2
+### Ohjelmistoprojekti 2
 
 Jäsenet
 
@@ -7,6 +7,8 @@ Jäsenet
 - Samu Kekkonen
 - Jani Kinnunen
 - Konsta Lyytikäinen
+
+<img src="Stockfolio%20logo.png" alt="Project Logo" width="300">
 
 # Stockfolio
 
