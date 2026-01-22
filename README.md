@@ -10,9 +10,9 @@ Jäsenet
 
 <img src="Stockfolio%20logo.png" alt="Project Logo" width="300">
 
-# Stockfolio
+# 
 
-Henkilökohtainen osakesalkkuprofiili
+### Henkilökohtainen osakesalkkuprofiili
 
 ## Projektissa käytetyt teknologiat
 
