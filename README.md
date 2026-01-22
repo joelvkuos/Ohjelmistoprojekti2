@@ -25,10 +25,5 @@ Henkilökohtainen osakesalkkuprofiili
 3. Osakkeiden seuranta ja havainnot
 4. Julkisten salkkujen selaus ja arviointi
 
-## API
-
-### API julkisiin osakkeisiin
-https://finnhub.io/docs/api
-
-### Käyttäjä REST-API taulut
-[Käyttäjä REST-API](Käyttäjä%20REST-API.md)
+### Dokumentaatio
+[Dokumentaatio](Dokumentaatio.md)

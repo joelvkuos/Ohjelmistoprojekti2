@@ -20,3 +20,9 @@
 |portfolio_id (FK)  | INT            |
 |ticker             | VARCHAR(10)    |
 |quantity           | DECIMAL(15,4)  |
+
+
+## API
+
+### API julkisiin osakkeisiin
+https://finnhub.io/docs/api
