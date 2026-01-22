@@ -29,3 +29,6 @@ Henkilökohtainen osakesalkkuprofiili
 
 ### API julkisiin osakkeisiin
 https://finnhub.io/docs/api
+
+### Käyttäjä REST-API taulut
+[Käyttäjä REST-API](Käyttäjä%20REST-API.md)
