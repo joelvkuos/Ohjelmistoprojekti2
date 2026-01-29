@@ -14,7 +14,7 @@ export default function Login() {
                 <h1>Log in</h1>
                 <TextField className="textField" placeholder="Username:"></TextField>
                 <TextField className="textField" placeholder="Password:"></TextField>
-                <Button className="loginButton">Log in</Button>
+                <Button className="btn-grad">Log in</Button>
             </ Box >
         </Box>
     )

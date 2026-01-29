@@ -19,7 +19,7 @@
     padding: 24px;
     border-radius: 8px;
     justify-content: center;
-    background: #121212;
+    background: radial-gradient(circle at bottom, #212B39, #121212);
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16)
 }
 
@@ -60,14 +60,20 @@ h3 {
     color: whitesmoke;
 }
 
-.loginButton {
-    background-color: whitesmoke !important;
-    color: #121212 !important;
-    width: 300px !important;
-    height: 40px;
+
+.btn-grad {
+    background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%)
 }
 
-.loginButton:hover {
-    background-color: #03346e !important;
+.btn-grad {
+    width: 300px;
+    height: 40px;
+    transition: background-position 10s, color 15s;
+    background-size: 200% auto;
+    display: block;
     color: whitesmoke !important;
+}
+
+.btn-grad:hover {
+    background-position: right center;
 }
