@@ -1,23 +1,25 @@
 import { Box, Button, TextField } from "@mui/material";
+import { Link } from "react-router-dom";
 import "../styles/Login.css"
+
+
 export default function Login() {
 
 
     return (
         <Box className='loginBox1'>
             <Box className='loginBox3'>
-                <h1>Stockfolio</h1>
-                <h3>Personal stock portfolio profile</h3>
+                <h1 className="Stockfolio">Stockfolio</h1>
+                <h3>Your personal stock portfolio</h3>
 
             </Box>
             <Box className='loginBox2'>
-
                 <h1>LOGIN</h1>
                 <TextField className="textField" placeholder="Username:"></TextField>
                 <TextField className="textField" placeholder="Password:" type="password"></TextField>
                 <Button className="btn-grad1">log in</Button>
-                <p className="pCreateAccount">Don't have an account?</p>
-                <Button className="btn-grad2">Create account</Button>
+                <Link className="link1" to="/">Forgot password?</Link>
+                <p className="pCreateAccount">Don't have an account? <Link className="link2" to="/" >Create one here</Link></p> {/*Laitoin vaan jonkun random linkin, sen voi muuttaa miten haluaa */}
 
             </ Box >
         </Box>

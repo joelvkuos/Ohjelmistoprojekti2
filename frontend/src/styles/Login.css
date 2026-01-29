@@ -31,25 +31,35 @@
     flex-direction: column;
     gap: 2px;
     padding: 24px;
-    border-radius: 8px;
 }
 
-h1 {
+.Stockfolio {
     color: whitesmoke;
+
 }
 
 h3 {
     color: whitesmoke;
 }
 
-.pCreateAccount {
-    padding-left: 24px;
-    align-self: flex-start;
+.link1 {
+    color: whitesmoke;
     margin-bottom: -8px;
 }
 
+.link2 {
+    color: whitesmoke;
+}
+
+
+
+.pCreateAccount {
+    padding-left: 24px;
+    align-self: flex-start;
+}
+
 .textField {
-    background-color: black !important;
+    background-color: #121212 !important;
     width: 300px !important;
 }
 
