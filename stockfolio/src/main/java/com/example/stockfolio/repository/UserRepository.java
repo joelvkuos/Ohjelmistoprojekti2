@@ -1,5 +1,11 @@
 package com.example.stockfolio.repository;
 
-public class UserRepository {
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.stockfolio.model.User;
+
+public interface UserRepository extends JpaRepository<User, Long>{
+    Optional<User> findfindByByUsername(String username);
 }
