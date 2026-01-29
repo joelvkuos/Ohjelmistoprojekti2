@@ -1,4 +1,6 @@
- ### Ohjelmistoprojekti 2
+<img src="Stockfolio%20logo.png" alt="Project Logo" width="300">
+
+### Henkilökohtainen osakesalkkuprofiili
 
 Jäsenet
 
@@ -8,9 +10,9 @@ Jäsenet
 - Jani Kinnunen
 - Konsta Lyytikäinen
 
-# Stockfolio
 
-Henkilökohtainen osakesalkkuprofiili
+# 
+
 
 ## Projektissa käytetyt teknologiat
 
@@ -25,7 +27,5 @@ Henkilökohtainen osakesalkkuprofiili
 3. Osakkeiden seuranta ja havainnot
 4. Julkisten salkkujen selaus ja arviointi
 
-## API
-
-### API julkisiin osakkeisiin
-https://finnhub.io/docs/api
+### Dokumentaatio
+[Dokumentaatio](Dokumentaatio.md)
