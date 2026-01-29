@@ -1,4 +1,6 @@
- ### Ohjelmistoprojekti 2
+<img src="Stockfolio%20logo.png" alt="Project Logo" width="300">
+
+### Henkilökohtainen osakesalkkuprofiili
 
 Jäsenet
 
@@ -8,9 +10,9 @@ Jäsenet
 - Jani Kinnunen
 - Konsta Lyytikäinen
 
-# Stockfolio
 
-Henkilökohtainen osakesalkkuprofiili
+# 
+
 
 ## Projektissa käytetyt teknologiat
 
