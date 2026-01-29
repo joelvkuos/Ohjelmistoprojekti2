@@ -42,6 +42,12 @@ h3 {
     color: whitesmoke;
 }
 
+.pCreateAccount {
+    padding-left: 24px;
+    align-self: flex-start;
+    margin-bottom: -8px;
+}
+
 .textField {
     background-color: black !important;
     width: 300px !important;
@@ -61,19 +67,28 @@ h3 {
 }
 
 
-.btn-grad {
-    background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%)
-}
-
-.btn-grad {
+.btn-grad1 {
+    background-color: whitesmoke !important;
+    color: #212B39 !important;
     width: 300px;
     height: 40px;
-    transition: background-position 10s, color 15s;
-    background-size: 200% auto;
-    display: block;
+}
+
+.btn-grad1:hover {
+    background-position: right center;
+    background-color: #212B39 !important;
     color: whitesmoke !important;
 }
 
-.btn-grad:hover {
+.btn-grad2 {
+    background-color: whitesmoke !important;
+    color: #212B39 !important;
+    width: 300px;
+    height: 40px;
+}
+
+.btn-grad2:hover {
     background-position: right center;
+    background-color: #3e9c35 !important;
+    color: whitesmoke !important;
 }

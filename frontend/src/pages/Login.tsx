@@ -8,13 +8,17 @@ export default function Login() {
             <Box className='loginBox3'>
                 <h1>Stockfolio</h1>
                 <h3>Personal stock portfolio profile</h3>
+
             </Box>
             <Box className='loginBox2'>
 
-                <h1>Log in</h1>
+                <h1>LOGIN</h1>
                 <TextField className="textField" placeholder="Username:"></TextField>
                 <TextField className="textField" placeholder="Password:"></TextField>
-                <Button className="btn-grad">Log in</Button>
+                <Button className="btn-grad1">log in</Button>
+                <p className="pCreateAccount">Don't have an account?</p>
+                <Button className="btn-grad2">Create account</Button>
+
             </ Box >
         </Box>
     )
