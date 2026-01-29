@@ -14,7 +14,7 @@ export default function Login() {
 
                 <h1>LOGIN</h1>
                 <TextField className="textField" placeholder="Username:"></TextField>
-                <TextField className="textField" placeholder="Password:"></TextField>
+                <TextField className="textField" placeholder="Password:" type="password"></TextField>
                 <Button className="btn-grad1">log in</Button>
                 <p className="pCreateAccount">Don't have an account?</p>
                 <Button className="btn-grad2">Create account</Button>

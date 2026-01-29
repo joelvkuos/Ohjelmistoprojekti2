@@ -81,14 +81,11 @@ h3 {
 }
 
 .btn-grad2 {
-    background-color: whitesmoke !important;
-    color: #212B39 !important;
-    width: 300px;
+    color: whitesmoke !important;
+    width: 150px;
     height: 40px;
 }
 
 .btn-grad2:hover {
-    background-position: right center;
     background-color: #3e9c35 !important;
-    color: whitesmoke !important;
 }
