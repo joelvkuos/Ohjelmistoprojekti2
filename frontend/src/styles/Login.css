@@ -1,11 +1,14 @@
 /* Koko Box */
 .loginBox1 {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    animation: grow 1s;
+}
 
+.loginBox1.grow {
+    animation: grow 1s;
 }
 
 @keyframes grow {
@@ -16,6 +19,43 @@
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes FadeIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.loginBox1.reverse {
+    flex-direction: row-reverse; 
 }
 
 /* Log in box */
@@ -34,6 +74,14 @@
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16)
 }
 
+.loginBox2.slide-left {
+    animation: slideInFromLeft 0.5s ease-out;
+}
+
+.loginBox2.slide-right {
+    animation: slideInFromRight 0.5s ease-out;
+}
+
 /* Teksti Box */
 .loginBox3 {
     width: 350px;
@@ -42,6 +90,7 @@
     flex-direction: column;
     gap: 2px;
     padding: 24px;
+    animation: FadeIn 0.5s ease-out;
 }
 
 .Stockfolio {
