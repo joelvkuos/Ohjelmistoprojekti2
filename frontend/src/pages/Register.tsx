@@ -9,7 +9,7 @@ export default function Register() {
         <Box className='loginBox1 reverse green-bg'>
             <Box className='loginBox3'>
                 <h1 className="Stockfolio">Stockfolio</h1>
-                <h3 className="info">Your personal stock portfolio</h3>
+                <h3 className="info">Create an account to get started</h3>
 
             </Box>
             <Box className='loginBox2 slide-right green-bg'>
