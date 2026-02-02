@@ -1,0 +1,264 @@
+/* Koko Box */
+.loginBox1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.loginBox1.grow {
+    animation: grow 1s;
+}
+
+.loginBox1.green-bg {
+    background: radial-gradient(circle at top, #283f17, #121212);
+}
+
+.loginBox2.green-bg {
+    background: radial-gradient(circle at bottom, #283f17, #121212);
+}
+
+/* Animaatiot */
+@keyframes grow {
+    0% {
+        transform: scale(.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes FadeIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.loginBox1.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Log in box */
+.loginBox2 {
+
+    width: 350px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 8px;
+    justify-content: center;
+    background: radial-gradient(circle at bottom, #212B39, #121212);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16)
+}
+
+.loginBox2.slide-left {
+    animation: slideInFromLeft 0.5s ease-out;
+}
+
+.loginBox2.slide-right {
+    animation: slideInFromRight 0.5s ease-out;
+}
+
+/* Teksti Box */
+.loginBox3 {
+    width: 350px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 24px;
+    animation: FadeIn 0.5s ease-out;
+}
+
+.Stockfolio {
+    color: whitesmoke;
+    text-shadow: 3px 3px 10px rgb(0, 0, 0);
+}
+
+h3 {
+    color: whitesmoke;
+    text-shadow: 3px 3px 10px rgb(0, 0, 0);
+
+}
+
+.link1 {
+    color: whitesmoke;
+    margin-bottom: -8px;
+}
+
+.link2 {
+    color: whitesmoke;
+}
+
+
+
+.pCreateAccount {
+    padding-left: 24px;
+    align-self: flex-start;
+}
+
+.textField {
+    background-color: #121212 !important;
+    width: 300px !important;
+}
+
+.textField .MuiInputBase-root {
+    height: 40px !important;
+}
+
+.textField input::placeholder {
+    color: grey;
+    opacity: 1;
+}
+
+.textField input {
+    color: whitesmoke;
+}
+
+
+.btn-grad1 {
+    background-color: whitesmoke !important;
+    color: #212B39 !important;
+    width: 300px;
+    height: 40px;
+}
+
+.btn-grad1:hover {
+    background-position: right center;
+    background-color: #212B39 !important;
+    color: whitesmoke !important;
+}
+
+.btn-grad2 {
+    color: whitesmoke !important;
+    width: 150px;
+    height: 40px;
+}
+
+.btn-grad2:hover {
+    background-color: #3e9c35 !important;
+}
+
+/* Mobiili responsiivisuus */
+
+
+@media screen and (max-width: 768px) {
+    .loginBox1 {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .loginBox1.reverse {
+        flex-direction: column;
+    }
+
+    .loginBox2,
+    .loginBox3 {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        min-height: 300px;
+    }
+
+    .textField {
+        width: 100% !important;
+        max-width: 280px !important;
+    }
+
+    .btn-grad1,
+    .btn-grad2 {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .loginBox1 {
+        flex-direction: column;
+        justify-content: center;
+        justify-content: flex-start;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    /* Register-sivulla sama järjestys: teksti ylhäällä, form alla */
+    .loginBox1.reverse {
+        flex-direction: column;
+    }
+
+    .loginBox2,
+    .loginBox3 {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        min-height: auto;
+        padding: 24px 16px;
+    }
+
+    .loginBox3 {
+        text-align: center;
+        align-items: center;
+    }
+
+    .textField {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .btn-grad1,
+    .btn-grad2 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .pCreateAccount {
+        padding-left: 0;
+        text-align: center;
+        align-self: center;
+    }
+
+    .textField .MuiInputBase-root {
+        height: 48px !important;
+    }
+
+    .btn-grad1,
+    .btn-grad2 {
+        height: 48px;
+        font-size: 16px;
+    }
+}
