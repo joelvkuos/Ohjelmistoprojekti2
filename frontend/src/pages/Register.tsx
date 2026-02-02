@@ -6,13 +6,13 @@ export default function Register() {
     const navigate = useNavigate();
 
     return (
-        <Box className='loginBox1 reverse'>
+        <Box className='loginBox1 reverse green-bg'>
             <Box className='loginBox3'>
                 <h1 className="Stockfolio">Stockfolio</h1>
                 <h3 className="info">Your personal stock portfolio</h3>
 
             </Box>
-            <Box className='loginBox2 slide-right'>
+            <Box className='loginBox2 slide-right green-bg'>
                 <h1>REGISTER</h1>
                 <TextField className="textField" placeholder="Username:"></TextField>
                 <TextField className="textField" placeholder="Password:" type="password"></TextField>

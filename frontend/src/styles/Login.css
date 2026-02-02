@@ -11,6 +11,15 @@
     animation: grow 1s;
 }
 
+.loginBox1.green-bg {
+    background: radial-gradient(circle at top, #283f17, #121212);
+}
+
+.loginBox2.green-bg {
+    background: radial-gradient(circle at bottom, #283f17, #121212);
+}
+
+
 @keyframes grow {
     0% {
         transform: scale(.2);
