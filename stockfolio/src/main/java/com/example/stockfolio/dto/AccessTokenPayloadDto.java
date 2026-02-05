@@ -1,5 +1,7 @@
 package com.example.stockfolio.dto;
 
-public class AccessTokenPayloadDto {
+import java.time.Instant;
+
+public record AccessTokenPayloadDto(String accessToken, Instant expiresAt) {
 
 }
