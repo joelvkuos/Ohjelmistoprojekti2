@@ -92,6 +92,8 @@
 
 .loginBox2.slide-right {
     animation: slideInFromRight 0.5s ease-out;
+    height: 500px;
+
 }
 
 /* Teksti Box */
@@ -158,9 +160,18 @@ h3 {
     height: 40px;
 }
 
+
+
+
 .btn-grad1:hover {
     background-position: right center;
     background-color: #212B39 !important;
+    color: whitesmoke !important;
+}
+
+.btn-grad1:hover.register {
+    background-position: right center;
+    background-color: #283f17 !important;
     color: whitesmoke !important;
 }
 
