@@ -1,16 +1,24 @@
 package com.example.stockfolio.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Portfolio {
 
+    @Id
+    @GeneratedValue
     private Long portfolio_id;
+
+    @NotBlank(message = "User ID is required")
     private Long app_user_id;
+
+    @NotBlank(message = "Portfolio name is required")
     private String portfolio_name;
 
     public Portfolio () {
-
     }
     
     public Portfolio(Long portfolio_id, Long app_user_id, String portfolio_name) {
