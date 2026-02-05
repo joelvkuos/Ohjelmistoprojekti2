@@ -20,12 +20,12 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Optional<User> findAuthenticatedUser(){
-        Authentication authentication = SecurityContextHolder
-            .getContext().getAuthentication();
+    public Optional<User> getAuthenticatedUser(){
+        Authentication authentication = SecurityContextHolder 
+            .getContext().getAuthentication(); /*Hakee SecurityContextHolderista käyttäjän, eli ei tarvii parametreja kun hakee käyttäjätietoja koodissa */
 
         if(authentication == null || authentication.getName() == null){
-            return Optional.empty();
+            return Optional.empty(); /*Jos ei löydy tietoja tai nimeä -> palauttaa empty */
         }
 
         return userRepository.findByUsername(authentication.getName());
@@ -35,7 +35,7 @@ public class UserService {
         String passwordHash = passwordEncoder.encode(registration.password());
         User newUser = new User(registration.username(), passwordHash, "USER", registration.email(), registration.phone());
 
-        return userRepository.save(newUser);
+        return userRepository.save(newUser); /*Rekisteröi uuden käyttäjän oletuksena nyt USER rooli ja tallentaa repositorioon*/
 
     }
     
