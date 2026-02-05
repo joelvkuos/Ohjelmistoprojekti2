@@ -1,17 +1,12 @@
-import { Button } from "@mui/material";
 import "../styles/landingPage.css"
-import { useNavigate } from "react-router-dom";
+import NavBar from "../components/Appbar";
 
 
 export default function LandingPage() {
-    const navigate = useNavigate();
 
     return (
         <>
-            <header className="appbar">
-                Stockfolio
-                <Button className="btn signin" onClick={() => navigate('/')}>Sign in / Sign up</Button>
-            </header>
+            <NavBar />
             <div className="two-columns">
                 <div className="column-left">
                     Left column

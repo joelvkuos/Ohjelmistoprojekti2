@@ -1,14 +1,14 @@
 .appbar {
-    height: 64px;
+    height: 56px;
     display: flex;
     align-items: center;
     padding: 0 24px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    margin-top: 24px;
-    border-radius: 8px;
-    background-color: #121212;
-    border: 1px solid #282828;
+    margin-top: 32px;
+    border-radius: 16px;
+    background-color: #131720;
+    border: 1px solid #383838;
     box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
     justify-content: space-between;
 }
@@ -25,6 +25,10 @@
 
 .appbar-right {
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
 }
 
 .two-columns {
@@ -45,7 +49,56 @@
     text-align: center;
 }
 
-.btn-signin {
-    margin-left: auto;
-    background-color: #121212;
+.btn-signUp {
+    background-color: whitesmoke !important;
+    color: #121212 !important;
+    padding: 6px 16px !important;
+    text-transform: none !important;
+    border-radius: 8px !important;
+
 }
+
+.btn-signin:hover {
+    background-position: right center;
+    background-color: #212B39 !important;
+    color: whitesmoke !important;
+}
+
+.btn-signin {
+    color: white !important;
+    text-transform: none !important;
+    border-radius: 8px !important;
+
+}
+
+.btn-signUp:hover {
+    background-color: #282828;
+}
+
+/* Burgeri piilossa desktopilla */
+.burger-icon {
+    display: none;
+}
+
+/* @media (max-width: 768px) {
+    .burger-icon {
+        display: block;
+    }
+
+    .appbar-right {
+        display: none;
+    }
+
+    .mobile-menu {
+        position: absolute;
+        top: 56px;
+        right: 24px;
+        background-color: #131720;
+        border: 1px solid #383838;
+        border-radius: 8px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+} */
