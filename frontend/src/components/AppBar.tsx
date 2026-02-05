@@ -30,8 +30,8 @@ export default function NavBar() {
             </div>
             {menuOpen && (
                 <div className="mobile-menu">
-                    <Button>Sign Up</Button>
-                    <Button>Sign In</Button>
+                    <Button className="mobile-menu-btn2" onClick={() => navigate('/')}>Sign In</Button>
+                    <Button className="mobile-menu-btn1" onClick={() => navigate('/register')}>Sign Up</Button>
                 </div>
             )}
         </header>

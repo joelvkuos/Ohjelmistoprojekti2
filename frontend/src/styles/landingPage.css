@@ -3,14 +3,14 @@
     display: flex;
     align-items: center;
     padding: 0 24px;
-    max-width: 1100px;
-    margin: 0 auto;
-    margin-top: 32px;
+    max-width: min(1100px, calc(100% - 32px));
+    margin: 32px auto 0 auto;
     border-radius: 16px;
     background-color: #131720;
     border: 1px solid #383838;
     box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .appbar-left,
@@ -34,19 +34,27 @@
 .two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    max-width: 1200px;
+    gap: 8px;
+    max-width: min(1100px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 0 24px;
     padding-top: 24px;
+    box-sizing: border-box;
 }
 
 .column-left {
     text-align: center;
+    border: 1px solid aliceblue;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
 }
 
 .column-right {
     text-align: center;
+    border: 1px solid aliceblue;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
 }
 
 .btn-signUp {
@@ -55,6 +63,8 @@
     padding: 6px 16px !important;
     text-transform: none !important;
     border-radius: 8px !important;
+    min-width: auto !important;
+    white-space: nowrap !important;
 
 }
 
@@ -68,6 +78,8 @@
     color: white !important;
     text-transform: none !important;
     border-radius: 8px !important;
+    min-width: auto !important;
+    white-space: nowrap !important;
 
 }
 
@@ -80,7 +92,20 @@
     display: none;
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
+    .appbar {
+        margin-left: 16px;
+        margin-right: 16px;
+        max-width: calc(100% - 32px);
+    }
+
+    .two-columns {
+        padding-left: 16px;
+        padding-right: 16px;
+        grid-template-columns: 1fr;
+        /* yksi sarake mobiilissa */
+    }
+
     .burger-icon {
         display: block;
     }
@@ -92,7 +117,7 @@
     .mobile-menu {
         position: absolute;
         top: 56px;
-        right: 24px;
+        right: 16px;
         background-color: #131720;
         border: 1px solid #383838;
         border-radius: 8px;
@@ -100,5 +125,28 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
+        color: whitesmoke;
     }
-} */
+
+    .mobile-menu-btn1 {
+        background-color: whitesmoke !important;
+        color: #121212 !important;
+        text-transform: none !important;
+        padding: 8px 16px !important;
+    }
+
+    .mobile-menu-btn2 {
+        background-color: #121212 !important;
+        color: whitesmoke !important;
+        text-transform: none !important;
+        padding: 8px 16px !important;
+    }
+
+    .mobile-menu-btn1:hover {
+        background-color: #212939 !important;
+    }
+
+    .mobile-menu-btn2:hover {
+        background-color: #282828 !important;
+    }
+}
