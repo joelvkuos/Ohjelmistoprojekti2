@@ -42,12 +42,12 @@ public class PortfolioService {
     public Portfolio createPortfolio(Portfolio portfolio){
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
-            portfolio.setApp_user_id(user.getApp_user_id());
-            return portfolioRepository.save(portfolio);
+        portfolio.setApp_user_id(user.getApp_user_id());
+        return portfolioRepository.save(portfolio);
     }
 
     /*Poistaa portfolion (jos käyttäjällä oikeus) */
-    public void delete(Long portfolioId){
+    public void deletePortfolio(Long portfolioId){
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         User user = userService.getAuthenticatedUser()
