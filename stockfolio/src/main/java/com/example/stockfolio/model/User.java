@@ -10,17 +10,17 @@ public class User {
     private Long app_user_id;
     private String userName;
     private String passwordHash;
+    private String role;
     private String email;
     private String phone;
         
     public User () {
-        
     }
 
-    public User(Long app_user_id, String userName, String passwordHash, String email, String phone) {
-        this.app_user_id = app_user_id;
+    public User(String userName, String passwordHash, String role, String email, String phone) {
         this.userName = userName;
         this.passwordHash = passwordHash;
+        this.role = role;
         this.email = email;
         this.phone = phone;
     }
@@ -42,6 +42,12 @@ public class User {
     }
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
     public String getEmail() {
         return email;
