@@ -12,7 +12,7 @@ export default function NavBar() {
     return (
         <header className="appbar">
             <div className="appbar-left">
-                Stockfolio
+                <h1>Stockfolio</h1>
             </div>
             <div className="appbar-center">
             </div>
@@ -20,7 +20,7 @@ export default function NavBar() {
                 <MenuIcon />
             </div>
             <div className="appbar-right">
-                <Button className="btn-signin" onClick={() => navigate('/')}>
+                <Button className="btn-signin" onClick={() => navigate('/login')}>
                     Sign in
                 </Button>
                 <Button className="btn-signUp" onClick={() => navigate('/register')}>

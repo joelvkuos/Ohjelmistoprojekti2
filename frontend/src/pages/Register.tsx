@@ -19,8 +19,8 @@ export default function Register() {
                 <TextField className="textField" placeholder="Confirm Password:" type="password"></TextField>
                 <TextField className="textField" placeholder="Email:"></TextField>
                 <TextField className="textField" placeholder="Phone:"></TextField>
-                <Button className="btn-grad1 register" onClick={() => navigate('/')}>create account</Button>
-                <p className="pCreateAccount">Already have an account? <Link className="link2" to="/" >Back to login</Link></p>
+                <Button className="btn-grad1 register" onClick={() => navigate('/login')}>create account</Button>
+                <p className="pCreateAccount">Already have an account? <Link className="link2" to="/login" >Back to login</Link></p>
             </ Box >
         </Box>
     )
