@@ -46,12 +46,7 @@
     padding: 24px;
 }
 
-.hero-gif {
-    max-width: 50%;
-    max-height: 400px;
-    height: auto;
-    border-radius: 12px;
-}
+
 
 .btn-signUp {
     background-color: whitesmoke !important;
