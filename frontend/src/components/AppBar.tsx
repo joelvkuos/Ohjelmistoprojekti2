@@ -12,7 +12,7 @@ export default function NavBar() {
     return (
         <header className="appbar">
             <div className="appbar-left">
-                <h1>Stockfolio</h1>
+                <h1 onClick={() => navigate('/')} style={{ cursor: 'pointer'}}>Stockfolio</h1>
             </div>
             <div className="appbar-center">
             </div>
