@@ -5,6 +5,7 @@
 |app_user_id (PK)   | INT          |
 |username           | VARCHAR(50)  |
 |password           | VARCHAR(255) |
+|role               | VARCHAR(10)  |
 |email              | VARCHAR(100) |
 |phone              | VARCHAR(20)  |
 
