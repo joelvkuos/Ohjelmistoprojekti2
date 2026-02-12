@@ -1,17 +1,31 @@
 package com.example.stockfolio.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Holdings {
 
+    @Id
+    @GeneratedValue
     private Long holdings_id;
+
+    @NotNull(message = "Portfolio id is required")
     private Long portfolio_id;
+
+    @NotBlank(message = "Ticker is required")
     private String ticker;
+
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be positive")
     private Double quantity;
 
     public Holdings (){
-        
     }
     
     public Holdings(Long holdings_id, Long portfolio_id, String ticker, Double quantity) {

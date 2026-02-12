@@ -1,26 +1,45 @@
 package com.example.stockfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name="app_user")
 public class User {
 
+    @Id
+    @GeneratedValue
     private Long app_user_id;
+
+    @NotBlank(message = "Username is required")
     private String userName;
+
+    @NotBlank
+    @JsonIgnore
     private String passwordHash;
+
+    @NotBlank(message = "Role is required")
+    private String role;
+
+    @NotBlank(message = "Email is required")
     private String email;
+
+    @Pattern(regexp = "lisätään tähän pattern") /*TÄHÄN PATTERN */
     private String phone;
         
     public User () {
-        
     }
 
-    public User(Long app_user_id, String userName, String passwordHash, String email, String phone) {
-        this.app_user_id = app_user_id;
+    public User(String userName, String passwordHash, String role, String email, String phone) {
         this.userName = userName;
         this.passwordHash = passwordHash;
+        this.role = role;
         this.email = email;
         this.phone = phone;
     }
@@ -42,6 +61,12 @@ public class User {
     }
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
     public String getEmail() {
         return email;
