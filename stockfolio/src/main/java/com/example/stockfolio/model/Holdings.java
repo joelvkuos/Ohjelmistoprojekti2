@@ -1,12 +1,15 @@
 package com.example.stockfolio.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Holdings {
 
+    @Id
     private Long holdings_id;
     private Long portfolio_id;
+    
     private String ticker;
     private Double quantity;
 
