@@ -13,7 +13,7 @@ export default function Footer() {
                 className="footer-row"
             >
                 <div>
-                    <Link href='#'>Privacy Policy</Link>
+                    <Link href='#' className="link" >Privacy Policy</Link>
                 </div>
                 <div className="copyright">
                     <Typography>

@@ -107,6 +107,7 @@
 /* Burgeri piilossa desktopilla */
 .burger-icon {
     display: none;
+
 }
 
 @media (max-width: 768px) {
@@ -125,6 +126,7 @@
 
     .burger-icon {
         display: block;
+        padding-top: 8px;
     }
 
     .appbar-right {

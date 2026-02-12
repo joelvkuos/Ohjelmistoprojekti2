@@ -17,6 +17,11 @@
     width: 100%;
 }
 
+.link {
+    color: whitesmoke !important;
+}
+
+
 .copyright {
     text-align: center;
 }
@@ -33,4 +38,5 @@
 
 .stack {
     justify-self: end;
+    gap: 16px;
 }

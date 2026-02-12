@@ -12,7 +12,7 @@ export default function NavBar() {
     return (
         <header className="appbar">
             <div className="appbar-left">
-                <h1 onClick={() => navigate('/')} style={{ cursor: 'pointer'}}>Stockfolio</h1>
+                <h1 onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Stockfolio</h1>
             </div>
             <div className="appbar-center">
             </div>
@@ -30,7 +30,7 @@ export default function NavBar() {
             </div>
             {menuOpen && (
                 <div className="mobile-menu">
-                    <Button className="mobile-menu-btn2" onClick={() => navigate('/')}>Sign In</Button>
+                    <Button className="mobile-menu-btn2" onClick={() => navigate('/login')}>Sign In</Button>
                     <Button className="mobile-menu-btn1" onClick={() => navigate('/register')}>Sign Up</Button>
                 </div>
             )}
