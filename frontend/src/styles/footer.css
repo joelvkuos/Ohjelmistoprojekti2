@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #383838;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    box-sizing: border-box;
+    padding: 64px 64px !important;
+}
+
+.footer-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.githubicon {
+    color: whitesmoke !important;
+    justify-content: end;
+    border: 1px solid whitesmoke !important;
+    border-radius: 8px !important;
+
+}
+
+
+
+.stack {
+    justify-self: end;
+}
