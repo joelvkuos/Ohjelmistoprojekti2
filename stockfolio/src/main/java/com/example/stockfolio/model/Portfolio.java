@@ -10,39 +10,39 @@ public class Portfolio {
 
     @Id
     @GeneratedValue
-    private Long portfolio_id;
+    private Long portfolioId;
 
     @NotBlank(message = "User ID is required")
-    private Long app_user_id;
+    private Long appUserId;
 
     @NotBlank(message = "Portfolio name is required")
-    private String portfolio_name;
+    private String portfolioName;
 
     public Portfolio () {
     }
     
-    public Portfolio(Long portfolio_id, Long app_user_id, String portfolio_name) {
-        this.portfolio_id = portfolio_id;
-        this.app_user_id = app_user_id;
-        this.portfolio_name = portfolio_name;
+    public Portfolio(Long portfolioId, Long appUserId, String portfolioName) {
+        this.portfolioId = portfolioId;
+        this.appUserId = appUserId;
+        this.portfolioName = portfolioName;
     }
-    public Long getPortfolio_id() {
-        return portfolio_id;
+    public Long getPortfolioId() {
+        return portfolioId;
     }
-    public void setPortfolio_id(Long portfolio_id) {
-        this.portfolio_id = portfolio_id;
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
     }
-    public Long getApp_user_id() {
-        return app_user_id;
+    public Long getAppUserId() {
+        return appUserId;
     }
-    public void setApp_user_id(Long app_user_id) {
-        this.app_user_id = app_user_id;
+    public void setAppUserId(Long appUserId) {
+        this.appUserId = appUserId;
     }
-    public String getPortfolio_name() {
-        return portfolio_name;
+    public String getPortfolioName() {
+        return portfolioName;
     }
-    public void setPortfolio_name(String portfolio_name) {
-        this.portfolio_name = portfolio_name;
+    public void setPortfolioName(String portfolioName) {
+        this.portfolioName = portfolioName;
     }
 
 }

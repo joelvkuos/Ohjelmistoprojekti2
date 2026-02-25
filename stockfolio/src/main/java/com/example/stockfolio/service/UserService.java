@@ -28,7 +28,7 @@ public class UserService {
             return Optional.empty(); /*Jos ei löydy tietoja tai nimeä -> palauttaa empty */
         }
 
-        return userRepository.findByUsername(authentication.getName());
+        return userRepository.findByUserName(authentication.getName());
     }
 
     public User registerUser(RegisterUserDto registration){

@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long app_user_id;
+    private Long appUserId;
 
     @NotBlank(message = "Username is required")
     private String userName;
@@ -44,11 +44,11 @@ public class User {
         this.phone = phone;
     }
     
-    public Long getApp_user_id() {
-        return app_user_id;
+    public Long getAppUserId() {
+        return appUserId;
     }
-    public void setApp_user_id(Long app_user_id) {
-        this.app_user_id = app_user_id;
+    public void setAppUserId(Long appUserId) {
+        this.appUserId = appUserId;
     }
     public String getUserName() {
         return userName;

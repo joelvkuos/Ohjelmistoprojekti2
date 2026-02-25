@@ -35,14 +35,14 @@ public class PortfolioService {
     public List<Portfolio> getUsersPortfolios(){
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
-        return portfolioRepository.findByApp_user_id(user.getApp_user_id());
+        return portfolioRepository.findByAppUserId(user.getAppUserId());
     }
 
     /*Luo portfolion */
     public Portfolio createPortfolio(Portfolio portfolio){
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
-        portfolio.setApp_user_id(user.getApp_user_id());
+        portfolio.setAppUserId(user.getAppUserId());
         return portfolioRepository.save(portfolio);
     }
 
@@ -53,7 +53,7 @@ public class PortfolioService {
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
 
-        if(!portfolio.getApp_user_id().equals(user.getApp_user_id())){
+        if(!portfolio.getAppUserId().equals(user.getAppUserId())){
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not your portfolio");
         }
 

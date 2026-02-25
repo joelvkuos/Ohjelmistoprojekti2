@@ -39,7 +39,7 @@ public class HoldingsRestController {
 
     @GetMapping("/portfolio/{portfolioId}")
     public List<Holdings> getHoldingsByPortfolio(@PathVariable Long portfolioId) {
-        return holdingsRepository.findByPortfolio_id(portfolioId);
+        return holdingsRepository.findByPortfolioId(portfolioId);
     }
 
     @GetMapping("/ticker/{ticker}")

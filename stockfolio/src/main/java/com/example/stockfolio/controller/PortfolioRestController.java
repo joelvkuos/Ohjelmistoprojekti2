@@ -39,7 +39,7 @@ public class PortfolioRestController {
 
     @GetMapping("/user/{userId}")
     public List<Portfolio> getPortfoliosByUser(@PathVariable Long userId) {
-        return portfolioRepository.findByApp_user_id(userId);
+        return portfolioRepository.findByAppUserId(userId);
     }
 
     @PostMapping
