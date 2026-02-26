@@ -8,7 +8,8 @@ import com.example.stockfolio.model.Portfolio;
 
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
     
-    List<Portfolio> findByApp_user_id(Long userId);
+    List<Portfolio> findByAppUserId(Long appUserId);
     
-    List<Portfolio> findByPortfolio_name(String portfolioName);
+    List<Portfolio> findByPortfolioName(String portfolioName);
+
 }

@@ -15,10 +15,10 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long app_user_id;
+    private Long appUserId;
 
     @NotBlank(message = "Username is required")
-    private String userName;
+    private String username;
 
     @NotBlank
     @JsonIgnore
@@ -36,25 +36,25 @@ public class User {
     public User () {
     }
 
-    public User(String userName, String passwordHash, String role, String email, String phone) {
-        this.userName = userName;
+    public User(String username, String passwordHash, String role, String email, String phone) {
+        this.username = username;
         this.passwordHash = passwordHash;
         this.role = role;
         this.email = email;
         this.phone = phone;
     }
     
-    public Long getApp_user_id() {
-        return app_user_id;
+    public Long getAppUserId() {
+        return appUserId;
     }
-    public void setApp_user_id(Long app_user_id) {
-        this.app_user_id = app_user_id;
+    public void setAppUserId(Long appUserId) {
+        this.appUserId = appUserId;
     }
     public String getUserName() {
-        return userName;
+        return username;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
     public String getPasswordHash() {
         return passwordHash;

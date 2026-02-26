@@ -16,7 +16,7 @@ public class Holdings {
     private Long holdings_id;
 
     @NotNull(message = "Portfolio id is required")
-    private Long portfolio_id;
+    private Long portfolioId;
 
     @NotBlank(message = "Ticker is required")
     private String ticker;
@@ -28,9 +28,9 @@ public class Holdings {
     public Holdings (){
     }
     
-    public Holdings(Long holdings_id, Long portfolio_id, String ticker, Double quantity) {
+    public Holdings(Long holdings_id, Long portfolioId, String ticker, Double quantity) {
         this.holdings_id = holdings_id;
-        this.portfolio_id = portfolio_id;
+        this.portfolioId = portfolioId;
         this.ticker = ticker;
         this.quantity = quantity;
     }
@@ -40,11 +40,11 @@ public class Holdings {
     public void setHoldings_id(Long holdings_id) {
         this.holdings_id = holdings_id;
     }
-    public Long getPortfolio_id() {
-        return portfolio_id;
+    public Long getPortfolioId() {
+        return portfolioId;
     }
-    public void setPortfolio_id(Long portfolio_id) {
-        this.portfolio_id = portfolio_id;
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
     }
     public String getTicker() {
         return ticker;

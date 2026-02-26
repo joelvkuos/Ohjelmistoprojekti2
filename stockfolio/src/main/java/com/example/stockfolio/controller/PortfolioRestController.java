@@ -16,11 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stockfolio.model.Portfolio;
 import com.example.stockfolio.repository.PortfolioRepository;
+import com.example.stockfolio.service.PortfolioService;
+
 
 
 @RestController
 @RequestMapping("/api/portfolio")
 public class PortfolioRestController {
+    
+    @Autowired
+    private PortfolioService portfolioService;
 
     @Autowired
     private PortfolioRepository portfolioRepository;
@@ -39,7 +44,7 @@ public class PortfolioRestController {
 
     @GetMapping("/user/{userId}")
     public List<Portfolio> getPortfoliosByUser(@PathVariable Long userId) {
-        return portfolioRepository.findByApp_user_id(userId);
+        return portfolioRepository.findByAppUserId(userId);
     }
 
     @PostMapping
@@ -56,4 +61,10 @@ public class PortfolioRestController {
         portfolioRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/my")
+    public List<Portfolio> getMyPortfolios() {
+    return portfolioService.getUsersPortfolios();
+    }
+    
 }
