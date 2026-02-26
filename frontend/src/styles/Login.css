@@ -12,11 +12,11 @@
 }
 
 .loginBox1.green-bg {
-    background: radial-gradient(circle at top, #283f17, #121212);
+    background: linear-gradient(#283f17, #121212);
 }
 
 .loginBox2.green-bg {
-    background: radial-gradient(circle at bottom, #283f17, #121212);
+    background: linear-gradient(#121212, #283f17);
 }
 
 /* Animaatiot */
