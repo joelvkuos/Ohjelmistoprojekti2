@@ -1,11 +1,62 @@
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Space Mono', monospace;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: radial-gradient(circle at top, #212B39, #121212);
+  background: linear-gradient(#212B39, #121212);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  font-family: 'Questrial', sans-serif;
+}
+
+@font-face {
+  font-family: 'Questrial';
+  src: url('./assets/fonts/Questrial,Space_Mono/Questrial/Questrial-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/Space_Mono/SpaceMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/Space_Mono/SpaceMono-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/Space_Mono/SpaceMono-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
 }

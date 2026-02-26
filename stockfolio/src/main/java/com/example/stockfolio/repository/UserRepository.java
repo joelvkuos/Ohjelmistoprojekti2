@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.stockfolio.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
-    Optional<User> findfindByByUsername(String username);
+    Optional<User> findByUsername(String username);
 }

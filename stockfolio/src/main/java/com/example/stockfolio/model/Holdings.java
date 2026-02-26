@@ -1,36 +1,49 @@
 package com.example.stockfolio.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Holdings {
 
-    private Long holdings_id;
-    private Long portfolio_id;
+    @Id
+    @GeneratedValue
+    private Long holdingsId;
+
+    @NotNull(message = "Portfolio id is required")
+    private Long portfolioId;
+
+    @NotBlank(message = "Ticker is required")
     private String ticker;
+
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be positive")
     private Double quantity;
 
     public Holdings (){
-        
     }
     
-    public Holdings(Long holdings_id, Long portfolio_id, String ticker, Double quantity) {
-        this.holdings_id = holdings_id;
-        this.portfolio_id = portfolio_id;
+    public Holdings(Long holdingsId, Long portfolioId, String ticker, Double quantity) {
+        this.holdingsId = holdingsId;
+        this.portfolioId = portfolioId;
         this.ticker = ticker;
         this.quantity = quantity;
     }
-    public Long getHoldings_id() {
-        return holdings_id;
+    public Long getHoldingsId() {
+        return holdingsId;
     }
-    public void setHoldings_id(Long holdings_id) {
-        this.holdings_id = holdings_id;
+    public void setHoldingsId(Long holdingsId) {
+        this.holdingsId = holdingsId;
     }
-    public Long getPortfolio_id() {
-        return portfolio_id;
+    public Long getPortfolioId() {
+        return portfolioId;
     }
-    public void setPortfolio_id(Long portfolio_id) {
-        this.portfolio_id = portfolio_id;
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
     }
     public String getTicker() {
         return ticker;

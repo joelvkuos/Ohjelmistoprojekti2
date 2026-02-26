@@ -1,47 +1,72 @@
 package com.example.stockfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name="app_user")
 public class User {
 
-    private Long app_user_id;
-    private String userName;
+    @Id
+    @GeneratedValue
+    private Long appUserId;
+
+    @NotBlank(message = "Username is required")
+    private String username;
+
+    @NotBlank
+    @JsonIgnore
     private String passwordHash;
+
+    @NotBlank(message = "Role is required")
+    private String role;
+
+    @NotBlank(message = "Email is required")
     private String email;
+
+    @Pattern(regexp = "lisätään tähän pattern") /*TÄHÄN PATTERN */
     private String phone;
         
     public User () {
-        
     }
 
-    public User(Long app_user_id, String userName, String passwordHash, String email, String phone) {
-        this.app_user_id = app_user_id;
-        this.userName = userName;
+    public User(String username, String passwordHash, String role, String email, String phone) {
+        this.username = username;
         this.passwordHash = passwordHash;
+        this.role = role;
         this.email = email;
         this.phone = phone;
     }
     
-    public Long getApp_user_id() {
-        return app_user_id;
+    public Long getAppUserId() {
+        return appUserId;
     }
-    public void setApp_user_id(Long app_user_id) {
-        this.app_user_id = app_user_id;
+    public void setAppUserId(Long appUserId) {
+        this.appUserId = appUserId;
     }
     public String getUserName() {
-        return userName;
+        return username;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
     public String getPasswordHash() {
         return passwordHash;
     }
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
     public String getEmail() {
         return email;
