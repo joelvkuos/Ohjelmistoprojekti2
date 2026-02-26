@@ -58,7 +58,4 @@ public class Holdings {
         this.quantity = quantity;
     }
 
-    
-
-
 }

@@ -33,7 +33,7 @@ public class UserService {
 
     public User registerUser(RegisterUserDto registration){
         String passwordHash = passwordEncoder.encode(registration.password());
-        User newUser = new User(registration.username(), passwordHash, "USER", registration.email(), registration.phone());
+        User newUser = new User(registration.username(), passwordHash, "ROLE_USER", registration.email(), registration.phone());
 
         return userRepository.save(newUser); /*Rekisteröi uuden käyttäjän oletuksena nyt USER rooli ja tallentaa repositorioon*/
 
