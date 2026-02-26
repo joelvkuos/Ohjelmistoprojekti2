@@ -1,0 +1,167 @@
+.appbar {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    max-width: min(1100px, calc(100% - 32px));
+    margin: 32px auto 0 auto;
+    border-radius: 16px;
+    background-color: #131720;
+    border: 1px solid #383838;
+    box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.navigation-left {
+    text-align: left;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.appbar-center,
+.appbar-right {
+    flex: 1;
+}
+
+.appbar-center {
+    text-align: center;
+}
+
+.appbar-right {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+}
+
+.column-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    margin-top: 24px;
+    box-sizing: border-box;
+}
+
+.column-text {
+    text-align: center;
+    padding: 36px;
+}
+
+
+.btn-logOut {
+    background-color: #960019 !important;
+    color: whitesmoke !important;
+    padding: 6px 16px !important;
+    text-transform: none !important;
+    border-radius: 8px !important;
+    min-width: auto !important;
+    white-space: nowrap !important;
+}
+
+.btn-logOut:hover {
+    background-color: #420D09 !important;
+}
+
+.btn-navigation {
+    padding: 6px 16px !important;
+    color: white !important;
+    text-transform: none !important;
+    border-radius: 8px !important;
+    min-width: auto !important;
+    white-space: nowrap !important;
+}
+
+.btn-navigation:hover {
+    background-color: #212B39 !important;
+    color: whitesmoke !important;
+}
+
+
+
+@keyframes FadeIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.FadeIn {
+    animation: FadeIn 0.8s ease-out;
+}
+
+
+/* Burgeri piilossa desktopilla */
+.burger-icon {
+    display: none;
+
+}
+
+@media (max-width: 768px) {
+    .appbar {
+        margin-left: 16px;
+        margin-right: 16px;
+        max-width: calc(100% - 32px);
+    }
+
+    .two-columns {
+        padding-left: 16px;
+        padding-right: 16px;
+        grid-template-columns: 1fr;
+        /* yksi sarake mobiilissa */
+    }
+
+    .burger-icon {
+        display: block;
+        padding-top: 8px;
+    }
+
+    .appbar-right {
+        display: none;
+    }
+
+    .mobile-menu {
+        position: absolute;
+        top: 56px;
+        right: 16px;
+        background-color: #131720;
+        border: 1px solid #383838;
+        border-radius: 8px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        color: whitesmoke;
+    }
+
+    .mobile-menu-btn1 {
+        background-color: whitesmoke !important;
+        color: #121212 !important;
+        text-transform: none !important;
+        padding: 8px 16px !important;
+    }
+
+    .mobile-menu-btn2 {
+        background-color: #121212 !important;
+        color: whitesmoke !important;
+        text-transform: none !important;
+        padding: 8px 16px !important;
+    }
+
+    .mobile-menu-btn1:hover {
+        background-color: #212939 !important;
+    }
+
+    .mobile-menu-btn2:hover {
+        background-color: #282828 !important;
+    }
+}
