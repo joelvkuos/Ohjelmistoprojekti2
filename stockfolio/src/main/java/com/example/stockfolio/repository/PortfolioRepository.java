@@ -9,7 +9,6 @@ import com.example.stockfolio.model.Portfolio;
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
     
     List<Portfolio> findByAppUserId(Long appUserId);
-    
     List<Portfolio> findByPortfolioName(String portfolioName);
 
 }

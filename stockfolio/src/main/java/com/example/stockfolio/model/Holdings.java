@@ -1,6 +1,5 @@
 package com.example.stockfolio.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,7 +12,7 @@ public class Holdings {
 
     @Id
     @GeneratedValue
-    private Long holdings_id;
+    private Long holdingsId;
 
     @NotNull(message = "Portfolio id is required")
     private Long portfolioId;
@@ -28,17 +27,17 @@ public class Holdings {
     public Holdings (){
     }
     
-    public Holdings(Long holdings_id, Long portfolioId, String ticker, Double quantity) {
-        this.holdings_id = holdings_id;
+    public Holdings(Long holdingsId, Long portfolioId, String ticker, Double quantity) {
+        this.holdingsId = holdingsId;
         this.portfolioId = portfolioId;
         this.ticker = ticker;
         this.quantity = quantity;
     }
-    public Long getHoldings_id() {
-        return holdings_id;
+    public Long getHoldingsId() {
+        return holdingsId;
     }
-    public void setHoldings_id(Long holdings_id) {
-        this.holdings_id = holdings_id;
+    public void setHoldingsId(Long holdingsId) {
+        this.holdingsId = holdingsId;
     }
     public Long getPortfolioId() {
         return portfolioId;
