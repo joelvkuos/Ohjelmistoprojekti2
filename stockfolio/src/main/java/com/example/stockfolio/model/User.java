@@ -30,7 +30,7 @@ public class User {
     @NotBlank(message = "Email is required")
     private String email;
 
-    @Pattern(regexp = "lisätään tähän pattern") /*TÄHÄN PATTERN */
+    /*@Pattern(regexp = "pattern") /*TÄHÄN PATTERN */
     private String phone;
         
     public User () {
@@ -50,10 +50,10 @@ public class User {
     public void setAppUserId(Long appUserId) {
         this.appUserId = appUserId;
     }
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
     public String getPasswordHash() {

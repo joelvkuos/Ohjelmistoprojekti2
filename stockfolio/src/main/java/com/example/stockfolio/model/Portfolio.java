@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Portfolio {
@@ -12,7 +13,8 @@ public class Portfolio {
     @GeneratedValue
     private Long portfolioId;
 
-    @NotBlank(message = "User ID is required")
+
+    @NotNull(message = "User ID is required")
     private Long appUserId;
 
     @NotBlank(message = "Portfolio name is required")

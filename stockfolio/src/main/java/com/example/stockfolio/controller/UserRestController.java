@@ -47,7 +47,7 @@ public class UserRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-   @PostMapping("")
+   @PostMapping("/register")
     public User createUser(@Valid @RequestBody RegisterUserDto registration, BindingResult bindingResult) {
         Optional<User> existingUser = userRepository.findByUsername(registration.username());
 

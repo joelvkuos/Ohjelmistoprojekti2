@@ -42,7 +42,11 @@ public class AuthRestController {
 
         try {
             Authentication auth = authenticationManager.authenticate(credentials);
+            System.out.println("[DEBUG] Authenticated: " + auth.isAuthenticated());
+            System.out.println("[DEBUG] Auth principal: " + auth.getPrincipal());
+            System.out.println("[DEBUG] About to generate JWT for: " + auth.getName());
             AccessTokenPayloadDto accessTokenPayload = jwtService.getAccessToken(auth.getName());
+            System.out.println("[DEBUG] JWT generated successfully");
 
             return ResponseEntity.ok().body(accessTokenPayload);
         } catch (Exception e) {
