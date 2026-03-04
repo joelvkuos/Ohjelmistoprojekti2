@@ -31,11 +31,11 @@ public class HoldingsService {
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
 
-        List<Portfolio> portfolios = portfolioRepository.findByAppUserId(user.getAppUserId());
+        List<Portfolio> portfolios = portfolioRepository.findByUser(user);
 
         List<Holdings> allHoldings = new ArrayList<>();
         for(Portfolio p : portfolios){
-            allHoldings.addAll(holdingsRepository.findByPortfolioId(p.getPortfolioId()));
+            allHoldings.addAll(holdingsRepository.findByPortfolio(p));
         }
         return allHoldings;
     }
@@ -45,13 +45,16 @@ public class HoldingsService {
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
 
-        Portfolio portfolio = portfolioRepository.findById(holdings.getPortfolioId())
+        
+        Long portfolioId = holdings.getPortfolio().getPortfolioId();
+        Portfolio portfolio = portfolioRepository.findById(portfolioId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Portfolio not found"));
 
-        if(!portfolio.getAppUserId().equals(user.getAppUserId())){
+        if(!portfolio.getUser().getAppUserId().equals(user.getAppUserId())){
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not your portfolio");
         }
 
+        holdings.setPortfolio(portfolio);
         return holdingsRepository.save(holdings);
     }
 
@@ -59,12 +62,12 @@ public class HoldingsService {
     public void deleteHolding(Long holdingId){
         Holdings holdings = holdingsRepository.findById(holdingId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Holding not found"));
-        Portfolio portfolio = portfolioRepository.findById(holdings.getPortfolioId())
+        Portfolio portfolio = portfolioRepository.findById(holdings.getPortfolio().getPortfolioId())
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Portfolio not found"));
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
 
-        if(!portfolio.getAppUserId().equals(user.getAppUserId())){
+        if(!portfolio.getUser().getAppUserId().equals(user.getAppUserId())){
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not your holding");
         }
 

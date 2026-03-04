@@ -44,13 +44,13 @@ public class PortfolioRestController {
 
     @GetMapping("/user/{userId}")
     public List<Portfolio> getPortfoliosByUser(@PathVariable Long userId) {
-        return portfolioRepository.findByAppUserId(userId);
+        return portfolioRepository.findByUser_AppUserId(userId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Portfolio createPortfolio(@RequestBody Portfolio portfolio) {
-        return portfolioRepository.save(portfolio);
+        return portfolioService.createPortfolio(portfolio);
     }
 
     @DeleteMapping("/{id}")
@@ -58,7 +58,8 @@ public class PortfolioRestController {
         if (!portfolioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        portfolioRepository.deleteById(id);
+        
+        portfolioService.deletePortfolio(id);
         return ResponseEntity.noContent().build();
     }
 

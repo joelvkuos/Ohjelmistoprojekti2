@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stockfolio.model.Holdings;
 import com.example.stockfolio.repository.HoldingsRepository;
+import com.example.stockfolio.service.HoldingsService;
 
 
 @RestController
@@ -39,7 +40,7 @@ public class HoldingsRestController {
 
     @GetMapping("/portfolio/{portfolioId}")
     public List<Holdings> getHoldingsByPortfolio(@PathVariable Long portfolioId) {
-        return holdingsRepository.findByPortfolioId(portfolioId);
+        return holdingsRepository.findByPortfolio_PortfolioId(portfolioId);
     }
 
     @GetMapping("/ticker/{ticker}")
@@ -47,10 +48,13 @@ public class HoldingsRestController {
         return holdingsRepository.findByTicker(ticker);
     }
 
+    @Autowired
+    private HoldingsService holdingsService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Holdings createHolding(@RequestBody Holdings holding) {
-        return holdingsRepository.save(holding);
+        return holdingsService.createHolding(holding);
     }
 
     @DeleteMapping("/{id}")

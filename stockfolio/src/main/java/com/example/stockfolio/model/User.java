@@ -1,10 +1,15 @@
 package com.example.stockfolio.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -19,6 +24,10 @@ public class User {
 
     @NotBlank(message = "Username is required")
     private String username;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Portfolio> portfolios = new ArrayList<>();
 
     @NotBlank
     @JsonIgnore
@@ -81,5 +90,12 @@ public class User {
         this.phone = phone;
     }
 
+    public List<Portfolio> getPortfolios() {
+        return portfolios;
+    }
+
+    public void setPortfolios(List<Portfolio> portfolios) {
+        this.portfolios = portfolios;
+    }
 
 }
