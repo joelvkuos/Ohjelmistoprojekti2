@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.stockfolio.model.Holdings;
 import com.example.stockfolio.model.Portfolio;
 import com.example.stockfolio.repository.PortfolioRepository;
 import com.example.stockfolio.service.PortfolioService;
@@ -51,6 +53,15 @@ public class PortfolioRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public Portfolio createPortfolio(@RequestBody Portfolio portfolio) {
         return portfolioRepository.save(portfolio);
+    }
+
+    @PutMapping("/{id}")
+    public Portfolio updatePortfolio(@PathVariable Long id, @RequestBody Portfolio updatePortfolio){
+        Portfolio existing = portfolioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Portfolio not found"));
+        existing.setAppUserId(updatePortfolio.getAppUserId());
+        existing.setPortfolioName(updatePortfolio.getPortfolioName());
+        return portfolioRepository.save(existing);
     }
 
     @DeleteMapping("/{id}")

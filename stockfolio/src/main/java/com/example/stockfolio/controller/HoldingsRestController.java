@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,6 +52,15 @@ public class HoldingsRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public Holdings createHolding(@RequestBody Holdings holding) {
         return holdingsRepository.save(holding);
+    }
+    @PutMapping("/{id}")
+    public Holdings updateHolding(@PathVariable Long id, @RequestBody Holdings updateHolding){
+        Holdings existing = holdingsRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Holding not found"));
+        existing.setPortfolioId(updateHolding.getPortfolioId());
+        existing.setQuantity(updateHolding.getQuantity());
+        existing.setTicker(updateHolding.getTicker());
+        return holdingsRepository.save(existing);
     }
 
     @DeleteMapping("/{id}")
