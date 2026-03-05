@@ -19,8 +19,9 @@ public class StockfolioApplication {
 		SpringApplication.run(StockfolioApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner dataLoader(UserRepository userRepo, PortfolioRepository portfolioRepo, HoldingsRepository holdingsRepo) {
+		
 		return args -> {
 			// Create test users
 			User user1 = userRepo.save(new User("alice", "password1", "USER", "alice@example.com", "123456789"));
@@ -33,6 +34,6 @@ public class StockfolioApplication {
 			holdingsRepo.save(new Holdings(null, portfolio1.getPortfolioId(), "GOOGL", 5.0));
 			holdingsRepo.save(new Holdings(null, portfolio2.getPortfolioId(), "MSFT", 8.0));
 		};
-	}
+	}*/
 
 }
