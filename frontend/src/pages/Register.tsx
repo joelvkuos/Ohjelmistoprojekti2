@@ -42,7 +42,12 @@ export default function Register() {
 
         setLoading(true);
         try {
-            await addCustomer(formData);
+            await addCustomer({
+                username: formData.username,
+                password: formData.password,
+                email: formData.email,
+                phone: formData.phone
+            });
             navigate('/login');
         } catch (err) {
             setError("Registration failed. Please try again.");
