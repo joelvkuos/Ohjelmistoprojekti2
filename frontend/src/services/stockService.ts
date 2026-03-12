@@ -1,0 +1,1 @@
+/** Stock-toiminnot (jos tarvitaan) */
