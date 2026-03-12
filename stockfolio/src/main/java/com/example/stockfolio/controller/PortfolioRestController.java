@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.stockfolio.model.Holdings;
 import com.example.stockfolio.model.Portfolio;
 import com.example.stockfolio.repository.PortfolioRepository;
 import com.example.stockfolio.service.PortfolioService;
@@ -44,22 +43,17 @@ public class PortfolioRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Portfolio> getPortfoliosByUser(@PathVariable Long userId) {
-        return portfolioRepository.findByAppUserId(userId);
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Portfolio createPortfolio(@RequestBody Portfolio portfolio) {
-        return portfolioRepository.save(portfolio);
+        return portfolioService.createPortfolio(portfolio);
     }
 
     @PutMapping("/{id}")
     public Portfolio updatePortfolio(@PathVariable Long id, @RequestBody Portfolio updatePortfolio){
         Portfolio existing = portfolioRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Portfolio not found"));
-        existing.setAppUserId(updatePortfolio.getAppUserId());
+        existing.setUser(updatePortfolio.getUser());
         existing.setPortfolioName(updatePortfolio.getPortfolioName());
         return portfolioRepository.save(existing);
     }
@@ -69,13 +63,13 @@ public class PortfolioRestController {
         if (!portfolioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        portfolioRepository.deleteById(id);
+        portfolioService.deletePortfolio(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/my")
     public List<Portfolio> getMyPortfolios() {
-    return portfolioService.getUsersPortfolios();
+        return portfolioService.getUsersPortfolios();
     }
     
 }

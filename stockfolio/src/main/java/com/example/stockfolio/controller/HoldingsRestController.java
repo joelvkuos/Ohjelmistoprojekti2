@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stockfolio.model.Holdings;
 import com.example.stockfolio.repository.HoldingsRepository;
+import com.example.stockfolio.service.HoldingsService;
 
 
 @RestController
 @RequestMapping("/api/holdings")
 public class HoldingsRestController {
+
+    @Autowired
+    private HoldingsService holdingsService;
 
     @Autowired
     private HoldingsRepository holdingsRepository;
@@ -38,26 +42,26 @@ public class HoldingsRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/portfolio/{portfolioId}")
-    public List<Holdings> getHoldingsByPortfolio(@PathVariable Long portfolioId) {
-        return holdingsRepository.findByPortfolioId(portfolioId);
-    }
-
     @GetMapping("/ticker/{ticker}")
     public List<Holdings> getHoldingsByTicker(@PathVariable String ticker) {
         return holdingsRepository.findByTicker(ticker);
     }
 
+    @GetMapping("/my")
+    public List<Holdings> getMyHoldings() {
+        return holdingsService.getUserHoldings();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Holdings createHolding(@RequestBody Holdings holding) {
-        return holdingsRepository.save(holding);
+        return holdingsService.createHolding(holding);
     }
     @PutMapping("/{id}")
     public Holdings updateHolding(@PathVariable Long id, @RequestBody Holdings updateHolding){
         Holdings existing = holdingsRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Holding not found"));
-        existing.setPortfolioId(updateHolding.getPortfolioId());
+        existing.setPortfolio(updateHolding.getPortfolio());
         existing.setQuantity(updateHolding.getQuantity());
         existing.setTicker(updateHolding.getTicker());
         return holdingsRepository.save(existing);
@@ -68,7 +72,7 @@ public class HoldingsRestController {
         if (!holdingsRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        holdingsRepository.deleteById(id);
+        holdingsService.deleteHolding(id);
         return ResponseEntity.noContent().build();
     }
 }

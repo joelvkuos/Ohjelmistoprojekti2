@@ -1,8 +1,16 @@
 package com.example.stockfolio.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,38 +21,57 @@ public class Portfolio {
     @GeneratedValue
     private Long portfolioId;
 
-
     @NotNull(message = "User ID is required")
-    private Long appUserId;
+    @ManyToOne
+    @JoinColumn(name = "app_user_id", nullable = false)
+    private User user;
 
     @NotBlank(message = "Portfolio name is required")
     private String portfolioName;
 
+    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Holdings> holdings;
+
     public Portfolio () {
     }
     
-    public Portfolio(Long portfolioId, Long appUserId, String portfolioName) {
+    public Portfolio(Long portfolioId, User user, String portfolioName) {
         this.portfolioId = portfolioId;
-        this.appUserId = appUserId;
+        this.user = user;
         this.portfolioName = portfolioName;
     }
+
     public Long getPortfolioId() {
         return portfolioId;
     }
+
     public void setPortfolioId(Long portfolioId) {
         this.portfolioId = portfolioId;
     }
-    public Long getAppUserId() {
-        return appUserId;
+
+    public User getUser() {
+        return user;
     }
-    public void setAppUserId(Long appUserId) {
-        this.appUserId = appUserId;
+
+    public void setUser(User user) {
+        this.user = user;
     }
+
     public String getPortfolioName() {
         return portfolioName;
     }
+
     public void setPortfolioName(String portfolioName) {
         this.portfolioName = portfolioName;
+    }
+
+    public List<Holdings> getHoldings() {
+        return holdings;
+    }
+
+    public void setHoldings(List<Holdings> holdings) {
+        this.holdings = holdings;
     }
 
 }

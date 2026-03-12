@@ -3,15 +3,6 @@ package com.example.stockfolio;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import com.example.stockfolio.repository.UserRepository;
-import com.example.stockfolio.repository.PortfolioRepository;
-import com.example.stockfolio.repository.HoldingsRepository;
-import com.example.stockfolio.model.User;
-import com.example.stockfolio.model.Portfolio;
-import com.example.stockfolio.model.Holdings;
-
 @SpringBootApplication
 public class StockfolioApplication {
 
