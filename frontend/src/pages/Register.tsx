@@ -65,7 +65,6 @@ export default function Register() {
             </Box>
             <Box className='loginBox2 slide-right green-bg'>
                 <h1>REGISTER</h1>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <TextField
                     className="textField"
                     placeholder="Username:"
@@ -88,6 +87,9 @@ export default function Register() {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    error={error == "Passwords do not match"}
+                    helperText={error == "Passwords do not match" ? error : " "}
+
                 />
                 <TextField
                     className="textField"
