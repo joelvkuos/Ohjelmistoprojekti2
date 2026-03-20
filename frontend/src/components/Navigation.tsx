@@ -24,6 +24,9 @@ export default function Navigation() {
             <Button className='btn-navigation'>
                 Stocks
             </Button>
+            <Button className='btn-navigation'>
+                Profile
+            </Button>
 
             <div className="appbar-center">
             </div>
