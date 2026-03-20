@@ -137,11 +137,11 @@ h3 {
 }
 
 .textField {
-    background-color: #121212 !important;
     width: 300px !important;
 }
 
 .textField .MuiInputBase-root {
+    background-color: #121212 !important;
     height: 40px !important;
 }
 
@@ -154,8 +154,9 @@ h3 {
     color: whitesmoke;
 }
 
-.textField .MuiFormHelperText-root {
-    background-color: transparent !important;
+.textField .MuiFormHelperText-root,
+.textField .MuiFormHelperText-root.Mui-error {
+    background-color: 'black' !important;
 }
 
 .btn-grad1 {
