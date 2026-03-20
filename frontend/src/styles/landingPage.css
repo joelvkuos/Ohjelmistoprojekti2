@@ -46,6 +46,14 @@
     padding: 36px;
 }
 
+.column-section .column-text {
+    text-align: center !important;
+}
+
+.column-text h4 {
+    color: #b0b0b0;
+}
+
 
 .btn-signUp {
     background-color: whitesmoke !important;
