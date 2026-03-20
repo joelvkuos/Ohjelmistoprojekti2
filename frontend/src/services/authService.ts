@@ -1,16 +1,26 @@
 /** Auth-funktiot */
 /** eli sisältää register() <- POST /api/users/register */
-/** login() <- POST /api/auth/login (tulevaisuudessa) */
+/** login() <- GET /api/auth/login (tulevaisuudessa) */
 /** logout() */
 
 import type { Customer } from '../types/api.types'
 
 const API_URL = 'https://stockfolio-postgres-stockfolio-postgres.2.rahtiapp.fi/api'
+const USERNAME = import.meta.env.VITE_API_USERNAME ?? ''
+const PASSWORD = import.meta.env.VITE_API_PASSWORD ?? ''
+
+const credentials = btoa(`${USERNAME}:${PASSWORD}`);
+
 
 export const addCustomer = async (customer: Customer): Promise<Customer> => {
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        ...(USERNAME && PASSWORD ? { Authorization: `Basic ${credentials}` } : {})
+    };
+
     const response = await fetch(`${API_URL}/users/register`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
             username: customer.username,
             password: customer.password,
