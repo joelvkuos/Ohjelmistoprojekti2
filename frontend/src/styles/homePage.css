@@ -81,6 +81,24 @@
     color: whitesmoke !important;
 }
 
+.btn-starter {
+    background-color: #131720 !important;
+    color: whitesmoke !important;
+    padding: 6px 16px !important;
+    border: #383838 1px solid !important;
+    text-transform: none !important;
+    border-radius: 8px !important;
+    min-width: auto !important;
+    white-space: nowrap !important;
+}
+
+.btn-starter:hover {
+    background-color: #212B39 !important;
+    color: whitesmoke !important;
+    border-color: #212B39 !important;
+}
+
+
 
 
 @keyframes FadeIn {
