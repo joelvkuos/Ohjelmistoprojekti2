@@ -37,6 +37,7 @@ export default function Login() {
         setLoading(true);
         try {
             await loginCustomer(formData.username, formData.password);
+            localStorage.setItem('username', formData.username);
             navigate('/homepage');
         } catch (err) {
             setError("Login failed. Please check your credentials.");

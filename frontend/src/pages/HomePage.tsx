@@ -4,15 +4,25 @@ import "../styles/homePage.css"
 import Navigation from "../components/Navigation";
 import { Button } from "@mui/material";
 import stocksImage from "../assets/Stocks.jpg"
+import { useState, useEffect } from "react";
 
 
 export default function Homepage() {
+    const [username, setUsername] = useState<string>("User");
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
+
     return (
         <>
             <Navigation />
              <div className="two-column-section">
                 <div className="column-text">
-                    <h1>Welcome User!</h1>
+                    <h1>Welcome {username}!</h1>
                     <h4>Welcome to Stockfolio — your personal space to showcase and track your investment journey. 
                         Build your own stock portfolios, monitor your performance, and see your investments come to life in one place. 
                         Explore what others are investing in, share your thoughts, 
