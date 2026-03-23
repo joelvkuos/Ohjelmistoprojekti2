@@ -36,3 +36,28 @@ export const addCustomer = async (customer: Customer): Promise<Customer> => {
 
     return response.json();
 }
+
+
+
+export const loginCustomer = async (username: string, password: string) => {
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        ...(USERNAME && PASSWORD ? { Authorization: `Basic ${credentials}` } : {})
+    };
+
+    const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            username: username,
+            password: password
+        }),
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Login failed');
+    }
+
+    return response.json();
+}
