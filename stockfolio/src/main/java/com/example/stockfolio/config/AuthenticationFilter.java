@@ -30,11 +30,12 @@ public class AuthenticationFilter extends OncePerRequestFilter{
 
         if (jws != null) {
             String user = jwtService.getAuthUser(request);
-
+            if (user != null) {
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     user, null, List.of());
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
 
         filterChain.doFilter(request, response);
