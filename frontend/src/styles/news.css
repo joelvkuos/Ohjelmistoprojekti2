@@ -1,0 +1,17 @@
+.news-container {
+    padding: 20px;
+}
+
+.error-message {
+    color: red;
+}
+
+.article-card {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.article-image {
+    max-width: 200px;
+}
