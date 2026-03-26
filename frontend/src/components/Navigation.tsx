@@ -9,7 +9,7 @@ import { useAuth } from '../context/AuthContext';
 export default function Navigation() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
-    const { logout, state } = useAuth();
+    const { logout } = useAuth();
 
 
     const handleLogout = () => {
