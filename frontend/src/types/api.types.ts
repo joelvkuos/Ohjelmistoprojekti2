@@ -7,3 +7,15 @@ export interface Customer {
     phone: string;
 }
 
+export interface NewsArticle {
+    id: number;
+    category: string;
+    datetime: number;
+    headline: string;
+    image: string;
+    related: string;
+    source: string;
+    summary: string;
+    url: string;
+}
+
