@@ -1,17 +1,15 @@
 import { Box, Button, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { loginCustomer } from "../services/authService";
 import "../styles/Login.css"
 import { useState } from "react";
-
-
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
 
     const navigate = useNavigate();
+    const { login, state } = useAuth();
 
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         username: "",
@@ -25,7 +23,6 @@ export default function Login() {
         });
     };
 
-
     const handleLogin = async () => {
         setError("");
 
@@ -34,18 +31,13 @@ export default function Login() {
             return;
         }
 
-        setLoading(true);
         try {
-            await loginCustomer(formData.username, formData.password);
-            localStorage.setItem('username', formData.username);
+            await login(formData.username, formData.password);
             navigate('/homepage');
         } catch (err) {
-            setError("Login failed. Please check your credentials.");
-        } finally {
-            setLoading(false);
+            setError(err instanceof Error ? err.message : "Login failed. Please check your credentials.");
         }
     }
-
 
     return (
         <Box className='loginBox1'>
@@ -62,6 +54,7 @@ export default function Login() {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
+                    disabled={state.loading}
                 />
                 <TextField
                     className="textField"
@@ -72,17 +65,19 @@ export default function Login() {
                     onChange={handleChange}
                     error={error !== ""}
                     helperText={error ? error : " "}
+                    disabled={state.loading}
                 />
                 <Button
                     className="btn-grad1"
                     onClick={handleLogin}
+                    disabled={state.loading}
                 >
-                    {loading ? 'Logging in..' : 'Log in'}
+                    {state.loading ? 'Logging in..' : 'Log in'}
                 </Button>
                 <Link className="link1" to="/">Forgot password?</Link>
-                <p className="pCreateAccount">Don't have an account? <Link className="link2" to="/register" >Create one here</Link></p> {/*Laitoin vaan jonkun random linkin, sen voi muuttaa miten haluaa */}
+                <p className="pCreateAccount">Don't have an account? <Link className="link2" to="/register" >Create one here</Link></p>
 
-            </ Box >
+            </Box>
         </Box>
     )
 

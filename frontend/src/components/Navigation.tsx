@@ -3,11 +3,19 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import '../styles/landingPage.css';
+import { useAuth } from '../context/AuthContext';
 
 
 export default function Navigation() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+    const { logout } = useAuth();
+
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
 
     return (
         <header className="appbar">
@@ -35,7 +43,7 @@ export default function Navigation() {
             </div>
             <div className="appbar-right">
 
-                <Button className="btn-logOut" onClick={() => navigate('/')}>
+                <Button className="btn-logOut" onClick={handleLogout}>
                     Log out
                 </Button>
 

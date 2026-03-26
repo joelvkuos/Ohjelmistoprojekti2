@@ -4,6 +4,7 @@ import Register from './pages/Register'
 import LandingPage from './pages/landingPage'
 import Homepage from './pages/HomePage'
 import News from './pages/News'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
 
@@ -12,8 +13,22 @@ function App() {
       <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/homepage' element={<Homepage />} />
-      <Route path='/news' element={<News />} />
+      <Route
+        path='/homepage'
+        element={
+          <ProtectedRoute>
+            <Homepage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='/news'
+        element={
+          <ProtectedRoute>
+            <News />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   )
 }
