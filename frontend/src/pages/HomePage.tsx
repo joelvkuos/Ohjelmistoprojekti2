@@ -20,12 +20,12 @@ export default function Homepage() {
     return (
         <>
             <Navigation />
-             <div className="two-column-section">
+            <div className="two-column-section">
                 <div className="column-text">
                     <h1>Welcome {username}!</h1>
-                    <h4>Welcome to Stockfolio — your personal space to showcase and track your investment journey. 
-                        Build your own stock portfolios, monitor your performance, and see your investments come to life in one place. 
-                        Explore what others are investing in, share your thoughts, 
+                    <h4>Welcome to Stockfolio — your personal space to showcase and track your investment journey.
+                        Build your own stock portfolios, monitor your performance, and see your investments come to life in one place.
+                        Explore what others are investing in, share your thoughts,
                         and join the conversation — but most importantly, keep your own portfolio front and center.</h4>
                     <Button className="btn-starter">
                         Get Started With Stockfolio

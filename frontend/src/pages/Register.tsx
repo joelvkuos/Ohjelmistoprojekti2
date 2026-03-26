@@ -1,15 +1,14 @@
 import { Box, Button, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { addCustomer } from "../services/authService";
 import "../styles/Login.css"
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
     const navigate = useNavigate();
-
+    const { register, state } = useAuth();
 
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         username: "",
@@ -18,7 +17,6 @@ export default function Register() {
         email: "",
         phone: ""
     });
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -40,19 +38,16 @@ export default function Register() {
             return;
         }
 
-        setLoading(true);
         try {
-            await addCustomer({
-                username: formData.username,
-                password: formData.password,
-                email: formData.email,
-                phone: formData.phone
-            });
+            await register(
+                formData.username,
+                formData.password,
+                formData.email,
+                formData.phone
+            );
             navigate('/login');
         } catch (err) {
-            setError("Registration failed. Please try again.");
-        } finally {
-            setLoading(false);
+            setError(err instanceof Error ? err.message : "Registration failed. Please try again.");
         }
     }
 
@@ -71,6 +66,7 @@ export default function Register() {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
+                    disabled={state.loading}
                 />
                 <TextField
                     className="textField"
@@ -79,6 +75,7 @@ export default function Register() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
+                    disabled={state.loading}
                 />
                 <TextField
                     className="textField"
@@ -89,7 +86,7 @@ export default function Register() {
                     onChange={handleChange}
                     error={error == "Passwords do not match"}
                     helperText={error == "Passwords do not match" ? error : " "}
-
+                    disabled={state.loading}
                 />
                 <TextField
                     className="textField"
@@ -97,6 +94,7 @@ export default function Register() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    disabled={state.loading}
                 />
                 <TextField
                     className="textField"
@@ -104,16 +102,18 @@ export default function Register() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    disabled={state.loading}
                 />
                 <Button
                     className="btn-grad1 register"
                     onClick={handleRegister}
-                    disabled={loading}
+                    disabled={state.loading}
                 >
-                    {loading ? 'Creating...' : 'create account'}
+                    {state.loading ? 'Creating...' : 'create account'}
                 </Button>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <p className="pCreateAccount">Already have an account? <Link className="link2" to="/login" >Back to login</Link></p>
-            </ Box >
+            </Box>
         </Box>
     )
 }

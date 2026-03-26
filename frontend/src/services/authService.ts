@@ -1,22 +1,18 @@
 /** Auth-funktiot */
-/** eli sisältää register() <- POST /api/users/register */
-/** login() <- GET /api/auth/login (tulevaisuudessa) */
-/** logout() */
 
-import type { Customer } from '../types/api.types'
+import type { Customer, AuthResponse } from '../types/api.types'
 
 const API_URL = 'https://stockfolio-postgres-stockfolio-postgres.2.rahtiapp.fi/api'
 const USERNAME = import.meta.env.VITE_API_USERNAME ?? ''
 const PASSWORD = import.meta.env.VITE_API_PASSWORD ?? ''
 
-const credentials = btoa(`${USERNAME}:${PASSWORD}`);
+const credentials = btoa(`${USERNAME}:${PASSWORD}`)
 
-
-export const addCustomer = async (customer: Customer): Promise<Customer> => {
+export const addCustomer = async (customer: Customer): Promise<AuthResponse> => {
     const headers: HeadersInit = {
         'Content-Type': 'application/json',
         ...(USERNAME && PASSWORD ? { Authorization: `Basic ${credentials}` } : {})
-    };
+    }
 
     const response = await fetch(`${API_URL}/users/register`, {
         method: 'POST',
@@ -27,23 +23,21 @@ export const addCustomer = async (customer: Customer): Promise<Customer> => {
             email: customer.email,
             phone: customer.phone
         }),
-    });
+    })
 
     if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Registration failed');
+        const errorText = await response.text()
+        throw new Error(errorText || 'Registration failed')
     }
 
-    return response.json();
+    return response.json()
 }
 
-
-
-export const loginCustomer = async (username: string, password: string) => {
+export const loginCustomer = async (username: string, password: string): Promise<AuthResponse> => {
     const headers: HeadersInit = {
         'Content-Type': 'application/json',
         ...(USERNAME && PASSWORD ? { Authorization: `Basic ${credentials}` } : {})
-    };
+    }
 
     const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
@@ -52,12 +46,47 @@ export const loginCustomer = async (username: string, password: string) => {
             username: username,
             password: password
         }),
-    });
+    })
 
     if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Login failed');
+        const errorText = await response.text()
+        throw new Error(errorText || 'Login failed')
     }
 
-    return response.json();
+    return response.json()
+}
+
+export const logoutCustomer = async (refreshToken: string): Promise<void> => {
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    }
+
+    const response = await fetch(`${API_URL}/auth/logout`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ refreshToken }),
+    })
+
+    if (!response.ok) {
+        console.error('Logout failed')
+    }
+}
+
+export const refreshTokens = async (refreshToken: string): Promise<AuthResponse> => {
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    }
+
+    const response = await fetch(`${API_URL}/auth/refresh`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ refreshToken }),
+    })
+
+    if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(errorText || 'Token refresh failed')
+    }
+
+    return response.json()
 }
