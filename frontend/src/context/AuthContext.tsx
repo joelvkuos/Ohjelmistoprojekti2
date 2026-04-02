@@ -89,18 +89,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const bootstrapAsync = async () => {
             try {
                 const accessToken = localStorage.getItem('accessToken')
-                const refreshToken = localStorage.getItem('refreshToken')
+                const expiresAt = localStorage.getItem('expiresAt')
                 const userJson = localStorage.getItem('user')
 
-                if (accessToken && refreshToken && userJson) {
-                    const user = JSON.parse(userJson)
-                    dispatch({
-                        type: 'RESTORE_TOKEN',
-                        payload: { user, accessToken, refreshToken },
-                    })
-                } else {
-                    dispatch({ type: 'LOGOUT' })
+                // Tarkista että token on voimassa
+                if (accessToken && expiresAt) {
+                    const now = new Date()
+                    const expireTime = new Date(expiresAt)
+                    
+                    if (now < expireTime) {
+                        // Token on edelleen voimassa, restoroi käyttäjätiedot
+                        let user = null
+                        try {
+                            user = userJson ? JSON.parse(userJson) : { id: 0, username: 'User', email: '' }
+                        } catch (e) {
+                            user = { id: 0, username: 'User', email: '' }
+                        }
+                        
+                        dispatch({
+                            type: 'RESTORE_TOKEN',
+                            payload: { user, accessToken, refreshToken: accessToken },
+                        })
+                        return
+                    }
                 }
+                
+                dispatch({ type: 'LOGOUT' })
             } catch (e) {
                 console.error('Failed to restore token', e)
                 dispatch({ type: 'LOGOUT' })
@@ -130,14 +144,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             // Tallenna tokens localStorage:hen
             localStorage.setItem('accessToken', data.accessToken)
-            localStorage.setItem('refreshToken', data.refreshToken)
-            localStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('expiresAt', data.expiresAt || new Date(Date.now() + 3600000).toISOString())
+            
+            const user = { id: 0, username: username, email: '' }
+            localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem('refreshToken', data.accessToken)
 
             dispatch({
                 type: 'LOGIN_SUCCESS',
-                payload: data.user,
+                payload: user,
                 accessToken: data.accessToken,
-                refreshToken: data.refreshToken,
+                refreshToken: data.accessToken,
             })
         } catch (error) {
             const message = error instanceof Error ? error.message : 'Login failed'
@@ -150,6 +167,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
         localStorage.removeItem('user')
+        localStorage.removeItem('expiresAt')
         dispatch({ type: 'LOGOUT' })
     }, [])
 
