@@ -21,7 +21,7 @@ export default function Profile() {
                         <Button className="profileButton" startIcon={<Person2OutlinedIcon />} onClick={() => navigate('/profile')} >
                             Profile
                         </Button>
-                        <Button className="profileButton" startIcon={<WorkOutlineOutlinedIcon />} onClick={() => navigate('/portfolio')}>
+                        <Button className="portfolioButton" startIcon={<WorkOutlineOutlinedIcon />} onClick={() => navigate('/portfolio')}>
                             Portfolio
                         </Button>
                     </div>
