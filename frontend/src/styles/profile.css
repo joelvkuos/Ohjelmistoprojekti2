@@ -1,4 +1,4 @@
-.column-section {
+.profilecolumn-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-.two-column-section {
+.profiletwo-column-section {
     display: grid;
     grid-template-columns: 2fr 4fr;
     align-items: center;
@@ -52,12 +52,14 @@
 .profileButtons {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 8px;
-
 }
 
 .profileButton {
+    justify-content: flex-start !important;
+    width: 100%;
+    text-align: left !important;
     color: whitesmoke !important;
     background-color: #131720 !important;
     color: whitesmoke !important;
@@ -67,11 +69,15 @@
     border-radius: 8px !important;
     min-width: auto !important;
     white-space: nowrap !important;
-
 }
 
 .profileButton:hover {
     background-color: #212B39 !important;
     color: whitesmoke !important;
     border-color: #212B39 !important;
+}
+
+.profileButton .MuiButton-startIcon {
+    margin-left: 0 !important;
+    margin-right: 18px !;
 }

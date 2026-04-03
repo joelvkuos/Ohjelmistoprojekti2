@@ -2,20 +2,26 @@ import "../styles/profile.css"
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { Button } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
+
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 
 
 export default function Profile() {
+    const navigate = useNavigate();
+
     return (
         <>
             <Navigation />
-            <div className="two-column-section">
+            <div className="profiletwo-column-section">
                 <div className="column-text">
                     <h2>My profile</h2>
                     <div className="profileButtons">
-                        <Button className="profileButton">
+                        <Button className="profileButton" startIcon={<Person2OutlinedIcon />} onClick={() => navigate('/profile')} >
                             Profile
                         </Button>
-                        <Button className="profileButton">
+                        <Button className="profileButton" startIcon={<WorkOutlineOutlinedIcon />} onClick={() => navigate('/portfolio')}>
                             Portfolio
                         </Button>
                     </div>
