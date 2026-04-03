@@ -5,6 +5,8 @@ import Navigation from "../components/Navigation";
 import { Button } from "@mui/material";
 import stocksImage from "../assets/Stocks.jpg"
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function Homepage() {
@@ -17,6 +19,8 @@ export default function Homepage() {
         }
     }, []);
 
+    const navigate = useNavigate();
+
     return (
         <>
             <Navigation />
@@ -27,7 +31,7 @@ export default function Homepage() {
                         Build your own stock portfolios, monitor your performance, and see your investments come to life in one place.
                         Explore what others are investing in, share your thoughts,
                         and join the conversation — but most importantly, keep your own portfolio front and center.</h4>
-                    <Button className="btn-starter">
+                    <Button className="btn-starter" onClick={() => navigate('/portfolio')}>
                         Get Started With Stockfolio
                     </Button>
                 </div>

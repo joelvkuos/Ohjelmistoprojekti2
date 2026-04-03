@@ -32,7 +32,7 @@ export default function Navigation() {
             <Button className='btn-navigation'>
                 Stocks
             </Button>
-            <Button className='btn-navigation'>
+            <Button className='btn-navigation' onClick={() => navigate('/profile')}>
                 Profile
             </Button>
 
