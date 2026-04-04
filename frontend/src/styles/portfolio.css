@@ -1,0 +1,106 @@
+.portfolio-container {
+    padding: 20px;
+}
+
+.error-message {
+    color: red;
+}
+
+.portfolio-card {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.portfolio-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.holdings-list {
+    margin-top: 10px;
+}
+
+.holding-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.holding-item:last-child {
+    border-bottom: none;
+}
+
+.holding-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.holding-ticker {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.holding-quantity {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.holding-price-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.holding-price {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.holding-change {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.holding-total {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.holding-loading {
+    color: #999;
+    font-style: italic;
+}
+
+.no-portfolios {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.create-portfolio-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.create-portfolio-btn:hover {
+    background-color: #0056b3;
+}

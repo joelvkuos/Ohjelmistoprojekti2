@@ -46,3 +46,28 @@ export interface AuthState {
     loading: boolean;
     error: string | null;
 }
+
+export interface Portfolio {
+    portfolioId: number;
+    portfolioName: string;
+    user: {
+        id: number;
+        username: string;
+        email: string;
+    };
+    holdings?: Holdings[];
+}
+
+export interface Holdings {
+    holdingsId: number;
+    ticker: string;
+    quantity: number;
+}
+
+export interface StockQuote {
+    ticker: string;
+    currentPrice: number;
+    change: number;
+    changePercent: number;
+    timestamp: number;
+}

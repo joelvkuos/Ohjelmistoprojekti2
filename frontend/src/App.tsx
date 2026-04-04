@@ -5,6 +5,8 @@ import LandingPage from './pages/landingPage'
 import Homepage from './pages/HomePage'
 import News from './pages/News'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import Portfolio from './pages/Portfolio'
+import Profile from './pages/Profile'
 
 function App() {
 
@@ -26,6 +28,22 @@ function App() {
         element={
           <ProtectedRoute>
             <News />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='/portfolio'
+        element={
+          <ProtectedRoute>
+            <Portfolio />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='/profile'
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />
