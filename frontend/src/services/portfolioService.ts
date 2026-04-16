@@ -14,6 +14,15 @@ export const getMyPortfolios = async (accessToken: string): Promise<Portfolio[]>
     }
 };
 
+export const getAllPortfolios = async (accessToken: string): Promise<Portfolio[]> => {
+    try {
+        return await fetchAPI('/portfolio', { requiresAuth: true }, accessToken);
+    } catch (error) {
+        console.error('Error fetching all portfolios:', error);
+        throw error;
+    }
+};
+
 export const getPortfolio = async (id: number, accessToken: string): Promise<Portfolio> => {
     try {
         return await fetchAPI(`/portfolio/${id}`, { requiresAuth: true }, accessToken);
