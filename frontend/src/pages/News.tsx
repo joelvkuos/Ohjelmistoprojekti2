@@ -8,11 +8,13 @@ export default function News() {
     const [articles, setArticles] = useState<NewsArticle[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [offset, setOffset] = useState(0);
+    const [loadingMore, setLoadingMore] = useState(false);
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const news = await getMarketNews('general', 20);
+                const news = await getMarketNews('general', 10);
                 setArticles(news);
             } catch (err) {
                 setError("Failed to load news articles");
@@ -23,6 +25,21 @@ export default function News() {
 
         fetchNews();
     }, []);
+
+    const handleLoadMore = async () => {
+        setLoadingMore(true);
+        try {
+            const moreNews = await getMarketNews('general', 10, offset + 10);
+            if (moreNews.length > 0) {
+                setArticles(prev => [...prev, ...moreNews]);
+                setOffset(prev => prev + 10);
+            }
+        } catch (err) {
+            setError("Failed to load more articles");
+        } finally {
+            setLoadingMore(false);
+        }
+    };
 
     return (
     <>
@@ -43,6 +60,11 @@ export default function News() {
                         <a href={article.url} target="_blank" rel="noopener noreferrer">Read more</a>
                     </div>
                 ))}
+                <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+                    <a href="#" onClick={(e) => { e.preventDefault(); handleLoadMore(); }} style={{ cursor: loadingMore ? 'not-allowed' : 'pointer', opacity: loadingMore ? 0.6 : 1 }}>
+                        {loadingMore ? 'Loading...' : 'Load more'}
+                    </a>
+                </p>
             </div>
         </div>
     <Footer />

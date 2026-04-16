@@ -29,7 +29,7 @@ export default function Navigation() {
             <Button className='btn-navigation' onClick={() => navigate('/news')}>
                 News
             </Button>
-            <Button className='btn-navigation'>
+            <Button className='btn-navigation' onClick={() => navigate('/stocks')}>
                 Stocks
             </Button>
             <Button className='btn-navigation' onClick={() => navigate('/portfolios')}>
