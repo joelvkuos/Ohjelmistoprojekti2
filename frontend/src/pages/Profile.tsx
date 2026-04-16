@@ -22,7 +22,7 @@ export default function Profile() {
                             Profile
                         </Button>
                         <Button className="portfolioButton" startIcon={<WorkOutlineOutlinedIcon />} onClick={() => navigate('/portfolio')}>
-                            Portfolio
+                            My portfolios
                         </Button>
                     </div>
                 </div>

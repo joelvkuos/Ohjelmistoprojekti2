@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getMyPortfolios, type Portfolio } from "../services/portfolioService";
+import { getMyPortfolios, createPortfolio, type Portfolio } from "../services/portfolioService";
 import { getMultipleStockQuotes, type StockQuote } from "../services/stockQuoteService";
 import "../styles/portfolio.css";
 
@@ -12,6 +12,9 @@ export default function PortfolioPage() {
     const [stockQuotes, setStockQuotes] = useState<Map<string, StockQuote>>(new Map());
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [newPortfolioName, setNewPortfolioName] = useState("");
+    const [isCreating, setIsCreating] = useState(false);
 
     useEffect(() => {
         const fetchPortfolios = async () => {
@@ -54,6 +57,38 @@ export default function PortfolioPage() {
         fetchPortfolios();
     }, [state.accessToken]);
 
+    const handleCreatePortfolio = async () => {
+        if (!newPortfolioName.trim()) {
+            setError("Portfolio name cannot be empty");
+            return;
+        }
+
+        if (!state.accessToken) {
+            setError("Not authenticated");
+            return;
+        }
+
+        setIsCreating(true);
+        try {
+            await createPortfolio(
+                { portfolioName: newPortfolioName },
+                state.accessToken
+            );
+
+            const updatedPortfolios = await getMyPortfolios(state.accessToken);
+            setPortfolios(updatedPortfolios);
+
+            setShowCreateModal(false);
+            setNewPortfolioName("");
+            setError("");
+        } catch (err) {
+            setError("Failed to create portfolio");
+            console.error(err);
+        } finally {
+            setIsCreating(false);
+        }
+    };
+
     return (
         <>
             <Navigation />
@@ -65,7 +100,12 @@ export default function PortfolioPage() {
                 {!loading && !error && portfolios.length === 0 && (
                     <div className="no-portfolios">
                         <p>You don't have any portfolios yet.</p>
-                        <button className="create-portfolio-btn">Create Portfolio</button>
+                        <button 
+                            className="create-portfolio-btn"
+                            onClick={() => setShowCreateModal(true)}
+                        >
+                            Create Portfolio
+                        </button>
                     </div>
                 )}
 
@@ -112,6 +152,39 @@ export default function PortfolioPage() {
                         </div>
                     ))}
                 </div>
+
+                {/* Create Portfolio Modal */}
+                {showCreateModal && (
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                            <h2>Create New Portfolio</h2>
+                            <input
+                                type="text"
+                                placeholder="Enter portfolio name"
+                                value={newPortfolioName}
+                                onChange={(e) => setNewPortfolioName(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && handleCreatePortfolio()}
+                                disabled={isCreating}
+                            />
+                            <div className="modal-buttons">
+                                <button
+                                    className="modal-btn create-btn"
+                                    onClick={handleCreatePortfolio}
+                                    disabled={isCreating}
+                                >
+                                    {isCreating ? 'Creating...' : 'Create'}
+                                </button>
+                                <button
+                                    className="modal-btn cancel-btn"
+                                    onClick={() => setShowCreateModal(false)}
+                                    disabled={isCreating}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
             <Footer />
         </>
