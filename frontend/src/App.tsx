@@ -7,6 +7,7 @@ import News from './pages/News'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import Portfolio from './pages/Portfolio'
 import Profile from './pages/Profile'
+import AllPortfolios from './pages/AllPortfolios'
 
 function App() {
 
@@ -44,6 +45,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='/portfolios'
+        element={
+          <ProtectedRoute>
+            <AllPortfolios />
           </ProtectedRoute>
         }
       />

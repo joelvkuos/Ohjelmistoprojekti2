@@ -1,0 +1,26 @@
+.all-portfolios-container {
+    padding: 20px;
+}
+
+.all-portfolios-subtitle {
+    margin-top: -4px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.portfolio-owner {
+    display: inline-block;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.portfolio-name {
+    color: #444;
+}
+
+.no-holdings-message {
+    color: #2b2b2b;
+}
+.all-portfolios-subtitle{
+    color: #ffffff;
+}
