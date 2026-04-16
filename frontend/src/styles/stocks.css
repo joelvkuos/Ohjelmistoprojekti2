@@ -1,0 +1,123 @@
+.stocks-container {
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.stocks-container h1 {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.error-message {
+    color: #ef4444;
+    margin-bottom: 20px;
+}
+
+.search-section {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #383838;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #1a1f2e;
+    color: #ffffff;
+}
+
+.search-input::placeholder {
+    color: #888888;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-width: 400px;
+    background: #131720;
+    border: 1px solid #383838;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.search-item {
+    padding: 10px;
+    border-bottom: 1px solid #383838;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.search-item:hover {
+    background-color: #1a1f2e;
+}
+
+.stock-card {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #383838;
+    border-radius: 4px;
+    background-color: #1a1f2e;
+}
+
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.company-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.stock-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.company-name {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    color: #888888;
+}
+
+.stock-price {
+    text-align: right;
+}
+
+.price {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.change {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.stock-change {
+    margin: 0;
+    font-size: 14px;
+    color: #888888;
+}
