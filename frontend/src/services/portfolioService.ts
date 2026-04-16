@@ -14,6 +14,15 @@ export const getMyPortfolios = async (accessToken: string): Promise<Portfolio[]>
     }
 };
 
+export const getAllPortfolios = async (accessToken: string): Promise<Portfolio[]> => {
+    try {
+        return await fetchAPI('/portfolio', { requiresAuth: true }, accessToken);
+    } catch (error) {
+        console.error('Error fetching all portfolios:', error);
+        throw error;
+    }
+};
+
 export const getPortfolio = async (id: number, accessToken: string): Promise<Portfolio> => {
     try {
         return await fetchAPI(`/portfolio/${id}`, { requiresAuth: true }, accessToken);
@@ -23,7 +32,7 @@ export const getPortfolio = async (id: number, accessToken: string): Promise<Por
     }
 };
 
-export const createPortfolio = async (portfolio: Omit<Portfolio, 'portfolioId'>, accessToken: string): Promise<Portfolio> => {
+export const createPortfolio = async (portfolio: { portfolioName: string }, accessToken: string): Promise<Portfolio> => {
     try {
         return await fetchAPI('/portfolio', {
             method: 'POST',
@@ -57,6 +66,31 @@ export const deletePortfolio = async (id: number, accessToken: string): Promise<
         }, accessToken);
     } catch (error) {
         console.error('Error deleting portfolio:', error);
+        throw error;
+    }
+};
+
+export const addHolding = async (holding: { portfolio?: { portfolioId: number }; ticker: string; quantity: number }, accessToken: string): Promise<Holdings> => {
+    try {
+        return await fetchAPI('/holdings', {
+            method: 'POST',
+            body: JSON.stringify(holding),
+            requiresAuth: true
+        }, accessToken);
+    } catch (error) {
+        console.error('Error adding holding:', error);
+        throw error;
+    }
+};
+
+export const removeHolding = async (id: number, accessToken: string): Promise<void> => {
+    try {
+        await fetchAPI(`/holdings/${id}`, {
+            method: 'DELETE',
+            requiresAuth: true
+        }, accessToken);
+    } catch (error) {
+        console.error('Error removing holding:', error);
         throw error;
     }
 };

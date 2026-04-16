@@ -32,6 +32,9 @@ export default function Navigation() {
             <Button className='btn-navigation' onClick={() => navigate('/stocks')}>
                 Stocks
             </Button>
+            <Button className='btn-navigation' onClick={() => navigate('/portfolios')}>
+                All Portfolios
+            </Button>
             <Button className='btn-navigation' onClick={() => navigate('/profile')}>
                 Profile
             </Button>

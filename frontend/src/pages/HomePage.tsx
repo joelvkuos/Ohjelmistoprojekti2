@@ -8,15 +8,20 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 
-
 export default function Homepage() {
-    const [username, setUsername] = useState<string>("User");
+    const [username, setUsername] = useState<string>();
 
     useEffect(() => {
-        const storedUsername = localStorage.getItem('username');
-        if (storedUsername) {
-            setUsername(storedUsername);
-        }
+        const storedUserJson = localStorage.getItem('user');
+        if (!storedUserJson) return;
+        
+        try {
+            const user = JSON.parse(storedUserJson);
+            setUsername(user.username)
+        } catch (e) {
+            console.error("Error in JSON" , e)
+        }    
+        
     }, []);
 
     const navigate = useNavigate();
