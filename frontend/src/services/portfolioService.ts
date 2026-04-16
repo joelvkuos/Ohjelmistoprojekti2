@@ -23,7 +23,7 @@ export const getPortfolio = async (id: number, accessToken: string): Promise<Por
     }
 };
 
-export const createPortfolio = async (portfolio: Omit<Portfolio, 'portfolioId'>, accessToken: string): Promise<Portfolio> => {
+export const createPortfolio = async (portfolio: { portfolioName: string }, accessToken: string): Promise<Portfolio> => {
     try {
         return await fetchAPI('/portfolio', {
             method: 'POST',
