@@ -5,22 +5,36 @@
 .all-portfolios-subtitle {
     margin-top: -4px;
     margin-bottom: 20px;
-    color: #333;
+    color: #ffffff;
 }
 
 .portfolio-owner {
     display: inline-block;
-    color: #444;
+    color: #c8d0db;
     font-size: 0.9rem;
 }
 
 .portfolio-name {
-    color: #444;
+    color: #ffffff;
 }
 
 .no-holdings-message {
-    color: #2b2b2b;
+    color: #d3d9e1;
 }
-.all-portfolios-subtitle{
-    color: #ffffff;
+
+.all-portfolios-container .portfolio-card {
+    background-color: #131720;
+    border: 1px solid #383838;
+    box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
+}
+
+.all-portfolios-container .portfolio-header span,
+.all-portfolios-container .holding-quantity,
+.all-portfolios-container .holding-total,
+.all-portfolios-container .holding-loading {
+    color: #c8d0db;
+}
+
+.all-portfolios-container .holding-item {
+    border-bottom: 1px solid #2b3241;
 }
