@@ -60,3 +60,28 @@ export const deletePortfolio = async (id: number, accessToken: string): Promise<
         throw error;
     }
 };
+
+export const addHolding = async (holding: { portfolio?: { portfolioId: number }; ticker: string; quantity: number }, accessToken: string): Promise<Holdings> => {
+    try {
+        return await fetchAPI('/holdings', {
+            method: 'POST',
+            body: JSON.stringify(holding),
+            requiresAuth: true
+        }, accessToken);
+    } catch (error) {
+        console.error('Error adding holding:', error);
+        throw error;
+    }
+};
+
+export const removeHolding = async (id: number, accessToken: string): Promise<void> => {
+    try {
+        await fetchAPI(`/holdings/${id}`, {
+            method: 'DELETE',
+            requiresAuth: true
+        }, accessToken);
+    } catch (error) {
+        console.error('Error removing holding:', error);
+        throw error;
+    }
+};
