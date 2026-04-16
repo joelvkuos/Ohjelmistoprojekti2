@@ -37,7 +37,7 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
         case 'REGISTER_START':
             return {
                 ...state,
-                loading: true,
+                loading: false,
                 error: null,
             }
         case 'LOGIN_SUCCESS':
