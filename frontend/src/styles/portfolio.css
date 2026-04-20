@@ -9,9 +9,9 @@
 .portfolio-card {
     margin: 20px 0;
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #212B39;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #212B39;
 }
 
 .portfolio-header {
@@ -99,7 +99,7 @@
     color: whitesmoke !important;
     border: #383838 1px solid !important;
     border-radius: 8px !important;
-    width: 100%;
+    width: 20%;
     display: inline-flex !important;
     align-items: center;
     column-gap: 16px;
@@ -372,4 +372,79 @@
     text-align: center;
     color: #999;
     padding: 20px;
+}
+
+/* Stock Search Styles */
+.stock-search-section {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.searching-text {
+    font-size: 0.85em;
+    color: #666;
+    margin: 8px 0;
+    font-style: italic;
+}
+
+.search-results-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover,
+.search-result-item.selected {
+    background-color: #f0f0f0;
+}
+
+.search-result-item.selected {
+    background-color: #e3f2fd;
+    border-left: 3px solid #131720;
+    padding-left: 9px;
+}
+
+.result-symbol {
+    font-weight: bold;
+    font-size: 1em;
+    color: #333;
+}
+
+.result-description {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 4px;
+}
+
+.selected-stock-info {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.selected-stock-info p {
+    margin: 6px 0;
+    color: #333;
 }

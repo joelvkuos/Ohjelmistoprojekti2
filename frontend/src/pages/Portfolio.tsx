@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getMyPortfolios, createPortfolio, updatePortfolio, deletePortfolio, addHolding, removeHolding, type Portfolio } from "../services/portfolioService";
 import { getMultipleStockQuotes, type StockQuote } from "../services/stockQuoteService";
+import { searchStock } from "../services/stockService";
 import "../styles/portfolio.css";
 
 export default function PortfolioPage() {
@@ -23,6 +24,10 @@ export default function PortfolioPage() {
     const [newTicker, setNewTicker] = useState("");
     const [newQuantity, setNewQuantity] = useState("");
     const [isAddingHolding, setIsAddingHolding] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState<any[]>([]);
+    const [selectedStock, setSelectedStock] = useState<any>(null);
+    const [isSearching, setIsSearching] = useState(false);
 
     useEffect(() => {
         const fetchPortfolios = async () => {
@@ -196,9 +201,7 @@ export default function PortfolioPage() {
             }
             setPortfolios(updatedPortfolios);
 
-            setShowAddHoldingModal(false);
-            setNewTicker("");
-            setNewQuantity("");
+            handleCloseAddHoldingModal();
             setError("");
         } catch (err) {
             setError("Failed to add holding");
@@ -233,6 +236,50 @@ export default function PortfolioPage() {
             setError("Failed to remove holding");
             console.error(err);
         }
+    };
+
+    const handleSearchStock = async (query: string) => {
+        setSearchQuery(query);
+        if (query.trim().length < 1) {
+            setSearchResults([]);
+            return;
+        }
+
+        setIsSearching(true);
+        try {
+            const results = await searchStock(query);
+            setSearchResults(results.slice(0, 10)); // Limit to 10 results
+        } catch (err) {
+            console.error('Error searching stocks:', err);
+            setSearchResults([]);
+        } finally {
+            setIsSearching(false);
+        }
+    };
+
+    const handleSelectStock = (stock: any) => {
+        setSelectedStock(stock);
+        setNewTicker(stock.symbol);
+        setSearchQuery(stock.symbol);
+        setSearchResults([]);
+    };
+
+    const handleOpenAddHoldingModal = () => {
+        setShowAddHoldingModal(true);
+        setSearchQuery("");
+        setSearchResults([]);
+        setSelectedStock(null);
+        setNewTicker("");
+        setNewQuantity("");
+    };
+
+    const handleCloseAddHoldingModal = () => {
+        setShowAddHoldingModal(false);
+        setSearchQuery("");
+        setSearchResults([]);
+        setSelectedStock(null);
+        setNewTicker("");
+        setNewQuantity("");
     };
 
     return (
@@ -333,7 +380,7 @@ export default function PortfolioPage() {
                                     <h3>Holdings</h3>
                                     <button 
                                         className="add-holding-btn"
-                                        onClick={() => setShowAddHoldingModal(true)}
+                                        onClick={handleOpenAddHoldingModal}
                                     >
                                         + Add Stock
                                     </button>
@@ -407,37 +454,68 @@ export default function PortfolioPage() {
 
                 {/* Add Holding Modal */}
                 {showAddHoldingModal && selectedPortfolio && (
-                    <div className="modal-overlay" onClick={() => setShowAddHoldingModal(false)}>
+                    <div className="modal-overlay" onClick={handleCloseAddHoldingModal}>
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                             <h2>Add Stock to {selectedPortfolio.portfolioName}</h2>
-                            <input
-                                type="text"
-                                placeholder="Stock Ticker (e.g., AAPL)"
-                                value={newTicker}
-                                onChange={(e) => setNewTicker(e.target.value)}
-                                disabled={isAddingHolding}
-                            />
+                            
+                            {/* Stock Search */}
+                            <div className="stock-search-section">
+                                <input
+                                    type="text"
+                                    placeholder="Search stocks by ticker or company name..."
+                                    value={searchQuery}
+                                    onChange={(e) => handleSearchStock(e.target.value)}
+                                    disabled={isAddingHolding}
+                                />
+                                {isSearching && <p className="searching-text">Searching...</p>}
+                                
+                                {searchResults.length > 0 && (
+                                    <div className="search-results-dropdown">
+                                        {searchResults.map((stock, index) => (
+                                            <div 
+                                                key={index} 
+                                                className={`search-result-item ${selectedStock?.symbol === stock.symbol ? 'selected' : ''}`}
+                                                onClick={() => handleSelectStock(stock)}
+                                            >
+                                                <div className="result-symbol">{stock.symbol}</div>
+                                                <div className="result-description">{stock.description}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Selected Stock Info */}
+                            {selectedStock && (
+                                <div className="selected-stock-info">
+                                    <p><strong>Symbol:</strong> {selectedStock.symbol}</p>
+                                    <p><strong>Company:</strong> {selectedStock.description}</p>
+                                </div>
+                            )}
+
+                            {/* Quantity Input */}
                             <input
                                 type="number"
                                 placeholder="Quantity"
                                 value={newQuantity}
                                 onChange={(e) => setNewQuantity(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && handleAddHolding()}
-                                disabled={isAddingHolding}
+                                disabled={isAddingHolding || !selectedStock}
                                 min="0.01"
                                 step="0.01"
                             />
+
                             <div className="modal-buttons">
                                 <button
                                     className="modal-btn create-btn"
                                     onClick={handleAddHolding}
-                                    disabled={isAddingHolding}
+                                    disabled={isAddingHolding || !selectedStock}
                                 >
                                     {isAddingHolding ? 'Adding...' : 'Add Stock'}
                                 </button>
                                 <button
                                     className="modal-btn cancel-btn"
-                                    onClick={() => setShowAddHoldingModal(false)}
+                                    onClick={handleCloseAddHoldingModal}
                                     disabled={isAddingHolding}
                                 >
                                     Cancel
