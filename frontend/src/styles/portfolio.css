@@ -100,6 +100,7 @@
     border: #383838 1px solid !important;
     border-radius: 8px !important;
     width: 20%;
+    height: 20px;
     display: inline-flex !important;
     align-items: center;
     column-gap: 16px;

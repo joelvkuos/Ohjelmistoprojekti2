@@ -2,8 +2,6 @@ package com.example.stockfolio.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +28,6 @@ public class Portfolio {
     private String portfolioName;
 
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Holdings> holdings;
 
     public Portfolio () {
