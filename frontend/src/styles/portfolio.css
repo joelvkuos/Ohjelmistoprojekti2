@@ -2,6 +2,19 @@
     padding: 20px;
 }
 
+.portfolio-container h1,
+.portfolio-container h2,
+.portfolio-container h3,
+.portfolio-container h4 {
+    font-family: 'Questrial', sans-serif;
+}
+
+.portfolio-container input,
+.portfolio-container button,
+.portfolio-container p {
+    font-family: 'Space Mono', monospace;
+}
+
 .error-message {
     color: red;
 }
