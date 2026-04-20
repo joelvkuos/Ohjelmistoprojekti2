@@ -1,5 +1,7 @@
 package com.example.stockfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,6 +21,7 @@ public class Holdings {
     @NotNull(message = "Portfolio id is required")
     @ManyToOne
     @JoinColumn(name = "portfolio_id", nullable = false)
+    @JsonIgnore
     private Portfolio portfolio;
 
     @NotBlank(message = "Ticker is required")
