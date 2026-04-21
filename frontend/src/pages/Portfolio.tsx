@@ -187,21 +187,19 @@ export default function PortfolioPage() {
             const ticker = newTicker.toUpperCase();
             const quantity = parseFloat(newQuantity);
             
-            // Check if holding with this ticker already exists
             const existingHolding = selectedPortfolio.holdings?.find(h => h.ticker === ticker);
             
             if (existingHolding) {
-                // Update existing holding by adding quantity
                 await updateHolding(
                     existingHolding.holdingsId,
                     {
                         ticker: ticker,
-                        quantity: existingHolding.quantity + quantity
+                        quantity: existingHolding.quantity + quantity,
+                        portfolio: { portfolioId: selectedPortfolio.portfolioId }
                     },
                     state.accessToken
                 );
             } else {
-                // Create new holding
                 await addHolding(
                     {
                         ticker: ticker,
@@ -212,7 +210,6 @@ export default function PortfolioPage() {
                 );
             }
 
-            // Refresh the portfolio
             const updatedPortfolios = await getMyPortfolios(state.accessToken);
             const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
             if (updated) {
@@ -243,7 +240,6 @@ export default function PortfolioPage() {
         try {
             await removeHolding(holdingId, state.accessToken);
 
-            // Refresh the portfolio
             const updatedPortfolios = await getMyPortfolios(state.accessToken);
             const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
             if (updated) {

@@ -83,7 +83,7 @@ export const addHolding = async (holding: { portfolio?: { portfolioId: number };
     }
 };
 
-export const updateHolding = async (id: number, holding: { ticker: string; quantity: number }, accessToken: string): Promise<Holdings> => {
+export const updateHolding = async (id: number, holding: { ticker: string; quantity: number; portfolio?: { portfolioId: number } }, accessToken: string): Promise<Holdings> => {
     try {
         return await fetchAPI(`/holdings/${id}`, {
             method: 'PUT',
