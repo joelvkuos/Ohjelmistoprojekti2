@@ -112,7 +112,7 @@ export default function Profile() {
             <Navigation />
             <div className="profiletwo-column-section">
                 <div className="column-text">
-                    <h2>My profile</h2>
+                    <h1>My profile</h1>
                     <div className="profileButtons">
                         <Button className="profileButton" startIcon={<Person2OutlinedIcon />} onClick={() => navigate('/profile')}>
                             Profile
