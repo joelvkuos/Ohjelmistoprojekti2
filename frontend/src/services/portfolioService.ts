@@ -83,6 +83,19 @@ export const addHolding = async (holding: { portfolio?: { portfolioId: number };
     }
 };
 
+export const updateHolding = async (id: number, holding: { ticker: string; quantity: number }, accessToken: string): Promise<Holdings> => {
+    try {
+        return await fetchAPI(`/holdings/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(holding),
+            requiresAuth: true
+        }, accessToken);
+    } catch (error) {
+        console.error('Error updating holding:', error);
+        throw error;
+    }
+};
+
 export const removeHolding = async (id: number, accessToken: string): Promise<void> => {
     try {
         await fetchAPI(`/holdings/${id}`, {

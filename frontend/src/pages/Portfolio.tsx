@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getMyPortfolios, createPortfolio, updatePortfolio, deletePortfolio, addHolding, removeHolding, type Portfolio } from "../services/portfolioService";
+import { getMyPortfolios, createPortfolio, updatePortfolio, deletePortfolio, addHolding, updateHolding, removeHolding, type Portfolio } from "../services/portfolioService";
 import { getMultipleStockQuotes, type StockQuote } from "../services/stockQuoteService";
 import { searchStock } from "../services/stockService";
 import "../styles/portfolio.css";
@@ -184,14 +184,33 @@ export default function PortfolioPage() {
 
         setIsAddingHolding(true);
         try {
-            await addHolding(
-                {
-                    ticker: newTicker.toUpperCase(),
-                    quantity: parseFloat(newQuantity),
-                    portfolio: { portfolioId: selectedPortfolio.portfolioId }
-                },
-                state.accessToken
-            );
+            const ticker = newTicker.toUpperCase();
+            const quantity = parseFloat(newQuantity);
+            
+            // Check if holding with this ticker already exists
+            const existingHolding = selectedPortfolio.holdings?.find(h => h.ticker === ticker);
+            
+            if (existingHolding) {
+                // Update existing holding by adding quantity
+                await updateHolding(
+                    existingHolding.holdingsId,
+                    {
+                        ticker: ticker,
+                        quantity: existingHolding.quantity + quantity
+                    },
+                    state.accessToken
+                );
+            } else {
+                // Create new holding
+                await addHolding(
+                    {
+                        ticker: ticker,
+                        quantity: quantity,
+                        portfolio: { portfolioId: selectedPortfolio.portfolioId }
+                    },
+                    state.accessToken
+                );
+            }
 
             // Refresh the portfolio
             const updatedPortfolios = await getMyPortfolios(state.accessToken);
