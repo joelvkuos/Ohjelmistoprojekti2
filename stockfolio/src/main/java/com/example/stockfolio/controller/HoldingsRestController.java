@@ -35,13 +35,6 @@ public class HoldingsRestController {
         return holdingsRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Holdings> getHolding(@PathVariable Long id) {
-        return holdingsRepository.findById(id)
-                .map(holding -> ResponseEntity.ok(holding))
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     @GetMapping("/ticker/{ticker}")
     public List<Holdings> getHoldingsByTicker(@PathVariable String ticker) {
         return holdingsRepository.findByTicker(ticker);
@@ -52,19 +45,22 @@ public class HoldingsRestController {
         return holdingsService.getUserHoldings();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Holdings> getHolding(@PathVariable Long id) {
+        return holdingsRepository.findById(id)
+                .map(holding -> ResponseEntity.ok(holding))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Holdings createHolding(@RequestBody Holdings holding) {
         return holdingsService.createHolding(holding);
     }
+
     @PutMapping("/{id}")
     public Holdings updateHolding(@PathVariable Long id, @RequestBody Holdings updateHolding){
-        Holdings existing = holdingsRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Holding not found"));
-        existing.setPortfolio(updateHolding.getPortfolio());
-        existing.setQuantity(updateHolding.getQuantity());
-        existing.setTicker(updateHolding.getTicker());
-        return holdingsRepository.save(existing);
+        return holdingsService.updateHolding(id, updateHolding);
     }
 
     @DeleteMapping("/{id}")

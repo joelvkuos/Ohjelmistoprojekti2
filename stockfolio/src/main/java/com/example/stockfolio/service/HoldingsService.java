@@ -76,7 +76,21 @@ public class HoldingsService {
         holdingsRepository.deleteById(holdingId);
     }
 
+    /*Päivittää holdingin (jos käyttäjällä oikeus) */
+    public Holdings updateHolding(Long holdingId, Holdings updateHolding){
+        Holdings existing = holdingsRepository.findById(holdingId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Holding not found"));
+        Portfolio portfolio = existing.getPortfolio();
+        User user = userService.getAuthenticatedUser()
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
 
+        if(!portfolio.getUser().getAppUserId().equals(user.getAppUserId())){
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not your holding");
+        }
 
+        existing.setTicker(updateHolding.getTicker());
+        existing.setQuantity(updateHolding.getQuantity());
+        return holdingsRepository.save(existing);
+    }
 
 }

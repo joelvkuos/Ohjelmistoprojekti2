@@ -36,6 +36,11 @@ public class PortfolioRestController {
         return portfolioRepository.findAll();
     }
 
+    @GetMapping("/my")
+    public List<Portfolio> getMyPortfolios() {
+        return portfolioService.getUsersPortfolios();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Portfolio> getPortfolio(@PathVariable Long id) {
         return portfolioRepository.findById(id)
@@ -51,11 +56,7 @@ public class PortfolioRestController {
 
     @PutMapping("/{id}")
     public Portfolio updatePortfolio(@PathVariable Long id, @RequestBody Portfolio updatePortfolio){
-        Portfolio existing = portfolioRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Portfolio not found"));
-        existing.setUser(updatePortfolio.getUser());
-        existing.setPortfolioName(updatePortfolio.getPortfolioName());
-        return portfolioRepository.save(existing);
+        return portfolioService.updatePortfolio(id, updatePortfolio);
     }
 
     @DeleteMapping("/{id}")
@@ -65,11 +66,6 @@ public class PortfolioRestController {
         }
         portfolioService.deletePortfolio(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/my")
-    public List<Portfolio> getMyPortfolios() {
-        return portfolioService.getUsersPortfolios();
     }
     
 }

@@ -49,4 +49,19 @@ public class PortfolioService {
         portfolioRepository.deleteById(portfolioId);
     }
 
+    /*Päivittää portfolion (jos käyttäjällä oikeus) */
+    public Portfolio updatePortfolio(Long portfolioId, Portfolio updatePortfolio){
+        Portfolio existing = portfolioRepository.findById(portfolioId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        User user = userService.getAuthenticatedUser()
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
+
+        if(!existing.getUser().getAppUserId().equals(user.getAppUserId())){
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not your portfolio");
+        }
+
+        existing.setPortfolioName(updatePortfolio.getPortfolioName());
+        return portfolioRepository.save(existing);
+    }
+
 }
