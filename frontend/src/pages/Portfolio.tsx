@@ -28,6 +28,10 @@ export default function PortfolioPage() {
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [selectedStock, setSelectedStock] = useState<any>(null);
     const [isSearching, setIsSearching] = useState(false);
+    const [showEditHoldingModal, setShowEditHoldingModal] = useState(false);
+    const [editingHolding, setEditingHolding] = useState<any>(null);
+    const [editHoldingQuantity, setEditHoldingQuantity] = useState("");
+    const [isEditingHolding, setIsEditingHolding] = useState(false);
 
     useEffect(() => {
         const fetchPortfolios = async () => {
@@ -253,6 +257,134 @@ export default function PortfolioPage() {
         }
     };
 
+    const handleOpenEditHoldingModal = (holding: any) => {
+        setEditingHolding(holding);
+        setEditHoldingQuantity("");
+        setShowEditHoldingModal(true);
+    };
+
+    const handleCloseEditHoldingModal = () => {
+        setShowEditHoldingModal(false);
+        setEditingHolding(null);
+        setEditHoldingQuantity("");
+    };
+
+    const handleSellAll = async () => {
+        if (!state.accessToken || !editingHolding) {
+            setError("Not authenticated");
+            return;
+        }
+
+        setIsEditingHolding(true);
+        try {
+            await removeHolding(editingHolding.holdingsId, state.accessToken);
+
+            const updatedPortfolios = await getMyPortfolios(state.accessToken);
+            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio?.portfolioId);
+            if (updated) {
+                setSelectedPortfolio(updated);
+            }
+            setPortfolios(updatedPortfolios);
+            handleCloseEditHoldingModal();
+            setError("");
+        } catch (err) {
+            setError("Failed to sell all holdings");
+            console.error(err);
+        } finally {
+            setIsEditingHolding(false);
+        }
+    };
+
+    const handleSellAmount = async () => {
+        if (!editHoldingQuantity || parseFloat(editHoldingQuantity) <= 0) {
+            setError("Please enter a valid amount to sell");
+            return;
+        }
+
+        if (!state.accessToken || !editingHolding || !selectedPortfolio) {
+            setError("Not authenticated");
+            return;
+        }
+
+        const sellAmount = parseFloat(editHoldingQuantity);
+        if (sellAmount > editingHolding.quantity) {
+            setError("Cannot sell more than you own");
+            return;
+        }
+
+        setIsEditingHolding(true);
+        try {
+            const newQuantity = editingHolding.quantity - sellAmount;
+            if (newQuantity <= 0) {
+                await removeHolding(editingHolding.holdingsId, state.accessToken);
+            } else {
+                await updateHolding(
+                    editingHolding.holdingsId,
+                    {
+                        ticker: editingHolding.ticker,
+                        quantity: newQuantity,
+                        portfolio: { portfolioId: selectedPortfolio.portfolioId }
+                    },
+                    state.accessToken
+                );
+            }
+
+            const updatedPortfolios = await getMyPortfolios(state.accessToken);
+            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
+            if (updated) {
+                setSelectedPortfolio(updated);
+            }
+            setPortfolios(updatedPortfolios);
+            handleCloseEditHoldingModal();
+            setError("");
+        } catch (err) {
+            setError("Failed to sell holdings");
+            console.error(err);
+        } finally {
+            setIsEditingHolding(false);
+        }
+    };
+
+    const handleBuyAmount = async () => {
+        if (!editHoldingQuantity || parseFloat(editHoldingQuantity) <= 0) {
+            setError("Please enter a valid amount to buy");
+            return;
+        }
+
+        if (!state.accessToken || !editingHolding || !selectedPortfolio) {
+            setError("Not authenticated");
+            return;
+        }
+
+        setIsEditingHolding(true);
+        try {
+            const buyAmount = parseFloat(editHoldingQuantity);
+            await updateHolding(
+                editingHolding.holdingsId,
+                {
+                    ticker: editingHolding.ticker,
+                    quantity: editingHolding.quantity + buyAmount,
+                    portfolio: { portfolioId: selectedPortfolio.portfolioId }
+                },
+                state.accessToken
+            );
+
+            const updatedPortfolios = await getMyPortfolios(state.accessToken);
+            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
+            if (updated) {
+                setSelectedPortfolio(updated);
+            }
+            setPortfolios(updatedPortfolios);
+            handleCloseEditHoldingModal();
+            setError("");
+        } catch (err) {
+            setError("Failed to buy holdings");
+            console.error(err);
+        } finally {
+            setIsEditingHolding(false);
+        }
+    };
+
     const handleSearchStock = async (query: string) => {
         setSearchQuery(query);
         if (query.trim().length < 1) {
@@ -417,10 +549,10 @@ export default function PortfolioPage() {
                                                         )}
                                                     </div>
                                                     <button 
-                                                        className="remove-holding-btn"
-                                                        onClick={() => handleRemoveHolding(holding.holdingsId)}
+                                                        className="edit-holding-btn"
+                                                        onClick={() => handleOpenEditHoldingModal(holding)}
                                                     >
-                                                        Remove
+                                                        Edit
                                                     </button>
                                                 </div>
                                             );
@@ -532,6 +664,114 @@ export default function PortfolioPage() {
                                     className="modal-btn cancel-btn"
                                     onClick={handleCloseAddHoldingModal}
                                     disabled={isAddingHolding}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Edit Holding Modal */}
+                {showEditHoldingModal && editingHolding && (
+                    <div className="modal-overlay" onClick={handleCloseEditHoldingModal}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <h2>Edit Holding: {editingHolding.ticker}</h2>
+                            <p className="holding-info-text">Current quantity: {editingHolding.quantity} shares</p>
+                            
+                            <div className="edit-holding-section">
+                                <label>Amount:</label>
+                                <input
+                                    type="number"
+                                    placeholder="Enter amount"
+                                    value={editHoldingQuantity}
+                                    onChange={(e) => setEditHoldingQuantity(e.target.value)}
+                                    disabled={isEditingHolding}
+                                    min="0.01"
+                                    step="0.01"
+                                />
+                            </div>
+
+                            <div className="modal-buttons">
+                                <button
+                                    className="modal-btn sell-btn"
+                                    onClick={handleSellAmount}
+                                    disabled={isEditingHolding || !editHoldingQuantity}
+                                >
+                                    {isEditingHolding ? 'Processing...' : 'Sell Amount'}
+                                </button>
+                                <button
+                                    className="modal-btn buy-btn"
+                                    onClick={handleBuyAmount}
+                                    disabled={isEditingHolding || !editHoldingQuantity}
+                                >
+                                    {isEditingHolding ? 'Processing...' : 'Buy Amount'}
+                                </button>
+                                <button
+                                    className="modal-btn delete-btn"
+                                    onClick={handleSellAll}
+                                    disabled={isEditingHolding}
+                                >
+                                    {isEditingHolding ? 'Processing...' : 'Sell All'}
+                                </button>
+                                <button
+                                    className="modal-btn cancel-btn"
+                                    onClick={handleCloseEditHoldingModal}
+                                    disabled={isEditingHolding}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Edit Holding Modal */}
+                {showEditHoldingModal && editingHolding && (
+                    <div className="modal-overlay" onClick={handleCloseEditHoldingModal}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <h2>Edit Holding: {editingHolding.ticker}</h2>
+                            <p className="holding-info-text">Current quantity: {editingHolding.quantity} shares</p>
+                            
+                            <div className="edit-holding-section">
+                                <label>Amount:</label>
+                                <input
+                                    type="number"
+                                    placeholder="Enter amount"
+                                    value={editHoldingQuantity}
+                                    onChange={(e) => setEditHoldingQuantity(e.target.value)}
+                                    disabled={isEditingHolding}
+                                    min="0.01"
+                                    step="0.01"
+                                />
+                            </div>
+
+                            <div className="modal-buttons">
+                                <button
+                                    className="modal-btn sell-btn"
+                                    onClick={handleSellAmount}
+                                    disabled={isEditingHolding || !editHoldingQuantity}
+                                >
+                                    {isEditingHolding ? 'Processing...' : 'Sell Amount'}
+                                </button>
+                                <button
+                                    className="modal-btn buy-btn"
+                                    onClick={handleBuyAmount}
+                                    disabled={isEditingHolding || !editHoldingQuantity}
+                                >
+                                    {isEditingHolding ? 'Processing...' : 'Buy Amount'}
+                                </button>
+                                <button
+                                    className="modal-btn delete-btn"
+                                    onClick={handleSellAll}
+                                    disabled={isEditingHolding}
+                                >
+                                    {isEditingHolding ? 'Processing...' : 'Sell All'}
+                                </button>
+                                <button
+                                    className="modal-btn cancel-btn"
+                                    onClick={handleCloseEditHoldingModal}
+                                    disabled={isEditingHolding}
                                 >
                                     Cancel
                                 </button>
