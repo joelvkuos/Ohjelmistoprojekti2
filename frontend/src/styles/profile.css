@@ -11,13 +11,62 @@
 .profiletwo-column-section {
     display: grid;
     grid-template-columns: 2fr 4fr;
-    align-items: center;
+    align-items: stretch;
     gap: 48px;
     max-width: min(1100px, calc(100% - 32px));
     margin: 0 auto;
     margin-top: 24px;
     box-sizing: border-box;
     padding: 0 16px;
+}
+
+.profile-content {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.profile-display,
+.profile-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profile-field {
+    padding: 12px;
+    background-color: #131720;
+    border-radius: 6px;
+    border: 1px solid #383838;
+}
+
+.profile-field label {
+    display: block;
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.profile-value {
+    margin: 0;
+    font-size: 1.1rem;
+    color: whitesmoke;
+}
+
+.edit-button {
+    align-self: flex-start;
+    background-color: #212B39 !important;
+    color: whitesmoke !important;
+    border-radius: 8px !important;
+}
+
+.edit-button:hover {
+    background-color: #2a3847 !important;
+}
+
+.button-group {
+    padding-top: 16px;
+    border-top: 1px solid #383838;
 }
 
 .column-image {
@@ -118,4 +167,52 @@
     grid-column: 2;
     text-align: left;
     justify-self: start;
+}
+
+.profile-edit .MuiOutlinedInput-root {
+    background-color: #131720;
+    color: whitesmoke;
+}
+
+.profile-edit .MuiInputBase-input {
+    color: whitesmoke;
+}
+
+.profile-edit .MuiOutlinedInput-notchedOutline {
+    border-color: #383838;
+}
+
+.profile-edit .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #4a4a4a;
+}
+
+.profile-edit .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #90caf9;
+}
+
+.profile-edit .MuiInputBase-input.Mui-disabled {
+    -webkit-text-fill-color: #b0b0b0;
+}
+
+.profile-edit .MuiFormHelperText-root,
+.profile-edit .MuiFormHelperText-root.Mui-focused,
+.profile-edit .MuiFormHelperText-root.Mui-disabled {
+    color: #b0b0b0;
+}
+
+.profile-edit .MuiFormHelperText-root.Mui-error {
+    color: #ff6b6b;
+}
+
+
+
+@media (max-width: 768px) {
+    .profiletwo-column-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .profile-content {
+        width: 100%;
+    }
 }
