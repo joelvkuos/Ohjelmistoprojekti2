@@ -25,6 +25,7 @@ export default function Profile() {
     const [error, setError] = useState<string | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
     const [editData, setEditData] = useState({
         email: '',
@@ -76,7 +77,9 @@ export default function Profile() {
             setUserProfile(updated);
             setIsEditing(false);
             setError(null);
+            setSuccessMessage("Profile updated successfully.");
         } catch (err) {
+            setSuccessMessage(null);
             setError(err instanceof Error ? err.message : "Failed to update profile. Email and phone number cannot be empty.");
         } finally {
             setIsSaving(false);
@@ -92,6 +95,7 @@ export default function Profile() {
         }
         setIsEditing(false);
         setError(null);
+        setSuccessMessage(null);
     };
 
     if (loading) {
@@ -125,6 +129,7 @@ export default function Profile() {
 
                 {/* Profiilin sisältö */}
                 <Box className="profile-content">
+                    {successMessage && <Alert severity="success" sx={{ mb: 2 }}>{successMessage}</Alert>}
                     {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
                     {userProfile && !isEditing ? (
@@ -148,7 +153,10 @@ export default function Profile() {
                             <Button
                                 variant="contained"
                                 startIcon={<EditIcon />}
-                                onClick={() => setIsEditing(true)}
+                                onClick={() => {
+                                    setSuccessMessage(null);
+                                    setIsEditing(true);
+                                }}
                                 className="edit-button"
                                 sx={{ mt: 2 }}
                             >
