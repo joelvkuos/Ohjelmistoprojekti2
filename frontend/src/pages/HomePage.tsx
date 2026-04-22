@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import "../styles/homePage.css"
 
 import Navigation from "../components/Navigation";
-import { Button } from "@mui/material";
+import { Button, capitalize } from "@mui/material";
 import stocksImage from "../assets/Stocks.jpg"
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function Homepage() {
         
         try {
             const user = JSON.parse(storedUserJson);
-            setUsername(user.username)
+            setUsername(capitalize(user.username))
         } catch (e) {
             console.error("Error in JSON" , e)
         }    
