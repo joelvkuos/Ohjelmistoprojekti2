@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.stockfolio.dto.RegisterUserDto;
+import com.example.stockfolio.dto.UpdateUserDto;
 import com.example.stockfolio.model.User;
 import com.example.stockfolio.repository.UserRepository;
 import com.example.stockfolio.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/api/users")
@@ -47,7 +48,7 @@ public class UserRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-   @PostMapping("/register")
+    @PostMapping("/register")
     public User createUser(@Valid @RequestBody RegisterUserDto registration, BindingResult bindingResult) {
         Optional<User> existingUser = userRepository.findByUsername(registration.username());
 
@@ -69,11 +70,34 @@ public class UserRestController {
         return userService.getAuthenticatedUser()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication is required"));
     }
-    
+
+    @PutMapping("/update")
+    public ResponseEntity<User> updateUserProfile(@Valid @RequestBody UpdateUserDto updateDto) {
+        User authenticatedUser = userService.getAuthenticatedUser()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication is required"));
+
+        if (updateDto.email() != null) {
+            String email = updateDto.email().trim();
+            if (!email.isBlank()) {
+                authenticatedUser.setEmail(email);
+            }
+        }
+
+        if (updateDto.phone() != null) {
+            String phone = updateDto.phone().trim();
+            if (!phone.isBlank()) {
+                authenticatedUser.setPhone(phone);
+            }
+        }
+
+        User updatedUser = userRepository.save(authenticatedUser);
+        return ResponseEntity.ok(updatedUser);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         if (!userRepository.existsById(id)) {
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
         userRepository.deleteById(id);
         return ResponseEntity.noContent().build();
