@@ -77,7 +77,7 @@ export default function Profile() {
             setIsEditing(false);
             setError(null);
         } catch (err) {
-            setError(err instanceof Error ? err.message : "Failed to update profile");
+            setError(err instanceof Error ? err.message : "Failed to update profile. Email and phone number cannot be empty.");
         } finally {
             setIsSaving(false);
         }
