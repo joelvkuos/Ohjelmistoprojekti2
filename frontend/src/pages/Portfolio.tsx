@@ -231,32 +231,6 @@ export default function PortfolioPage() {
         }
     };
 
-    const handleRemoveHolding = async (holdingId: number) => {
-        if (!window.confirm("Are you sure you want to remove this holding?")) {
-            return;
-        }
-
-        if (!state.accessToken || !selectedPortfolio) {
-            setError("Not authenticated");
-            return;
-        }
-
-        try {
-            await removeHolding(holdingId, state.accessToken);
-
-            const updatedPortfolios = await getMyPortfolios(state.accessToken);
-            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
-            if (updated) {
-                setSelectedPortfolio(updated);
-            }
-            setPortfolios(updatedPortfolios);
-            setError("");
-        } catch (err) {
-            setError("Failed to remove holding");
-            console.error(err);
-        }
-    };
-
     const handleOpenEditHoldingModal = (holding: any) => {
         setEditingHolding(holding);
         setEditHoldingQuantity("");
