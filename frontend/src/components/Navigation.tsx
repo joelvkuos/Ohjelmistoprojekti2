@@ -23,9 +23,7 @@ export default function Navigation() {
 
                 <h1 onClick={() => navigate('/homepage')} style={{ cursor: 'pointer' }}>Stockfolio</h1>
             </div>
-            <Button className='btn-navigation' onClick={() => navigate('/homepage')}>
-                Home
-            </Button>
+
             <Button className='btn-navigation' onClick={() => navigate('/news')}>
                 News
             </Button>
