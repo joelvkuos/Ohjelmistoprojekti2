@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.stockfolio.dto.AddHoldingRequest;
 import com.example.stockfolio.model.Holdings;
 import com.example.stockfolio.repository.HoldingsRepository;
 import com.example.stockfolio.service.HoldingsService;
@@ -54,8 +55,8 @@ public class HoldingsRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Holdings createHolding(@RequestBody Holdings holding) {
-        return holdingsService.createHolding(holding);
+    public Holdings createHolding(@RequestBody AddHoldingRequest request) {
+        return holdingsService.createHolding(request);
     }
 
     @PutMapping("/{id}")

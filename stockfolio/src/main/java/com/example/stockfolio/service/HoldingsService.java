@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.stockfolio.dto.AddHoldingRequest;
 import com.example.stockfolio.model.Holdings;
 import com.example.stockfolio.model.Portfolio;
 import com.example.stockfolio.model.User;
@@ -40,25 +41,18 @@ public class HoldingsService {
         return allHoldings;
     }
 
-    /*Luo uuden holdingin käyttäjän portfolioon */
-    public Holdings createHolding(Holdings holdings){
-        User user = userService.getAuthenticatedUser()
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
+    
+    public Holdings createHolding(AddHoldingRequest request) {
+    
+        Portfolio portfolio = portfolioRepository.findById(request.getPortfolioId())
+                .orElseThrow(() -> new RuntimeException("Portfolio not found with id: " + request.getPortfolioId()));
 
-        Portfolio portfolio = holdings.getPortfolio();
-        if(portfolio == null || portfolio.getPortfolioId() == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Portfolio is required");
-        }
+        Holdings holding = new Holdings();
+        holding.setTicker(request.getTicker().toUpperCase());
+        holding.setQuantity(request.getQuantity());
+        holding.setPortfolio(portfolio);
 
-        portfolio = portfolioRepository.findById(portfolio.getPortfolioId())
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Portfolio not found"));
-
-        if(!portfolio.getUser().getAppUserId().equals(user.getAppUserId())){
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not your portfolio");
-        }
-
-        holdings.setPortfolio(portfolio);
-        return holdingsRepository.save(holdings);
+        return holdingsRepository.save(holding);
     }
 
     /*Poistaa holdingin portfoliosta */

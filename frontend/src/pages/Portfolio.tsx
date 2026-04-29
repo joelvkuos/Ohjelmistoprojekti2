@@ -171,8 +171,8 @@ export default function PortfolioPage() {
     };
 
     const handleAddHolding = async () => {
-        if (!newTicker.trim()) {
-            setError("Ticker cannot be empty");
+        if (!newTicker.trim() || !selectedStock) {
+            setError("Please select a stock");
             return;
         }
 
@@ -187,45 +187,41 @@ export default function PortfolioPage() {
         }
 
         setIsAddingHolding(true);
+        setError("");
+
         try {
-            const ticker = newTicker.toUpperCase();
+            const ticker = newTicker.toUpperCase().trim();
             const quantity = parseFloat(newQuantity);
-            
-            const existingHolding = selectedPortfolio.holdings?.find(h => h.ticker === ticker);
-            
-            if (existingHolding) {
-                await updateHolding(
-                    existingHolding.holdingsId,
-                    {
-                        ticker: ticker,
-                        quantity: existingHolding.quantity + quantity,
-                        portfolio: { portfolioId: selectedPortfolio.portfolioId }
-                    },
-                    state.accessToken
-                );
-            } else {
-                await addHolding(
-                    {
-                        ticker: ticker,
-                        quantity: quantity,
-                        portfolio: { portfolioId: selectedPortfolio.portfolioId }
-                    },
-                    state.accessToken
-                );
-            }
+
+            const payload = {
+                ticker: ticker,
+                quantity: quantity,
+                portfolioId: selectedPortfolio.portfolioId
+            };
+
+            console.log("Sending add holding payload:", payload);
+
+            await addHolding(payload, state.accessToken);
 
             const updatedPortfolios = await getMyPortfolios(state.accessToken);
-            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
-            if (updated) {
-                setSelectedPortfolio(updated);
-            }
             setPortfolios(updatedPortfolios);
+
+            const refreshedPortfolio = updatedPortfolios.find(
+                p => p.portfolioId === selectedPortfolio.portfolioId
+            );
+
+            if (refreshedPortfolio) {
+                setSelectedPortfolio(refreshedPortfolio);
+            }
 
             handleCloseAddHoldingModal();
             setError("");
-        } catch (err) {
-            setError("Failed to add holding");
-            console.error(err);
+        } catch (err: any) {
+            console.error("Add holding error:", err);
+            const errorMsg = err.response?.data?.message 
+                        || err.response?.data?.error 
+                        || "Failed to add holding";
+            setError(errorMsg);
         } finally {
             setIsAddingHolding(false);
         }
@@ -244,26 +240,80 @@ export default function PortfolioPage() {
     };
 
     const handleSellAll = async () => {
-        if (!state.accessToken || !editingHolding) {
+        if (!state.accessToken || !editingHolding || !selectedPortfolio) {
+            setError("Not authenticated or no holding selected");
+            return;
+        }
+
+        setIsEditingHolding(true);
+        setError("");
+
+        try {
+            await removeHolding(editingHolding.holdingsId, state.accessToken);
+
+            const updatedPortfolios = await getMyPortfolios(state.accessToken);
+            setPortfolios(updatedPortfolios);
+
+            const refreshedPortfolio = updatedPortfolios.find(
+                p => p.portfolioId === selectedPortfolio.portfolioId
+            );
+
+            if (refreshedPortfolio) {
+                setSelectedPortfolio(refreshedPortfolio);
+            }
+
+            handleCloseEditHoldingModal();
+            setError("");
+        } catch (err: any) {
+            console.error("Sell all error:", err);
+            const errorMsg = err.response?.data?.message || "Failed to sell all holdings";
+            setError(errorMsg);
+        } finally {
+            setIsEditingHolding(false);
+        }
+    };
+
+    const handleBuyAmount = async () => {
+        if (!editHoldingQuantity || parseFloat(editHoldingQuantity) <= 0) {
+            setError("Please enter a valid amount to buy");
+            return;
+        }
+
+        if (!state.accessToken || !editingHolding || !selectedPortfolio) {
             setError("Not authenticated");
             return;
         }
 
         setIsEditingHolding(true);
+        setError("");
+
         try {
-            await removeHolding(editingHolding.holdingsId, state.accessToken);
+            const buyAmount = parseFloat(editHoldingQuantity);
+
+            const payload = {
+                ticker: editingHolding.ticker,
+                quantity: editingHolding.quantity + buyAmount,
+                portfolioId: selectedPortfolio.portfolioId
+            };
+
+            await updateHolding(editingHolding.holdingsId, payload, state.accessToken);
 
             const updatedPortfolios = await getMyPortfolios(state.accessToken);
-            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio?.portfolioId);
-            if (updated) {
-                setSelectedPortfolio(updated);
-            }
             setPortfolios(updatedPortfolios);
+
+            const refreshedPortfolio = updatedPortfolios.find(
+                p => p.portfolioId === selectedPortfolio.portfolioId
+            );
+            if (refreshedPortfolio) {
+                setSelectedPortfolio(refreshedPortfolio);
+            }
+
             handleCloseEditHoldingModal();
             setError("");
-        } catch (err) {
-            setError("Failed to sell all holdings");
-            console.error(err);
+        } catch (err: any) {
+            console.error("Buy holding error:", err);
+            const errorMsg = err.response?.data?.message || "Failed to buy holdings";
+            setError(errorMsg);
         } finally {
             setIsEditingHolding(false);
         }
@@ -287,73 +337,39 @@ export default function PortfolioPage() {
         }
 
         setIsEditingHolding(true);
+        setError("");
+
         try {
             const newQuantity = editingHolding.quantity - sellAmount;
+
             if (newQuantity <= 0) {
                 await removeHolding(editingHolding.holdingsId, state.accessToken);
             } else {
-                await updateHolding(
-                    editingHolding.holdingsId,
-                    {
-                        ticker: editingHolding.ticker,
-                        quantity: newQuantity,
-                        portfolio: { portfolioId: selectedPortfolio.portfolioId }
-                    },
-                    state.accessToken
-                );
-            }
-
-            const updatedPortfolios = await getMyPortfolios(state.accessToken);
-            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
-            if (updated) {
-                setSelectedPortfolio(updated);
-            }
-            setPortfolios(updatedPortfolios);
-            handleCloseEditHoldingModal();
-            setError("");
-        } catch (err) {
-            setError("Failed to sell holdings");
-            console.error(err);
-        } finally {
-            setIsEditingHolding(false);
-        }
-    };
-
-    const handleBuyAmount = async () => {
-        if (!editHoldingQuantity || parseFloat(editHoldingQuantity) <= 0) {
-            setError("Please enter a valid amount to buy");
-            return;
-        }
-
-        if (!state.accessToken || !editingHolding || !selectedPortfolio) {
-            setError("Not authenticated");
-            return;
-        }
-
-        setIsEditingHolding(true);
-        try {
-            const buyAmount = parseFloat(editHoldingQuantity);
-            await updateHolding(
-                editingHolding.holdingsId,
-                {
+                const payload = {
                     ticker: editingHolding.ticker,
-                    quantity: editingHolding.quantity + buyAmount,
-                    portfolio: { portfolioId: selectedPortfolio.portfolioId }
-                },
-                state.accessToken
-            );
+                    quantity: newQuantity,
+                    portfolioId: selectedPortfolio.portfolioId
+                };
+
+                await updateHolding(editingHolding.holdingsId, payload, state.accessToken);
+            }
 
             const updatedPortfolios = await getMyPortfolios(state.accessToken);
-            const updated = updatedPortfolios.find(p => p.portfolioId === selectedPortfolio.portfolioId);
-            if (updated) {
-                setSelectedPortfolio(updated);
-            }
             setPortfolios(updatedPortfolios);
+
+            const refreshedPortfolio = updatedPortfolios.find(
+                p => p.portfolioId === selectedPortfolio.portfolioId
+            );
+            if (refreshedPortfolio) {
+                setSelectedPortfolio(refreshedPortfolio);
+            }
+
             handleCloseEditHoldingModal();
             setError("");
-        } catch (err) {
-            setError("Failed to buy holdings");
-            console.error(err);
+        } catch (err: any) {
+            console.error("Sell holding error:", err);
+            const errorMsg = err.response?.data?.message || "Failed to sell holdings";
+            setError(errorMsg);
         } finally {
             setIsEditingHolding(false);
         }
@@ -699,59 +715,6 @@ export default function PortfolioPage() {
                     </div>
                 )}
 
-                {/* Edit Holding Modal */}
-                {showEditHoldingModal && editingHolding && (
-                    <div className="modal-overlay" onClick={handleCloseEditHoldingModal}>
-                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                            <h2>Edit Holding: {editingHolding.ticker}</h2>
-                            <p className="holding-info-text">Current quantity: {editingHolding.quantity} shares</p>
-                            
-                            <div className="edit-holding-section">
-                                <label>Amount:</label>
-                                <input
-                                    type="number"
-                                    placeholder="Enter amount"
-                                    value={editHoldingQuantity}
-                                    onChange={(e) => setEditHoldingQuantity(e.target.value)}
-                                    disabled={isEditingHolding}
-                                    min="0.01"
-                                    step="0.01"
-                                />
-                            </div>
-
-                            <div className="modal-buttons">
-                                <button
-                                    className="modal-btn sell-btn"
-                                    onClick={handleSellAmount}
-                                    disabled={isEditingHolding || !editHoldingQuantity}
-                                >
-                                    {isEditingHolding ? 'Processing...' : 'Sell Amount'}
-                                </button>
-                                <button
-                                    className="modal-btn buy-btn"
-                                    onClick={handleBuyAmount}
-                                    disabled={isEditingHolding || !editHoldingQuantity}
-                                >
-                                    {isEditingHolding ? 'Processing...' : 'Buy Amount'}
-                                </button>
-                                <button
-                                    className="modal-btn delete-btn"
-                                    onClick={handleSellAll}
-                                    disabled={isEditingHolding}
-                                >
-                                    {isEditingHolding ? 'Processing...' : 'Sell All'}
-                                </button>
-                                <button
-                                    className="modal-btn cancel-btn"
-                                    onClick={handleCloseEditHoldingModal}
-                                    disabled={isEditingHolding}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
 
                 {/* Create Portfolio Modal */}
                 {showCreateModal && (
