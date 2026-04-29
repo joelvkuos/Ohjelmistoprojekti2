@@ -433,7 +433,6 @@ export default function PortfolioPage() {
                         >
                             <div className="portfolio-header">
                                 <h3 className="portfolio-name">{portfolio.portfolioName}</h3>
-                                <span>Portfolio ID: {portfolio.portfolioId}</span>
                             </div>
 
                             {portfolio.holdings && portfolio.holdings.length > 0 ? (
