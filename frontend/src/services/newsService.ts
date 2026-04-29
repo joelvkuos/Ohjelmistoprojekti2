@@ -7,7 +7,7 @@ export type { NewsArticle };
 const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_KEY ?? '';
 const FINNHUB_API_URL = 'https://finnhub.io/api/v1/news';
 
-export const getMarketNews = async (category: string = 'general', limit: number = 20, offset: number = 0): Promise<NewsArticle[]> => {
+export const getMarketNews = async (category: string = 'business', limit: number = 20, offset: number = 0): Promise<NewsArticle[]> => {
     try {
         if (!FINNHUB_API_KEY) {
             throw new Error('Finnhub API key not found. Check your .env file.');
