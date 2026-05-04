@@ -57,13 +57,13 @@
 
 .edit-button {
     align-self: flex-start;
-    background-color: #212B39 !important;
+    background-color: #131720 !important;
     color: whitesmoke !important;
     border-radius: 8px !important;
 }
 
 .edit-button:hover {
-    background-color: #2a3847 !important;
+    background-color: #131720 !important;
 }
 
 .button-group {
@@ -132,9 +132,9 @@
     justify-content: flex-start !important;
     padding-left: 12px !important;
     padding-right: 12px !important;
-    background-color: #212B39 !important;
+    background-color: #131720 !important;
     color: whitesmoke !important;
-    border-color: #212B39 !important;
+    border-color: #131720 !important;
     border: #383838 1px solid !important;
     border-radius: 8px !important;
     width: 100%;
@@ -145,7 +145,7 @@
 }
 
 .portfolioButton:hover {
-    background-color: #212B39 !important;
+    background-color: #131720 !important;
     color: whitesmoke !important;
     border: #383838 1px solid !important;
 
