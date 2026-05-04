@@ -1,9 +1,16 @@
 .all-portfolios-container {
     padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .all-portfolios-subtitle {
     margin-top: -4px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.all-portfolios-container h1 {
     margin-bottom: 20px;
     color: #ffffff;
 }
@@ -23,9 +30,19 @@
 }
 
 .all-portfolios-container .portfolio-card {
-    background-color: #131720;
+    margin: 20px 0;
+    padding: 15px;
     border: 1px solid #383838;
+    border-radius: 4px;
+    background-color: #131720;
     box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
+}
+
+.all-portfolios-container .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .all-portfolios-container .portfolio-header span,
@@ -33,6 +50,19 @@
 .all-portfolios-container .holding-total,
 .all-portfolios-container .holding-loading {
     color: #c8d0db;
+}
+
+.all-portfolios-container .holding-price {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.all-portfolios-container .holding-change {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .all-portfolios-container .holding-item {

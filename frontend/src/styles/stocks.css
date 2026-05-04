@@ -26,7 +26,7 @@
     border: 1px solid #383838;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #1a1f2e;
+    background-color: #131720;
     color: #ffffff;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .search-item:hover {
-    background-color: #1a1f2e;
+    background-color: #131720;
 }
 
 .stock-card {
@@ -64,7 +64,7 @@
     padding: 15px;
     border: 1px solid #383838;
     border-radius: 4px;
-    background-color: #1a1f2e;
+    background-color: #131720;
 }
 
 .stock-header {

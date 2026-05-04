@@ -24,7 +24,7 @@
     padding: 15px;
     border: #383838 1px solid !important;
     border-radius: 8px;
-    background-color: #212B39;
+    background-color: #131720;
 }
 
 .portfolio-header {
@@ -121,7 +121,7 @@
 }
 
 .create-portfolio-btn:hover {
-    background-color: #212B39 !important;
+    background-color: #131720 !important;
     color: whitesmoke !important;
     border: #383838 1px solid !important;
 }
@@ -141,7 +141,7 @@
 }
 
 .modal-content {
-    background-color: #212B39;
+    background-color: #131720;
     padding: 30px;
     border-radius: 8px;
     border: 1px solid #383838;
@@ -204,7 +204,7 @@
 }
 
 .create-btn:hover:not(:disabled) {
-    background-color: #212B39;
+    background-color: #131720;
 }
 
 .cancel-btn {
@@ -224,7 +224,7 @@
 
 /* Portfolio Detail Modal */
 .portfolio-detail-modal {
-    background-color: #212B39;
+    background-color: #131720;
     padding: 30px;
     border-radius: 8px;
     border: 1px solid #383838;
@@ -266,7 +266,7 @@
 
 .close-btn:hover {
     color: #f0f0f0;
-    background-color: #383838;
+    background-color: #131720;
 }
 
 .detail-actions {
@@ -292,7 +292,7 @@
 }
 
 .edit-btn:hover {
-    background-color: #212B39;
+    background-color: #131720;
 }
 
 .delete-btn {
@@ -436,11 +436,11 @@
 
 .search-result-item:hover,
 .search-result-item.selected {
-    background-color: #2a3a4d;
+    background-color: #131720;
 }
 
 .search-result-item.selected {
-    background-color: #2a3a4d;
+    background-color: #131720;
     border-left: 3px solid #131720;
     padding-left: 9px;
 }
