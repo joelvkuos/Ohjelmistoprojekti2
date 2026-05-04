@@ -77,7 +77,6 @@ export default function AllPortfoliosPage() {
                                         Owner: {portfolio.user?.username || "Unknown user"}
                                     </span>
                                 </div>
-                                <span>Portfolio ID: {portfolio.portfolioId}</span>
                             </div>
 
                             {portfolio.holdings && portfolio.holdings.length > 0 ? (
