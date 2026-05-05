@@ -8,6 +8,25 @@ interface FetchOptions extends RequestInit {
     requiresAuth?: boolean
 }
 
+async function parseResponse(response: Response) {
+    if (response.status === 204) {
+        return null
+    }
+
+    const contentType = response.headers.get('content-type') || ''
+    if (!contentType.includes('application/json')) {
+        const text = await response.text()
+        return text || null
+    }
+
+    const text = await response.text()
+    if (!text) {
+        return null
+    }
+
+    return JSON.parse(text)
+}
+
 export function useApiClient() {
     const { state, refreshAccessToken } = useAuth()
 
@@ -36,7 +55,7 @@ export function useApiClient() {
         if (response.status === 401 && state.refreshToken) {
             const newAccessToken = await refreshAccessToken()
 
-            // Yritä uudelleen uudella tokenilla
+            
             if (newAccessToken) {
                 const newHeaders = new Headers(fetchOptions.headers)
                 newHeaders.set('Content-Type', 'application/json')
@@ -54,7 +73,7 @@ export function useApiClient() {
             throw new Error(error || `HTTP Error: ${response.status}`)
         }
 
-        return response.json()
+        return parseResponse(response)
     }
 
     return { fetchWithAuth }
@@ -90,5 +109,5 @@ export async function fetchAPI(
         throw new Error(error || `HTTP Error: ${response.status}`)
     }
 
-    return response.json()
+    return parseResponse(response)
 }
