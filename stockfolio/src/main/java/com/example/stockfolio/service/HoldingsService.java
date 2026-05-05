@@ -26,7 +26,6 @@ public class HoldingsService {
     @Autowired
     UserService userService;
 
-    /*etsii käyttäjän holdaukset */
     public List<Holdings> getUserHoldings(){
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
@@ -40,7 +39,6 @@ public class HoldingsService {
         return allHoldings;
     }
 
-    // ==================== MINIMAL CHANGE ====================
     public Holdings createHolding(AddHoldingRequest request) {
         Portfolio portfolio = portfolioRepository.findById(request.getPortfolioId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, 
@@ -79,7 +77,7 @@ public class HoldingsService {
         return holdingsRepository.save(existing);
     }
 
-    /*Poistaa holdingin portfoliosta */
+    
     public void deleteHolding(Long holdingId){
         Holdings holdings = holdingsRepository.findById(holdingId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Holding not found"));
