@@ -23,10 +23,7 @@
 }
 
 .portfolio-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .portfolio-name {
@@ -39,8 +36,8 @@
 .holding-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
+    align-items: flex-start;
+    padding: 12px 0;
     border-bottom: 1px solid #383838;
 }
 
@@ -48,21 +45,31 @@
     border-bottom: none;
 }
 
+.holding-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .holding-ticker {
     font-weight: bold;
     color: #ffffff;
+    font-size: 1.1em;
 }
 
-.holding-quantity,
-.holding-total,
-.holding-loading {
+.holding-quantity {
     color: #888888;
     font-size: 0.9em;
+}
+
+.holding-price-info {
+    text-align: right;
 }
 
 .holding-price {
     font-weight: bold;
     color: #ffffff;
+    font-size: 1.05em;
 }
 
 .holding-change {
@@ -70,13 +77,19 @@
     font-weight: bold;
 }
 
-/* ====================== MODALS (Original Style) ====================== */
+.holding-total {
+    color: #22c55e;
+    font-size: 0.95em;
+}
+
+.holding-loading {
+    color: #888888;
+    font-style: italic;
+}
+
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
@@ -89,8 +102,8 @@
     padding: 30px;
     border-radius: 8px;
     border: 1px solid #383838;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    max-width: 460px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    max-width: 480px;
     width: 90%;
 }
 
@@ -99,7 +112,7 @@
     padding: 30px;
     border-radius: 8px;
     border: 1px solid #383838;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     max-width: 1050px;
     width: 92%;
     max-height: 85vh;
@@ -121,57 +134,32 @@
     font-size: 2em;
     cursor: pointer;
     color: #888;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .close-btn:hover {
-    color: #f0f0f0;
+    color: #ffffff;
 }
 
 .modal-buttons {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .modal-btn {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    font-size: 1em;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.create-btn {
-    background-color: #131720;
-    color: white;
-}
+.create-btn { background-color: #131720; color: white; }
+.cancel-btn { background-color: #383838; color: #f0f0f0; }
+.sell-btn, .delete-btn { background-color: #960019; color: whitesmoke; }
+.buy-btn { background-color: #006600; color: white; }
 
-.cancel-btn {
-    background-color: #383838;
-    color: #f0f0f0;
-    border: 1px solid #555;
-}
-
-.sell-btn,
-.delete-btn {
-    background-color: #960019;
-    color: whitesmoke;
-}
-
-.buy-btn {
-    background-color: #006600;
-    color: white;
-}
-
-.no-portfolios,
-.no-holdings {
+.no-portfolios, .no-holdings {
     text-align: center;
     padding: 40px;
     color: #888888;
