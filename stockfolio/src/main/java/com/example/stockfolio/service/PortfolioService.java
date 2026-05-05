@@ -38,7 +38,7 @@ public class PortfolioService {
     /*Poistaa portfolion (jos käyttäjällä oikeus) */
     public void deletePortfolio(Long portfolioId){
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Porfolio not found"));
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
 

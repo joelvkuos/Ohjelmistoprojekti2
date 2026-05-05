@@ -1,5 +1,7 @@
 .portfolio-container {
     padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .portfolio-container h1,
@@ -7,6 +9,7 @@
 .portfolio-container h3,
 .portfolio-container h4 {
     font-family: 'Questrial', sans-serif;
+    color: #ffffff;
 }
 
 .portfolio-container input,
@@ -15,16 +18,13 @@
     font-family: 'Space Mono', monospace;
 }
 
-.error-message {
-    color: red;
-}
-
 .portfolio-card {
     margin: 20px 0;
     padding: 15px;
-    border: #383838 1px solid !important;
-    border-radius: 8px;
+    border: 1px solid #383838;
+    border-radius: 4px;
     background-color: #131720;
+    box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
 }
 
 .portfolio-header {
@@ -37,6 +37,7 @@
 .portfolio-name {
     font-size: 1.2em;
     font-weight: bold;
+    color: #ffffff;
 }
 
 .holdings-list {
@@ -48,7 +49,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #2b3241;
 }
 
 .holding-item:last-child {
@@ -64,10 +65,13 @@
 .holding-ticker {
     font-weight: bold;
     font-size: 1.1em;
+    color: #ffffff;
 }
 
-.holding-quantity {
-    color: #666;
+.holding-quantity,
+.holding-total,
+.holding-loading {
+    color: #c8d0db;
     font-size: 0.9em;
 }
 
@@ -81,16 +85,14 @@
 .holding-price {
     font-weight: bold;
     font-size: 1.1em;
+    color: #ffffff;
+    margin: 0;
 }
 
 .holding-change {
     font-size: 0.9em;
-    font-weight: 500;
-}
-
-.holding-total {
-    color: #666;
-    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px 0 0 0;
 }
 
 .holding-loading {
@@ -98,35 +100,6 @@
     font-style: italic;
 }
 
-.no-portfolios {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-}
-
-.create-portfolio-btn {
-    justify-content: flex-start !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    background-color: #131720 !important;
-    color: whitesmoke !important;
-    border: #383838 1px solid !important;
-    border-radius: 8px !important;
-    width: 20%;
-    height: 20px;
-    display: inline-flex !important;
-    align-items: center;
-    column-gap: 16px;
-    min-width: 0 !important;
-}
-
-.create-portfolio-btn:hover {
-    background-color: #131720 !important;
-    color: whitesmoke !important;
-    border: #383838 1px solid !important;
-}
-
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -140,53 +113,27 @@
     z-index: 1000;
 }
 
-.modal-content {
+.modal-content,
+.portfolio-detail-modal {
     background-color: #131720;
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #383838;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
+    max-width: 600px;
     width: 90%;
 }
 
-.modal-content h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #f0f0f0;
-}
-
-.modal-content input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #383838;
-    border-radius: 4px;
-    background-color: #131720;
-    color: #f0f0f0;
-    font-size: 1em;
-    box-sizing: border-box;
-}
-
-.modal-content input::placeholder {
-    color: #888;
-}
-
-.modal-content input:focus {
-    outline: none;
-    border-color: #00a0e9;
-    box-shadow: 0 0 0 2px rgba(0, 160, 233, 0.1);
-}
-
-.modal-content input:disabled {
-    background-color: #0d1117;
-    color: #666;
+.portfolio-detail-modal {
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .modal-buttons {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .modal-btn {
@@ -201,98 +148,16 @@
 .create-btn {
     background-color: #131720;
     color: white;
+    border: 1px solid #383838;
 }
 
 .create-btn:hover:not(:disabled) {
-    background-color: #131720;
+    background-color: #1f2a3d;
 }
 
 .cancel-btn {
     background-color: #383838;
     color: #f0f0f0;
-    border: 1px solid #555;
-}
-
-.cancel-btn:hover:not(:disabled) {
-    background-color: #454545;
-}
-
-.modal-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Portfolio Detail Modal */
-.portfolio-detail-modal {
-    background-color: #131720;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #383838;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-.detail-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #383838;
-    padding-bottom: 15px;
-}
-
-.detail-header h2 {
-    margin: 0;
-    color: #f0f0f0;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    color: #888;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-}
-
-.close-btn:hover {
-    color: #f0f0f0;
-    background-color: #131720;
-}
-
-.detail-actions {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.action-btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.edit-btn {
-    background-color: #131720;
-    color: white;
-}
-
-.edit-btn:hover {
-    background-color: #131720;
 }
 
 .delete-btn {
@@ -304,168 +169,39 @@
     background-color: #420D09;
 }
 
-.holdings-section {
-    margin-top: 20px;
+.error-message {
+    color: #ff6b6b;
 }
 
-.holdings-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.holdings-header h3 {
-    margin: 0;
-    color: #f0f0f0;
-}
-
-.add-holding-btn {
-    background-color: #131720;
-    color: whitesmoke;
-    border: 1px solid #383838;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: all 0.3s ease;
-}
-
-.add-holding-btn:hover {
-    background-color: #212B39;
-}
-
-.holdings-detail-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.holding-detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    border: 1px solid #383838;
-    border-radius: 4px;
-    background-color: #131720;
-}
-
-.holding-detail-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.detail-ticker {
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #f0f0f0;
-}
-
-.detail-quantity {
-    font-size: 0.9em;
-    color: #999;
-}
-
-.detail-value {
-    font-size: 0.9em;
-    color: #28a745;
-    font-weight: 500;
-}
-
-.remove-holding-btn {
-    background-color: #960019;
-    color: whitesmoke;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85em;
-    transition: all 0.3s ease;
-}
-
-.remove-holding-btn:hover {
-    background-color: #420D09;
-}
-
+.no-portfolios,
 .no-holdings {
     text-align: center;
-    color: #999;
-    padding: 20px;
+    padding: 40px;
+    color: #c8d0db;
 }
 
-/* Stock Search Styles */
-.stock-search-section {
-    position: relative;
-    margin-bottom: 20px;
+.create-portfolio-btn {
+    background-color: #131720;
+    color: whitesmoke;
+    border: 1px solid #383838;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 1em;
 }
 
-.searching-text {
-    font-size: 0.85em;
-    color: #999;
-    margin: 8px 0;
-    font-style: italic;
+.create-portfolio-btn:hover {
+    background-color: #1f2a3d;
 }
 
+/* Stock Search & Other Modal Elements */
+.stock-search-section,
+.selected-stock-info,
 .search-results-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
     background-color: #131720;
     border: 1px solid #383838;
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    max-height: 250px;
-    overflow-y: auto;
-    z-index: 100;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.search-result-item {
-    padding: 12px;
-    border-bottom: 1px solid #383838;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.search-result-item:last-child {
-    border-bottom: none;
 }
 
 .search-result-item:hover,
 .search-result-item.selected {
-    background-color: #131720;
-}
-
-.search-result-item.selected {
-    background-color: #131720;
-    border-left: 3px solid #131720;
-    padding-left: 9px;
-}
-
-.result-symbol {
-    font-weight: bold;
-    font-size: 1em;
-    color: #f0f0f0;
-}
-
-.result-description {
-    font-size: 0.85em;
-    color: #999;
-    margin-top: 4px;
-}
-
-.selected-stock-info {
-    background-color: #131720;
-    border: 1px solid #383838;
-    border-radius: 4px;
-    padding: 12px;
-    margin-bottom: 20px;
-}
-
-.selected-stock-info p {
-    margin: 6px 0;
-    color: #f0f0f0;
+    background-color: #1f2a3d;
 }
