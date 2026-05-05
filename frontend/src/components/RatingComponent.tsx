@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { addOrUpdateRating, getAverageRating, getUserRating, deleteRating } from "../services/ratingService";
-import type { AverageRatingResponse, Rating } from "../types/api.types";
 import "../styles/rating.css";
 
 interface RatingComponentProps {
