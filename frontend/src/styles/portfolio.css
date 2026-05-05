@@ -20,46 +20,36 @@
 
 .portfolio-card {
     margin: 20px 0;
-    padding: 15px;
+    padding: 18px;
     border: 1px solid #383838;
     border-radius: 4px;
     background-color: #131720;
     box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.portfolio-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+.portfolio-card:hover {
+    border-color: #555;
+    transform: translateY(-2px);
 }
 
 .portfolio-name {
-    font-size: 1.2em;
+    font-size: 1.25em;
     font-weight: bold;
     color: #ffffff;
-}
-
-.holdings-list {
-    margin-top: 10px;
 }
 
 .holding-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #2b3241;
 }
 
 .holding-item:last-child {
     border-bottom: none;
-}
-
-.holding-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
 }
 
 .holding-ticker {
@@ -75,29 +65,14 @@
     font-size: 0.9em;
 }
 
-.holding-price-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-}
-
 .holding-price {
     font-weight: bold;
-    font-size: 1.1em;
     color: #ffffff;
-    margin: 0;
 }
 
 .holding-change {
     font-size: 0.9em;
     font-weight: bold;
-    margin: 5px 0 0 0;
-}
-
-.holding-loading {
-    color: #999;
-    font-style: italic;
 }
 
 .modal-overlay {
@@ -106,58 +81,82 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
-.modal-content,
-.portfolio-detail-modal {
+.modal-content {
     background-color: #131720;
     padding: 30px;
-    border-radius: 4px;
+    border-radius: 8px;
     border: 1px solid #383838;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
+    max-width: 500px;
     width: 90%;
 }
 
 .portfolio-detail-modal {
-    max-height: 80vh;
+    background-color: #131720;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #383838;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-width: 1050px;
+    width: 92%;
+    max-height: 85vh;
     overflow-y: auto;
 }
 
-.modal-buttons {
+.detail-header {
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #383838;
 }
 
-.modal-btn {
-    padding: 10px 20px;
+.detail-header h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.6em;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2.2em;
+    cursor: pointer;
+    color: #888;
+    padding: 0 10px;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+.detail-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 13px;
     border: none;
     border-radius: 4px;
-    font-size: 1em;
+    font-size: 1.05em;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
-.create-btn {
-    background-color: #131720;
-    color: white;
-    border: 1px solid #383838;
-}
-
-.create-btn:hover:not(:disabled) {
+.edit-btn {
     background-color: #1f2a3d;
-}
-
-.cancel-btn {
-    background-color: #383838;
-    color: #f0f0f0;
+    color: white;
 }
 
 .delete-btn {
@@ -165,43 +164,75 @@
     color: whitesmoke;
 }
 
-.delete-btn:hover {
-    background-color: #420D09;
+.holdings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
 }
 
-.error-message {
-    color: #ff6b6b;
+.add-holding-btn {
+    background-color: #131720;
+    color: whitesmoke;
+    border: 1px solid #383838;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.holding-detail-item {
+    padding: 16px;
+    border: 1px solid #383838;
+    border-radius: 4px;
+    background-color: #131720;
+    margin-bottom: 10px;
+}
+
+.edit-holding-btn {
+    background-color: #1f2a3d;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message { 
+    color: #ff6b6b; 
 }
 
 .no-portfolios,
 .no-holdings {
     text-align: center;
-    padding: 40px;
-    color: #c8d0db;
+    padding: 50px 20px;
+    color: #999;
 }
 
 .create-portfolio-btn {
     background-color: #131720;
     color: whitesmoke;
     border: 1px solid #383838;
+    padding: 11px 20px;
     border-radius: 4px;
-    padding: 10px 16px;
-    font-size: 1em;
+    margin-bottom: 20px;
 }
 
-.create-portfolio-btn:hover {
-    background-color: #1f2a3d;
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 25px;
 }
 
-/* Stock Search & Other Modal Elements */
-.stock-search-section,
-.selected-stock-info,
-.search-results-dropdown {
-    background-color: #131720;
-    border: 1px solid #383838;
+.modal-btn {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.search-result-item:hover,
-.search-result-item.selected {
-    background-color: #1f2a3d;
-}
+.create-btn  { background-color: #1f2a3d; color: white; }
+.cancel-btn  { background-color: #383838; color: #f0f0f0; }
+.sell-btn,
+.delete-btn { background-color: #960019; color: whitesmoke; }
+.buy-btn     { background-color: #006600; color: white; }
