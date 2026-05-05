@@ -4,40 +4,36 @@
     margin: 0 auto;
 }
 
-.portfolio-container h1,
-.portfolio-container h2,
-.portfolio-container h3,
-.portfolio-container h4 {
-    font-family: 'Questrial', sans-serif;
+.portfolio-container h1 {
+    margin-bottom: 20px;
     color: #ffffff;
 }
 
-.portfolio-container input,
-.portfolio-container button,
-.portfolio-container p {
-    font-family: 'Space Mono', monospace;
+.error-message {
+    color: #ef4444;
+    margin-bottom: 20px;
 }
 
 .portfolio-card {
     margin: 20px 0;
-    padding: 18px;
+    padding: 15px;
     border: 1px solid #383838;
     border-radius: 4px;
     background-color: #131720;
-    box-shadow: 0px 6px 12px rgba(48, 45, 45, 0.16);
-    cursor: pointer;
-    transition: all 0.2s ease;
 }
 
-.portfolio-card:hover {
-    border-color: #555;
-    transform: translateY(-2px);
+.portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .portfolio-name {
-    font-size: 1.25em;
+    font-size: 18px;
     font-weight: bold;
     color: #ffffff;
+    margin: 0;
 }
 
 .holding-item {
@@ -45,7 +41,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid #2b3241;
+    border-bottom: 1px solid #383838;
 }
 
 .holding-item:last-child {
@@ -54,14 +50,13 @@
 
 .holding-ticker {
     font-weight: bold;
-    font-size: 1.1em;
     color: #ffffff;
 }
 
 .holding-quantity,
 .holding-total,
 .holding-loading {
-    color: #c8d0db;
+    color: #888888;
     font-size: 0.9em;
 }
 
@@ -81,7 +76,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +89,7 @@
     border-radius: 8px;
     border: 1px solid #383838;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
+    max-width: 480px;
     width: 90%;
 }
 
@@ -114,24 +109,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
+    margin-bottom: 20px;
     border-bottom: 2px solid #383838;
-}
-
-.detail-header h2 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 1.6em;
+    padding-bottom: 15px;
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 2.2em;
+    font-size: 2em;
     cursor: pointer;
     color: #888;
-    padding: 0 10px;
 }
 
 .close-btn:hover {
@@ -140,18 +128,16 @@
 
 .detail-actions {
     display: flex;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .action-btn {
-    flex: 1;
-    padding: 13px;
+    padding: 12px;
     border: none;
     border-radius: 4px;
-    font-size: 1.05em;
     cursor: pointer;
-    font-weight: 500;
+    font-size: 1em;
 }
 
 .edit-btn {
@@ -164,75 +150,46 @@
     color: whitesmoke;
 }
 
-.holdings-header {
+.modal-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
-.add-holding-btn {
-    background-color: #131720;
-    color: whitesmoke;
-    border: 1px solid #383838;
-    padding: 10px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.holding-detail-item {
-    padding: 16px;
-    border: 1px solid #383838;
-    border-radius: 4px;
-    background-color: #131720;
-    margin-bottom: 10px;
-}
-
-.edit-holding-btn {
-    background-color: #1f2a3d;
-    color: white;
+.modal-btn {
+    padding: 10px 20px;
     border: none;
-    padding: 9px 16px;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.error-message { 
-    color: #ff6b6b; 
-}
+.create-btn { background-color: #1f2a3d; color: white; }
+.cancel-btn { background-color: #383838; color: #f0f0f0; }
+.sell-btn,
+.delete-btn { background-color: #960019; color: whitesmoke; }
+.buy-btn { background-color: #006600; color: white; }
 
 .no-portfolios,
 .no-holdings {
     text-align: center;
-    padding: 50px 20px;
-    color: #999;
+    padding: 40px;
+    color: #888888;
 }
 
 .create-portfolio-btn {
     background-color: #131720;
     color: whitesmoke;
     border: 1px solid #383838;
-    padding: 11px 20px;
+    padding: 10px 18px;
     border-radius: 4px;
     margin-bottom: 20px;
 }
 
-.modal-buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    margin-top: 25px;
-}
-
-.modal-btn {
-    padding: 11px 22px;
-    border: none;
+.add-holding-btn {
+    background-color: #131720;
+    color: whitesmoke;
+    border: 1px solid #383838;
+    padding: 8px 16px;
     border-radius: 4px;
-    cursor: pointer;
 }
-
-.create-btn  { background-color: #1f2a3d; color: white; }
-.cancel-btn  { background-color: #383838; color: #f0f0f0; }
-.sell-btn,
-.delete-btn { background-color: #960019; color: whitesmoke; }
-.buy-btn     { background-color: #006600; color: white; }
