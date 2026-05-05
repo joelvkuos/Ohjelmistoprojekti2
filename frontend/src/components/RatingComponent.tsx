@@ -111,7 +111,7 @@ export default function RatingComponent({ portfolioId, portfolioOwnerId }: Ratin
                             </span>
                         </div>
                         <span className="rating-count">
-                            {ratingCount} {ratingCount === 1 ? "arvostelu" : "arvosteluita"}
+                            {ratingCount} {ratingCount === 1 ? "rating" : "ratings"}
                         </span>
                     </>
                 ) : (
