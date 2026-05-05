@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name="app_user")
@@ -34,7 +33,6 @@ public class User {
     @NotBlank(message = "Email is required")
     private String email;
 
-    //@Pattern(regexp = "^\\+?[0-9]{10}$")
     private String phone;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

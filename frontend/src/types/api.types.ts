@@ -71,3 +71,16 @@ export interface StockQuote {
     changePercent: number;
     timestamp: number;
 }
+
+export interface Rating {
+    ratingId: number;
+    portfolioId: number;
+    userId: number;
+    ratingValue: number;
+    createdAt: string;
+}
+
+export interface AverageRatingResponse {
+    average: number | null;
+    count: number;
+}

@@ -32,6 +32,9 @@ public class Portfolio {
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Holdings> holdings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Rating> ratings = new ArrayList<>();
+
     public Portfolio () {
     }
     
@@ -41,7 +44,6 @@ public class Portfolio {
         this.portfolioName = portfolioName;
     }
 
-    // Getters and Setters
     public Long getPortfolioId() {
         return portfolioId;
     }
@@ -72,5 +74,13 @@ public class Portfolio {
 
     public void setHoldings(List<Holdings> holdings) {
         this.holdings = holdings;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

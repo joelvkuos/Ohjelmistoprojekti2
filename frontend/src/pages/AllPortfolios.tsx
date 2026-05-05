@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
+import RatingComponent from "../components/RatingComponent";
 import { useAuth } from "../context/AuthContext";
 import { getAllPortfolios, type Portfolio } from "../services/portfolioService";
 import { getMultipleStockQuotes, type StockQuote } from "../services/stockQuoteService";
@@ -112,6 +113,11 @@ export default function AllPortfoliosPage() {
                             ) : (
                                 <p className="no-holdings-message">No holdings in this portfolio yet.</p>
                             )}
+
+                            <RatingComponent 
+                                portfolioId={portfolio.portfolioId} 
+                                portfolioOwnerId={portfolio.user?.id}
+                            />
                         </div>
                     ))}
                 </div>

@@ -21,25 +21,25 @@ import jakarta.servlet.http.HttpServletRequest;
 @Service
 public class JwtService {
     private final long EXP_TIME = Duration.ofHours(4).toMillis(); 
-    /*Voidaan muuttaa tokenin aikaa, eli millon pitää kirjautua uudelleen */
+    
     private final String PREFIX = "Bearer ";
 
-    @Value("${jwt.secret}") /*PITÄÄ PYSYÄ VISUSTI SALASSA PERKELE!!! */
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     public AccessTokenPayloadDto getAccessToken(String username){
-        Instant expiresAt = Instant.now().plusMillis(EXP_TIME); /*Insant modernimpi aikaleima kuin Date ja se on aina UTC -> tallentaa oikeen ajan riippumatta maasta */
+        Instant expiresAt = Instant.now().plusMillis(EXP_TIME); 
 
         String accessToken = Jwts.builder().subject(username).expiration(Date.from(expiresAt))
             .signWith(getSigningKey())
-            .compact(); /*Rakentaa jwt tokenin (username, exp_aika ja allekirjoitus) */
+            .compact(); 
 
         return new AccessTokenPayloadDto(accessToken, expiresAt);
     }
 
     public String getAuthUser(HttpServletRequest request){
         String authorizationHeaderValue = request.getHeader(HttpHeaders.AUTHORIZATION); 
-        /*Hakee "Authorization" header requestista, eli kun frontendistä tekee pyynnön niin hakee authorization kohdasta tiedon*/
+        
 
         if(authorizationHeaderValue == null){
             return null;
@@ -47,10 +47,10 @@ public class JwtService {
 
         try {
             String user = getJwtParser()
-                        .parseSignedClaims(authorizationHeaderValue.replace(PREFIX, "")) /*Poistaa prefixin tokenista eli korvaa Bearer -> "" */
+                        .parseSignedClaims(authorizationHeaderValue.replace(PREFIX, "")) 
                         .getPayload()
                         .getSubject(); 
-                        /*Parsii tokenin ja hakee käyttäjän/käyttäjänimen -> palauttaa usernamen tai null jos virhe*/
+                        
 
                 return user;
         } catch (Exception e) {
@@ -60,9 +60,9 @@ public class JwtService {
 
     private SecretKey getSigningKey() {
 		byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-		return Keys.hmacShaKeyFor(keyBytes); /*Muuttaa jwtSecret stringin SecretKey olioksi (käytetään allekirjoittamiseen ja vahvistamiseen) */
+		return Keys.hmacShaKeyFor(keyBytes); 
 	}
     private JwtParser getJwtParser() {
 		return Jwts.parser().verifyWith(getSigningKey()).build();
-	}/*Luo parserin joka vahvistaa allekirjotuksen */
+	}
 }

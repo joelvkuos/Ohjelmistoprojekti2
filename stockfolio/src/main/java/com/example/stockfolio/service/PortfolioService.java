@@ -20,14 +20,14 @@ public class PortfolioService {
     @Autowired
     private UserService userService;
 
-    /*Etsii käyttäjän portfoliot */
+    
     public List<Portfolio> getUsersPortfolios(){
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
         return portfolioRepository.findByUser(user);
     }
 
-    /*Luo portfolion */
+    
     public Portfolio createPortfolio(Portfolio portfolio){
         User user = userService.getAuthenticatedUser()
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
@@ -35,7 +35,7 @@ public class PortfolioService {
         return portfolioRepository.save(portfolio);
     }
 
-    /*Poistaa portfolion (jos käyttäjällä oikeus) */
+    
     public void deletePortfolio(Long portfolioId){
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Porfolio not found"));
@@ -49,7 +49,6 @@ public class PortfolioService {
         portfolioRepository.deleteById(portfolioId);
     }
 
-    /*Päivittää portfolion (jos käyttäjällä oikeus) */
     public Portfolio updatePortfolio(Long portfolioId, Portfolio updatePortfolio){
         Portfolio existing = portfolioRepository.findById(portfolioId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
