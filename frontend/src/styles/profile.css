@@ -63,7 +63,7 @@
 }
 
 .edit-button:hover {
-    background-color: #131720 !important;
+    background-color: #2a3344 !important;
 }
 
 .button-group {
@@ -145,10 +145,18 @@
 }
 
 .portfolioButton:hover {
-    background-color: #131720 !important;
+    background-color: #2a3344 !important;
     color: whitesmoke !important;
     border: #383838 1px solid !important;
+}
 
+.profileButton.active {
+    background-color: #2a3344 !important;
+    border: #4a9eff 1px solid !important;
+}
+
+.profileButton.active:hover {
+    background-color: #3a4354 !important;
 }
 
 .profileButton .MuiButton-startIcon {
