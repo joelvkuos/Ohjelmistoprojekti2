@@ -106,6 +106,9 @@ Frontend typically runs at:
 
 The REST API has [Swagger documentation](https://stockfolio-postgres-stockfolio-postgres.2.rahtiapp.fi/swagger-ui/index.html) (accessible when the backend server is running).
 
+## LICENSE
+Messenger is licensed under the [LICENSE](https://github.com/joelvkuos/Ohjelmistoprojekti2/blob/main/LICENSE)
+
 
 ### Dokumentaatio
 [Dokumentaatio](Dokumentaatio.md)
