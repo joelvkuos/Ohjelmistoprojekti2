@@ -11,9 +11,9 @@ Team:
 - Jani Kinnunen
 - Konsta Lyytikäinen
 
-Stockfolio is an project: a web app for creating and browsing stock portfolios and holdings. The frontend is built with **Vite + React + TypeScript**, and the backend is a **Spring Boot (Java)** REST API.
+Stockfolio is an project: a web app for creating and browsing stock portfolios and holdings. The frontend is built with **Vite + React + TypeScript**, and the backend is a **Spring Boot (Java)** REST API. The backend application uses H2 Database Engine as a development environment database and PostgreSQL as a production environment database. 
 
-**Live** https://ohjelmistoprojekti2.vercel.app/
+**Live:** https://ohjelmistoprojekti2.vercel.app/
 
 ---
 
@@ -22,10 +22,15 @@ Stockfolio is an project: a web app for creating and browsing stock portfolios a
 - User authentication (register/login)
 - Create and manage portfolios
 - Add holdings to portfolios (ticker + quantity)
-- Community view: browse portfolios created by all users
+- Community view: browse portfolios created by all users and rate portfolios
 - Stock quote fetching to display current price and portfolio/holding value
 
 ---
+
+## Deployments
+
+**Backend:** https://stockfolio-postgres-stockfolio-postgres.2.rahtiapp.fi/
+
 
 ## Backlog
 - GitHub projects Backlog: [Backlog](https://github.com/users/joelvkuos/projects/1)
@@ -55,15 +60,6 @@ Notes:
 - The “Community Portfolios” view lists portfolios from all users and displays holdings.
 - Stock prices/changes are fetched separately and are **not** persisted in the database.
 
----
-
-## Database
-
-The backend persists core data (users, portfolios, holdings) in a database.
-
-- Database engine: PostgreSQL
-
----
 
 ## Development Guide
 
@@ -78,10 +74,8 @@ Requirements:
 
 Run:
 ```bash
-cd backend
+cd stockfolio
 ./mvnw spring-boot:run
-# or
-./gradlew bootRun
 ```
 
 Backend typically runs at:
@@ -108,7 +102,3 @@ The REST API has [Swagger documentation](https://stockfolio-postgres-stockfolio-
 
 ## LICENSE
 Messenger is licensed under the [LICENSE](https://github.com/joelvkuos/Ohjelmistoprojekti2/blob/main/LICENSE)
-
-
-### Dokumentaatio
-[Dokumentaatio](Dokumentaatio.md)
