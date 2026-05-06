@@ -56,8 +56,14 @@ export default function RatingComponent({ portfolioId, portfolioOwnerId }: Ratin
     }, [portfolioId, state.accessToken, isPortfolioOwner, state.user?.id]);
 
     const handleRating = async (value: number) => {
-        if (!state.accessToken || isPortfolioOwner) return;
+        if (!state.accessToken) return;
 
+        if (isPortfolioOwner) {
+            setError("Cannot rate your own portfolio");
+            return;
+        }
+
+        setError("");
         setSubmitting(true);
         try {
             await addOrUpdateRating(portfolioId, value, state.accessToken);
