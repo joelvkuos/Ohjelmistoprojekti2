@@ -99,6 +99,10 @@ npm run dev
 Frontend typically runs at:
 - http://localhost:5173
 
+## REST API
+
+The REST API has [Swagger documentation](https://stockfolio-postgres-stockfolio-postgres.2.rahtiapp.fi/swagger-ui/index.html) (accessible when the backend server is running).
+
 
 ### Dokumentaatio
 [Dokumentaatio](Dokumentaatio.md)
