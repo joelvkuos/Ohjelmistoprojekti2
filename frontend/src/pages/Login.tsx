@@ -42,7 +42,8 @@ export default function Login() {
     return (
         <Box className='loginBox1'>
             <Box className='loginBox3'>
-                <h1 className="Stockfolio">Stockfolio</h1>
+                <h1 className="Stockfolio" onClick={() => navigate('/')} 
+                style={{ cursor: 'pointer' }}>Stockfolio</h1>
                 <h3>Your personal stock portfolio</h3>
 
             </Box>
@@ -74,7 +75,6 @@ export default function Login() {
                 >
                     {state.loading ? 'Logging in..' : 'Log in'}
                 </Button>
-                <Link className="link1" to="/">Forgot password?</Link>
                 <p className="pCreateAccount">Don't have an account? <Link className="link2" to="/register" >Create one here</Link></p>
 
             </Box>
