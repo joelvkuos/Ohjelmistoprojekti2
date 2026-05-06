@@ -27,6 +27,9 @@ Stockfolio is an project: a web app for creating and browsing stock portfolios a
 
 ---
 
+## Backlog
+- GitHub projects Backlog: [Backlog](https://github.com/users/joelvkuos/projects/1)
+
 ## Data Model
 
 > Field names may vary slightly in code, but the core structure is:
