@@ -106,6 +106,11 @@
     font-style: italic;
 }
 
+.holding-unavailable {
+    color: #999;
+    font-style: italic;
+}
+
 .no-portfolios {
     text-align: center;
     padding: 40px;

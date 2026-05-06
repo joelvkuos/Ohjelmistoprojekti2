@@ -473,8 +473,10 @@ export default function PortfolioPage() {
                                                         </span>
                                                         <span className="holding-total">Value: ${totalValue.toFixed(2)}</span>
                                                     </div>
-                                                ) : (
+                                                ) : loading ? (
                                                     <span className="holding-loading">Loading price...</span>
+                                                ) : (
+                                                    <span className="holding-unavailable">Price unavailable</span>
                                                 )}
                                             </div>
                                         );
