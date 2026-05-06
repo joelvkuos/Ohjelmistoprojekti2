@@ -118,25 +118,19 @@
 }
 
 .create-portfolio-btn {
-    justify-content: flex-start !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    background-color: #131720 !important;
-    color: whitesmoke !important;
-    border: #383838 1px solid !important;
-    border-radius: 8px !important;
-    width: 20%;
-    height: 20px;
-    display: inline-flex !important;
-    align-items: center;
-    column-gap: 16px;
-    min-width: 0 !important;
+    background-color: #131720;
+    color: whitesmoke;
+    border: 1px solid #383838;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
 }
 
 .create-portfolio-btn:hover {
-    background-color: #131720 !important;
-    color: whitesmoke !important;
-    border: #383838 1px solid !important;
+    background-color: #212B39;
+    border-color: #555;
 }
 
 /* Modal Styles */
