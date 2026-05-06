@@ -495,23 +495,6 @@
     color: #f0f0f0;
 }
 
-.portfolio-header-left {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-    margin-right: 1rem;
-}
-
-.portfolio-total-badge {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #28a745;
-    background: #f0f9f0;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-}
-
 .portfolio-summary {
     margin-top: 1rem;
     padding-top: 0.75rem;

@@ -464,11 +464,6 @@ export default function PortfolioPage() {
                             <div className="portfolio-header">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flex: 1, marginRight: '1rem' }}>
                                     <h3 className="portfolio-name" style={{ margin: 0 }}>{portfolio.portfolioName}</h3>
-                                    <div className="portfolio-header-left">
-                                        <span className="portfolio-total-badge">
-                                            ${portfolioTotal.toFixed(2)}
-                                        </span>
-                                    </div>
                                 </div>
                                 <button
                                     className="edit-portfolio-card-btn"
