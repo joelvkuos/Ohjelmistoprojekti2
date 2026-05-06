@@ -54,7 +54,8 @@ export default function Register() {
     return (
         <Box className='loginBox1 reverse green-bg'>
             <Box className='loginBox3'>
-                <h1 className="Stockfolio">Stockfolio</h1>
+                <h1 className="Stockfolio" onClick={() => navigate('/')} 
+                style={{ cursor: 'pointer' }}>Stockfolio</h1>
                 <h3 className="info">Create an account to get started</h3>
 
             </Box>

@@ -48,7 +48,8 @@
 .all-portfolios-container .portfolio-header span,
 .all-portfolios-container .holding-quantity,
 .all-portfolios-container .holding-total,
-.all-portfolios-container .holding-loading {
+.all-portfolios-container .holding-loading,
+.all-portfolios-container .holding-unavailable {
     color: #c8d0db;
 }
 

@@ -106,6 +106,11 @@
     font-style: italic;
 }
 
+.holding-unavailable {
+    color: #999;
+    font-style: italic;
+}
+
 .no-portfolios {
     text-align: center;
     padding: 40px;
@@ -113,25 +118,35 @@
 }
 
 .create-portfolio-btn {
-    justify-content: flex-start !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    background-color: #131720 !important;
-    color: whitesmoke !important;
-    border: #383838 1px solid !important;
-    border-radius: 8px !important;
-    width: 20%;
-    height: 20px;
-    display: inline-flex !important;
-    align-items: center;
-    column-gap: 16px;
-    min-width: 0 !important;
+    background-color: #131720;
+    color: whitesmoke;
+    border: 1px solid #383838;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
 }
 
 .create-portfolio-btn:hover {
-    background-color: #131720 !important;
-    color: whitesmoke !important;
-    border: #383838 1px solid !important;
+    background-color: #212B39;
+    border-color: #555;
+}
+
+.edit-portfolio-card-btn {
+    background-color: #131720;
+    color: whitesmoke;
+    border: 1px solid #383838;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.edit-portfolio-card-btn:hover {
+    background-color: #212B39;
+    border-color: #555;
 }
 
 /* Modal Styles */
@@ -199,8 +214,8 @@
 
 .modal-btn {
     padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+    border: 1px solid #383838;
+    border-radius: 8px;
     font-size: 1em;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -212,7 +227,8 @@
 }
 
 .create-btn:hover:not(:disabled) {
-    background-color: #131720;
+    background-color: #212B39;
+    border-color: #555;
 }
 
 .cancel-btn {
@@ -286,8 +302,8 @@
 .action-btn {
     flex: 1;
     padding: 12px;
-    border: none;
-    border-radius: 4px;
+    border: 1px solid #383838;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1em;
     font-weight: 500;
@@ -300,7 +316,8 @@
 }
 
 .edit-btn:hover {
-    background-color: #131720;
+    background-color: #212B39;
+    border-color: #555;
 }
 
 .delete-btn {

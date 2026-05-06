@@ -41,9 +41,18 @@ export const getStockQuote = async (ticker: string): Promise<StockQuote> => {
 
 export const getMultipleStockQuotes = async (tickers: string[]): Promise<StockQuote[]> => {
     try {
-        const quotes = await Promise.all(
+        const results = await Promise.allSettled(
             tickers.map(ticker => getStockQuote(ticker))
         );
+        
+        const quotes = results
+            .filter((result): result is PromiseSettledResult<StockQuote> & { status: 'fulfilled' } => result.status === 'fulfilled')
+            .map((result) => (result as PromiseFulfilledResult<StockQuote>).value);
+        
+        if (quotes.length === 0) {
+            throw new Error('Failed to fetch quotes for all tickers');
+        }
+        
         return quotes;
     } catch (error) {
         console.error('Error fetching multiple quotes:', error);

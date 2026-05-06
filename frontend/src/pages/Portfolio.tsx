@@ -444,11 +444,18 @@ export default function PortfolioPage() {
                         <div
                             key={portfolio.portfolioId}
                             className="portfolio-card"
-                            onClick={() => setSelectedPortfolio(portfolio)}
-                            style={{ cursor: 'pointer' }}
                         >
                             <div className="portfolio-header">
                                 <h3 className="portfolio-name">{portfolio.portfolioName}</h3>
+                                <button 
+                                    className="edit-portfolio-card-btn"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedPortfolio(portfolio);
+                                    }}
+                                >
+                                    Edit
+                                </button>
                             </div>
 
                             {portfolio.holdings && portfolio.holdings.length > 0 ? (
@@ -473,8 +480,10 @@ export default function PortfolioPage() {
                                                         </span>
                                                         <span className="holding-total">Value: ${totalValue.toFixed(2)}</span>
                                                     </div>
-                                                ) : (
+                                                ) : loading ? (
                                                     <span className="holding-loading">Loading price...</span>
+                                                ) : (
+                                                    <span className="holding-unavailable">Price unavailable</span>
                                                 )}
                                             </div>
                                         );
