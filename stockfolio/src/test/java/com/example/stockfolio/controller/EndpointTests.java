@@ -1,9 +1,13 @@
 package com.example.stockfolio.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -29,21 +33,67 @@ class EndpointTests {
     @Autowired
     private PortfolioRepository portfolioRepository;
 
+        @Autowired
+        private ObjectMapper objectMapper;
+
+        private String createAccessToken(String username, String password) throws Exception {
+        String registerJson = """
+            {
+                "username": "%s",
+                "password": "%s",
+                "email": "ci@example.com",
+                "phone": ""
+            }
+            """.formatted(username, password);
+
+        mockMvc.perform(post("/api/users/register")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(registerJson))
+            .andExpect(status().isOk());
+
+        String loginJson = """
+            {
+                "username": "%s",
+                "password": "%s"
+            }
+            """.formatted(username, password);
+
+        String responseBody = mockMvc.perform(post("/api/auth/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(loginJson))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+        JsonNode responseJson = objectMapper.readTree(responseBody);
+        return responseJson.get("accessToken").asText();
+        }
+
     @Test
     void usersEndpoint_ReturnsOk() throws Exception {
-        mockMvc.perform(get("/api/users"))
+        String token = createAccessToken("ci_users_" + System.currentTimeMillis(), "testpass123");
+
+        mockMvc.perform(get("/api/users")
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
                 .andExpect(status().isOk());
     }
 
     @Test
     void portfolioEndpoint_ReturnsOk() throws Exception {
-        mockMvc.perform(get("/api/portfolio"))
+        String token = createAccessToken("ci_portfolio_" + System.currentTimeMillis(), "testpass123");
+
+        mockMvc.perform(get("/api/portfolio")
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
                 .andExpect(status().isOk());
     }
 
     @Test
     void holdingsEndpoint_ReturnsOk() throws Exception {
-        mockMvc.perform(get("/api/holdings"))
+        String token = createAccessToken("ci_holdings_" + System.currentTimeMillis(), "testpass123");
+
+        mockMvc.perform(get("/api/holdings")
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
                 .andExpect(status().isOk());
     }
 
@@ -84,6 +134,8 @@ class EndpointTests {
 
     @Test
     void createPortfolio_SavesPortfolioToRepository() throws Exception {
+        String username = "ci_portfolio_create_" + System.currentTimeMillis();
+        String token = createAccessToken(username, "testpass123");
         String portfolioName = "CI Portfolio " + System.currentTimeMillis();
         String portfolioJson = """
                 {
@@ -94,6 +146,7 @@ class EndpointTests {
 
         mockMvc.perform(post("/api/portfolio")
                 .contentType(MediaType.APPLICATION_JSON)
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .content(portfolioJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.portfolioName").value(portfolioName));
