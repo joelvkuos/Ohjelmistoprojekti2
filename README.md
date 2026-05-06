@@ -1,7 +1,7 @@
 <img src="Stockfolio%20logo.png" alt="Project Logo" width="300">
 
 ### Stockfolio
-[![CI](https://github.com/joelvkuos/Ohjelmistoprojekti2/actions/workflows/<WORKFLOW_FILE>.yml/badge.svg)](https://github.com/joelvkuos/Ohjelmistoprojekti2/actions/workflows/.github/workflows.yml)
+[![CI Tests](https://github.com/joelvkuos/Ohjelmistoprojekti2/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/joelvkuos/Ohjelmistoprojekti2/actions/workflows/ci-tests.yml)
 
 Team:
 
