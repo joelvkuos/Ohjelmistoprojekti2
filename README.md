@@ -37,24 +37,43 @@ Stockfolio is an project: a web app for creating and browsing stock portfolios a
 
 ## Data Model
 
-> Field names may vary slightly in code, but the core structure is:
+```mermaid
+erDiagram
+    APP_USER {
+        LONG appUserId PK
+        STRING username
+        STRING passwordHash
+        STRING role
+        STRING email
+        STRING phone
+    }
 
-- **User**
-  - `id`
-  - `username`
-  - (auth fields such as password hash / roles, depending on implementation)
+    PORTFOLIO {
+        LONG portfolioId PK
+        LONG app_user_id FK
+        STRING portfolioName
+    }
 
-- **Portfolio**
-  - `portfolioId`
-  - `portfolioName`
-  - `user` (owner)
-  - `holdings[]`
+    HOLDINGS {
+        LONG holdingsId PK
+        LONG portfolio_id FK
+        STRING ticker
+        DOUBLE quantity
+    }
 
-- **Holding**
-  - `holdingsId`
-  - `ticker`
-  - `quantity`
-  - belongs to a `portfolio`
+    RATING {
+        LONG ratingId PK
+        LONG portfolio_id FK
+        LONG app_user_id FK
+        INT ratingValue
+        DATETIME createdAt
+    }
+
+    APP_USER ||--o{ PORTFOLIO : "owns"
+    PORTFOLIO ||--o{ HOLDINGS : "contains"
+    APP_USER ||--o{ RATING : "writes"
+    PORTFOLIO ||--o{ RATING : "receives"
+```
 
 Notes:
 - The “Community Portfolios” view lists portfolios from all users and displays holdings.
