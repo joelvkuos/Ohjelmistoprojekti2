@@ -11,7 +11,7 @@ Team:
 - Jani Kinnunen
 - Konsta Lyytikäinen
 
-Stockfolio is an project: a web app for creating and browsing stock portfolios and holdings. The frontend is built with **Vite + React + TypeScript**, and the backend is a **Spring Boot (Java)** REST API. The backend application uses H2 Database Engine as a development environment database and PostgreSQL as a production environment database. 
+Stockfolio is an project: a web app for creating and browsing stock portfolios and holdings. The frontend is built with **Vite + React + TypeScript**, and the backend is a **Spring Boot (Java)** REST API. The backend application uses H2 Database Engine as a development environment database and PostgreSQL as a production environment database. Stock data is fetched from the [Finnhub API](https://finnhub.io/docs/api).
 
 **Live:** https://ohjelmistoprojekti2.vercel.app/
 
