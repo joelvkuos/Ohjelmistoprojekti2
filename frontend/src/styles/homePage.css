@@ -190,6 +190,14 @@
         /* yksi sarake mobiilissa */
     }
 
+    .btn-navigation {
+        display: none !important;
+    }
+
+    .navigation-left {
+        flex: 1 !important;
+    }
+
     .burger-icon {
         display: block;
         padding-top: 8px;
@@ -211,6 +219,30 @@
         flex-direction: column;
         gap: 8px;
         color: whitesmoke;
+        z-index: 1000;
+        min-width: 150px;
+    }
+
+    .mobile-menu-btn {
+        background-color: transparent !important;
+        color: whitesmoke !important;
+        text-transform: none !important;
+        padding: 8px 16px !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    .mobile-menu-btn:hover {
+        background-color: #212B39 !important;
+    }
+
+    .mobile-menu-logout {
+        background-color: #960019 !important;
+        color: whitesmoke !important;
+    }
+
+    .mobile-menu-logout:hover {
+        background-color: #420D09 !important;
     }
 
     .mobile-menu-btn1 {

@@ -153,6 +153,8 @@
         flex-direction: column;
         gap: 8px;
         color: whitesmoke;
+        z-index: 1000;
+        min-width: 150px;
     }
 
     .mobile-menu-btn1 {
@@ -160,6 +162,8 @@
         color: #121212 !important;
         text-transform: none !important;
         padding: 8px 16px !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
     }
 
     .mobile-menu-btn2 {
@@ -167,6 +171,8 @@
         color: whitesmoke !important;
         text-transform: none !important;
         padding: 8px 16px !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
     }
 
     .mobile-menu-btn1:hover {

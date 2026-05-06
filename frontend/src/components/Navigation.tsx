@@ -11,29 +11,35 @@ export default function Navigation() {
     const [menuOpen, setMenuOpen] = useState(false);
     const { logout } = useAuth();
 
+    const closeMenu = () => setMenuOpen(false);
 
     const handleLogout = () => {
         logout();
+        closeMenu();
         navigate('/');
+    };
+
+    const handleNavigation = (path: string) => {
+        navigate(path);
+        closeMenu();
     };
 
     return (
         <header className="appbar">
             <div className="navigation-left">
-
-                <h1 onClick={() => navigate('/homepage')} style={{ cursor: 'pointer' }}>Stockfolio</h1>
+                <h1 onClick={() => handleNavigation('/homepage')} style={{ cursor: 'pointer' }}>Stockfolio</h1>
             </div>
 
-            <Button className='btn-navigation' onClick={() => navigate('/news')}>
+            <Button className='btn-navigation' onClick={() => handleNavigation('/news')}>
                 News
             </Button>
-            <Button className='btn-navigation' onClick={() => navigate('/stocks')}>
+            <Button className='btn-navigation' onClick={() => handleNavigation('/stocks')}>
                 Stocks
             </Button>
-            <Button className='btn-navigation' onClick={() => navigate('/portfolios')}>
+            <Button className='btn-navigation' onClick={() => handleNavigation('/portfolios')}>
                 All Portfolios
             </Button>
-            <Button className='btn-navigation' onClick={() => navigate('/profile')}>
+            <Button className='btn-navigation' onClick={() => handleNavigation('/profile')}>
                 Profile
             </Button>
 
@@ -43,16 +49,17 @@ export default function Navigation() {
                 <MenuIcon />
             </div>
             <div className="appbar-right">
-
                 <Button className="btn-logOut" onClick={handleLogout}>
                     Log out
                 </Button>
-
             </div>
             {menuOpen && (
                 <div className="mobile-menu">
-                    <Button className="mobile-menu-btn2" onClick={() => navigate('/login')}>Sign In</Button>
-                    <Button className="mobile-menu-btn1" onClick={() => navigate('/register')}>Sign Up</Button>
+                    <Button className="mobile-menu-btn" onClick={() => handleNavigation('/news')}>News</Button>
+                    <Button className="mobile-menu-btn" onClick={() => handleNavigation('/stocks')}>Stocks</Button>
+                    <Button className="mobile-menu-btn" onClick={() => handleNavigation('/portfolios')}>All Portfolios</Button>
+                    <Button className="mobile-menu-btn" onClick={() => handleNavigation('/profile')}>Profile</Button>
+                    <Button className="mobile-menu-btn mobile-menu-logout" onClick={handleLogout}>Log Out</Button>
                 </div>
             )}
         </header>
