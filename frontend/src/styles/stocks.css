@@ -1,5 +1,5 @@
 .stocks-container {
-    padding: 20px;
+    padding: 16px;
     max-width: 1100px;
     margin: 0 auto;
 }
@@ -7,27 +7,37 @@
 .stocks-container h1 {
     margin-bottom: 20px;
     color: #ffffff;
+    font-size: 28px;
 }
 
 .error-message {
     color: #ef4444;
     margin-bottom: 20px;
+    font-size: 14px;
 }
 
 .search-section {
     margin-bottom: 30px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .search-input {
     width: 100%;
     max-width: 400px;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #383838;
     border-radius: 4px;
     font-size: 14px;
     background-color: #131720;
     color: #ffffff;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #4f46e5;
 }
 
 .search-input::placeholder {
@@ -36,16 +46,17 @@
 
 .search-results {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     width: 100%;
     max-width: 400px;
     background: #131720;
     border: 1px solid #383838;
-    border-top: none;
-    max-height: 200px;
+    border-top: 1px solid #383838;
+    max-height: 250px;
     overflow-y: auto;
     z-index: 10;
+    border-radius: 4px;
 }
 
 .search-item {
@@ -120,4 +131,87 @@
     margin: 0;
     font-size: 14px;
     color: #888888;
+}
+
+/* Mobile - Responsive adjustments */
+@media (max-width: 600px) {
+    .stocks-container {
+        padding: 12px;
+    }
+
+    .stocks-container h1 {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .search-input {
+        max-width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .search-results {
+        max-width: 100%;
+    }
+
+    .stock-card {
+        padding: 12px;
+        margin: 16px 0;
+    }
+
+    .stock-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .stock-price {
+        align-self: flex-end;
+        width: 100%;
+        text-align: right;
+    }
+
+    .stock-header h3 {
+        font-size: 16px;
+    }
+
+    .company-logo {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .stocks-container {
+        padding: 16px;
+    }
+
+    .stocks-container h1 {
+        font-size: 26px;
+    }
+
+    .search-input {
+        max-width: 350px;
+        padding: 11px;
+    }
+
+    .search-results {
+        max-width: 350px;
+    }
+
+    .stock-card {
+        padding: 14px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .search-input {
+        max-width: 400px;
+    }
+
+    .search-results {
+        max-width: 400px;
+    }
 }
