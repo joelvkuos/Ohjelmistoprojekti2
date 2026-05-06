@@ -419,6 +419,19 @@ export default function PortfolioPage() {
         setNewQuantity("");
     };
 
+    const calculatePortfolioTotal = (portfolio: Portfolio): number => {
+        if (!portfolio.holdings || portfolio.holdings.length === 0) return 0;
+        
+        let total = 0;
+        portfolio.holdings.forEach(holding => {
+            const quote = stockQuotes.get(holding.ticker);
+            if (quote) {
+                total += holding.quantity * quote.currentPrice;
+            }
+        });
+        return total;
+    };
+
     return (
         <>
             <Navigation />
@@ -440,14 +453,24 @@ export default function PortfolioPage() {
                 </button>
 
                 <div>
-                    {portfolios.map((portfolio) => (
+                {portfolios.map((portfolio) => {
+                    const portfolioTotal = calculatePortfolioTotal(portfolio);
+                    
+                    return (
                         <div
                             key={portfolio.portfolioId}
                             className="portfolio-card"
                         >
                             <div className="portfolio-header">
-                                <h3 className="portfolio-name">{portfolio.portfolioName}</h3>
-                                <button 
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flex: 1, marginRight: '1rem' }}>
+                                    <h3 className="portfolio-name" style={{ margin: 0 }}>{portfolio.portfolioName}</h3>
+                                    <div className="portfolio-header-left">
+                                        <span className="portfolio-total-badge">
+                                            ${portfolioTotal.toFixed(2)}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button
                                     className="edit-portfolio-card-btn"
                                     onClick={(e) => {
                                         e.stopPropagation();
@@ -488,12 +511,16 @@ export default function PortfolioPage() {
                                             </div>
                                         );
                                     })}
+                                    <div className="portfolio-summary">
+                                        Portfolio Total: ${portfolioTotal.toFixed(2)}
+                                    </div>
                                 </div>
                             ) : (
                                 <p>No holdings in this portfolio yet.</p>
                             )}
                         </div>
-                    ))}
+                    );
+                })}
                 </div>
 
                 {/* Portfolio Detail View */}
