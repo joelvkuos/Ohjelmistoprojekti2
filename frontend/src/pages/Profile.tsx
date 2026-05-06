@@ -5,7 +5,7 @@ import { getCurrentUser, updateUserProfile, type UserProfile } from "../services
 
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Alert, Box, Button, CircularProgress, TextField } from "@mui/material";
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
@@ -18,6 +18,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 export default function Profile() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { state } = useAuth();
 
     const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -118,7 +119,7 @@ export default function Profile() {
                 <div className="column-text">
                     <h1>My profile</h1>
                     <div className="profileButtons">
-                        <Button className="profileButton" startIcon={<Person2OutlinedIcon />} onClick={() => navigate('/profile')}>
+                        <Button className={`profileButton ${location.pathname === '/profile' ? 'active' : ''}`} startIcon={<Person2OutlinedIcon />} onClick={() => navigate('/profile')}>
                             Profile
                         </Button>
                         <Button className="portfolioButton" startIcon={<WorkOutlineOutlinedIcon />} onClick={() => navigate('/portfolio')}>
