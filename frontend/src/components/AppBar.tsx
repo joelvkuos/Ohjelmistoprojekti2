@@ -9,10 +9,17 @@ export default function NavBar() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
 
+    const closeMenu = () => setMenuOpen(false);
+
+    const handleNavigation = (path: string) => {
+        navigate(path);
+        closeMenu();
+    };
+
     return (
         <header className="appbar">
             <div className="appbar-left">
-                <h1 onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Stockfolio</h1>
+                <h1 onClick={() => handleNavigation('/')} style={{ cursor: 'pointer' }}>Stockfolio</h1>
             </div>
             <div className="appbar-center">
             </div>
@@ -20,18 +27,17 @@ export default function NavBar() {
                 <MenuIcon />
             </div>
             <div className="appbar-right">
-                <Button className="btn-signin" onClick={() => navigate('/login')}>
+                <Button className="btn-signin" onClick={() => handleNavigation('/login')}>
                     Sign in
                 </Button>
-                <Button className="btn-signUp" onClick={() => navigate('/register')}>
+                <Button className="btn-signUp" onClick={() => handleNavigation('/register')}>
                     Sign up
                 </Button>
-
             </div>
             {menuOpen && (
                 <div className="mobile-menu">
-                    <Button className="mobile-menu-btn2" onClick={() => navigate('/login')}>Sign In</Button>
-                    <Button className="mobile-menu-btn1" onClick={() => navigate('/register')}>Sign Up</Button>
+                    <Button className="mobile-menu-btn2" onClick={() => handleNavigation('/login')}>Sign In</Button>
+                    <Button className="mobile-menu-btn1" onClick={() => handleNavigation('/register')}>Sign Up</Button>
                 </div>
             )}
         </header>
