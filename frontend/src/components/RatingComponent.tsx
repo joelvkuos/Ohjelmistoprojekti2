@@ -73,7 +73,7 @@ export default function RatingComponent({ portfolioId, portfolioOwnerId }: Ratin
             setAverageRating(avgResponse.average);
             setRatingCount(avgResponse.count);
         } catch (err) {
-            setError("Failed to submit rating");
+            setError("You cannot rate your own portfolio");
             console.error(err);
         } finally {
             setSubmitting(false);
