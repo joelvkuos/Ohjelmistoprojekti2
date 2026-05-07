@@ -79,6 +79,13 @@ Notes:
 - The “Community Portfolios” view lists portfolios from all users and displays holdings.
 - Stock prices/changes are fetched separately and are **not** persisted in the database.
 
+## Architecture
+<img width="1535" height="1024" alt="image" src="https://github.com/user-attachments/assets/d6f17afc-674c-4705-ab78-3aa9131b6c26" />
+
+## Video
+This video showcases the app’s key features. 
+
+[![Watch the demo](https://github.com/user-attachments/assets/fa5e791f-895f-4146-9011-6cadf8b2dfa2)](https://www.youtube.com/watch?v=71zHaewll18)
 
 ## Development Guide
 
